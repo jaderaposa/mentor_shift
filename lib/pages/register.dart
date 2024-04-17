@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/objects/custom_button.dart';
 
 class Register extends StatefulWidget {
  const Register({super.key});
@@ -169,21 +170,11 @@ class RegisterState extends State<Register> {
                         ),
                       ),
                       const SizedBox(height: 25),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF0B6E6D),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 15),
-                        ),
-                        child: const Text(
-                          'SIGN UP',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontFamily: 'ProtestRiot',
-                          ),
-                        ),
+                      CustomButton(
+                        text: 'SIGN UP',
+                        onPressed: () {
+                          // Handle button press
+                        },
                       ),
                       const SizedBox(height: 20),
                       GestureDetector(

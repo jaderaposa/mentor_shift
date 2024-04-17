@@ -22,12 +22,15 @@ class Role extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image.asset(
-                  'images/mentorshiftorig.png',
-                  width: double.infinity, // Make the image take the full width
-                  height: 120, // Keep the height fixed or adjust as needed
-                  fit: BoxFit
-                      .contain, // Scale the image to fit within the bounds
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: Image.asset(
+                    'images/mentorshiftorig.png',
+                    width: double.infinity, // Make the image take the full width
+                    height: 120, // Keep the height fixed or adjust as needed
+                    fit: BoxFit
+                        .contain, // Scale the image to fit within the bounds
+                  ),
                 ),
                 const SizedBox(height: 20),
                 const Text(

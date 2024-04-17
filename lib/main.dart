@@ -3,7 +3,7 @@ import 'package:mentor_shift/pages/login.dart';
 import 'package:mentor_shift/pages/register.dart';
 import 'package:mentor_shift/pages/role.dart';
 
-void main() => runApp(MaterialApp(initialRoute: '/role', routes: {
+void main() => runApp(MaterialApp(initialRoute: '/login', routes: {
       // '/': (context) => Loading(),
       '/login': (context) => const Login(),
       '/register': (context) => const Register(),

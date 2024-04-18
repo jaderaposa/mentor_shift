@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/custom_button.dart';
+import 'package:mentor_shift/objects/style/boxshadow.dart';
 
 
 class Login extends StatefulWidget {
@@ -87,15 +88,7 @@ class LoginState extends State<Login> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ],
+                          boxShadow: const [kBoxShadow],
                         ),
                         child: TextFormField(
                           decoration: const InputDecoration(
@@ -127,15 +120,7 @@ class LoginState extends State<Login> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 5,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ],
+                          boxShadow: const [kBoxShadow],
                         ),
                         child: TextFormField(
                           decoration: const InputDecoration(

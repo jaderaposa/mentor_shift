@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
+import 'package:mentor_shift/objects/backbutton.dart';
 
 class Register1 extends StatefulWidget {
   const Register1({Key? key}) : super(key: key);
@@ -28,6 +29,12 @@ class Register1State extends State<Register1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: CustomAppBar(
+        onBackButtonPress: () {
+          Navigator.of(context).pop();
+        },
+      ),
       body: Column(
         children: <Widget>[
           Expanded(

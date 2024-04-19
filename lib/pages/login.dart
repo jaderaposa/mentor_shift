@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/custom_button.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
-
+import 'package:mentor_shift/pages/register.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -191,7 +191,12 @@ class LoginState extends State<Login> {
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     // Navigate to register page
-                                    Navigator.pushNamed(context, '/register');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Register()), // replace Register() with your register screen widget
+                                    );
                                   },
                               ),
                             ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
+import 'package:mentor_shift/objects/style/paddedcontainer.dart';
 import 'package:mentor_shift/pages/register1.dart';
 import 'package:mentor_shift/objects/backbutton.dart';
 
@@ -66,13 +67,13 @@ class RegisterState extends State<Register> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(48, 20, 48, 0),
+                            padding: const EdgeInsets.fromLTRB(48, 50, 48, 0),
                             child: Column(
                               children: <Widget>[
                                 const Row(
                                   children: [
                                     Text(
-                                      'Create Account',
+                                      'Welcome to Mentor-Shift!\nFirst, let\'s create an account.',
                                       style: TextStyle(
                                         fontSize:
                                             20, // Adjust the font size as needed
@@ -87,97 +88,103 @@ class RegisterState extends State<Register> {
                                 ),
                                 const SizedBox(height: 10),
                                 // Email input
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0.0, vertical: 5.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: const [kBoxShadow],
-                                  ),
-                                  child: TextFormField(
-                                    decoration: const InputDecoration(
-                                      labelText: 'Email',
-                                      labelStyle: TextStyle(
-                                        fontFamily:
-                                            'ProtestRiot', // Apply ProtestRiot font to label
-                                        color: Color(0xFF076A89),
-                                      ),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      border: InputBorder
-                                          .none, // Remove the default border
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 5.0, horizontal: 15.0),
+                                PaddedContainer(
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 0.0, vertical: 5.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: const [kBoxShadow],
                                     ),
-                                    keyboardType: TextInputType.emailAddress,
-                                    style: const TextStyle(
-                                      fontFamily:
-                                          'ProtestRiot', // Apply ProtestRiot font to input text
+                                    child: TextFormField(
+                                      decoration: const InputDecoration(
+                                        labelText: 'Email',
+                                        labelStyle: TextStyle(
+                                          fontFamily:
+                                              'ProtestRiot', // Apply ProtestRiot font to label
+                                          color: Color(0xFF076A89),
+                                        ),
+                                        fillColor: Colors.white,
+                                        filled: true,
+                                        border: InputBorder
+                                            .none, // Remove the default border
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 5.0, horizontal: 15.0),
+                                      ),
+                                      keyboardType: TextInputType.emailAddress,
+                                      style: const TextStyle(
+                                        fontFamily:
+                                            'ProtestRiot', // Apply ProtestRiot font to input text
+                                      ),
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                // const SizedBox(height: 20),
                                 // Password input
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0.0, vertical: 5.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: const [kBoxShadow],
-                                  ),
-                                  child: TextFormField(
-                                    decoration: const InputDecoration(
-                                      labelText: 'Password',
-                                      labelStyle: TextStyle(
-                                        fontFamily:
-                                            'ProtestRiot', // Apply ProtestRiot font to label
-                                        color: Color(0xFF076A89),
-                                      ),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      border: InputBorder
-                                          .none, // Remove the default border
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 5.0, horizontal: 15.0),
+                                PaddedContainer(
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 0.0, vertical: 5.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: const [kBoxShadow],
                                     ),
-                                    obscureText: true,
-                                    style: const TextStyle(
-                                      fontFamily:
-                                          'ProtestRiot', // Apply ProtestRiot font to input text
+                                    child: TextFormField(
+                                      decoration: const InputDecoration(
+                                        labelText: 'Password',
+                                        labelStyle: TextStyle(
+                                          fontFamily:
+                                              'ProtestRiot', // Apply ProtestRiot font to label
+                                          color: Color(0xFF076A89),
+                                        ),
+                                        fillColor: Colors.white,
+                                        filled: true,
+                                        border: InputBorder
+                                            .none, // Remove the default border
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 5.0, horizontal: 15.0),
+                                      ),
+                                      obscureText: true,
+                                      style: const TextStyle(
+                                        fontFamily:
+                                            'ProtestRiot', // Apply ProtestRiot font to input text
+                                      ),
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                // const SizedBox(height: 20),
                                 // Confirm Password input
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0.0, vertical: 5.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: const [kBoxShadow],
-                                  ),
-                                  child: TextFormField(
-                                    decoration: const InputDecoration(
-                                      labelText: 'Confirm Password',
-                                      labelStyle: TextStyle(
-                                        fontFamily:
-                                            'ProtestRiot', // Apply ProtestRiot font to label
-                                        color: Color(0xFF076A89),
-                                      ),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      border: InputBorder
-                                          .none, // Remove the default border
-                                      contentPadding: EdgeInsets.symmetric(
-                                          vertical: 5.0, horizontal: 15.0),
+                                PaddedContainer(
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 0.0, vertical: 5.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: const [kBoxShadow],
                                     ),
-                                    obscureText: true,
-                                    style: const TextStyle(
-                                      fontFamily:
-                                          'ProtestRiot', // Apply ProtestRiot font to input text
+                                    child: TextFormField(
+                                      decoration: const InputDecoration(
+                                        labelText: 'Confirm Password',
+                                        labelStyle: TextStyle(
+                                          fontFamily:
+                                              'ProtestRiot', // Apply ProtestRiot font to label
+                                          color: Color(0xFF076A89),
+                                        ),
+                                        fillColor: Colors.white,
+                                        filled: true,
+                                        border: InputBorder
+                                            .none, // Remove the default border
+                                        contentPadding: EdgeInsets.symmetric(
+                                            vertical: 5.0, horizontal: 15.0),
+                                      ),
+                                      obscureText: true,
+                                      style: const TextStyle(
+                                        fontFamily:
+                                            'ProtestRiot', // Apply ProtestRiot font to input text
+                                      ),
                                     ),
                                   ),
                                 ),

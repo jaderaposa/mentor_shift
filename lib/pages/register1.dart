@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 import 'package:mentor_shift/objects/backbutton.dart';
+import 'package:mentor_shift/objects/style/paddedcontainer.dart';
 
 class Register1 extends StatefulWidget {
   const Register1({Key? key}) : super(key: key);
@@ -72,13 +73,13 @@ class Register1State extends State<Register1> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(48, 20, 48, 0),
+                        padding: const EdgeInsets.fromLTRB(48, 50, 48, 0),
                         child: Column(
                           children: <Widget>[
                             const Row(
                               children: [
                                 Text(
-                                  'Create Account',
+                                  'Let\'s get personal.',
                                   style: TextStyle(
                                     fontSize:
                                         20, // Adjust the font size as needed
@@ -91,109 +92,115 @@ class Register1State extends State<Register1> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 20),
                             // First Name input
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 0.0, vertical: 5.0),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: const [kBoxShadow],
-                              ),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: 'First Name',
-                                  labelStyle: TextStyle(
-                                    fontFamily:
-                                        'ProtestRiot', // Apply ProtestRiot font to label
-                                    color: Color(0xFF076A89),
-                                  ),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: InputBorder
-                                      .none, // Remove the default border
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 5.0, horizontal: 15.0),
+                            PaddedContainer(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 0.0, vertical: 5.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: const [kBoxShadow],
                                 ),
-                                keyboardType: TextInputType.name,
-                                style: const TextStyle(
-                                  fontFamily:
-                                      'ProtestRiot', // Apply ProtestRiot font to input text
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            // Last Name input
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 0.0, vertical: 5.0),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: const [kBoxShadow],
-                              ),
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  labelText: 'Last Name',
-                                  labelStyle: TextStyle(
-                                    fontFamily:
-                                        'ProtestRiot', // Apply ProtestRiot font to label
-                                    color: Color(0xFF076A89),
-                                  ),
-                                  fillColor: Colors.white,
-                                  filled: true,
-                                  border: InputBorder
-                                      .none, // Remove the default border
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 5.0, horizontal: 15.0),
-                                ),
-                                keyboardType: TextInputType.name,
-                                style: const TextStyle(
-                                  fontFamily:
-                                      'ProtestRiot', // Apply ProtestRiot font to input text
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                            // Date of Birth input
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 0.0, vertical: 5.0),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(8),
-                                boxShadow: const [kBoxShadow],
-                              ),
-                              child: Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: TextFormField(
-                                      decoration: const InputDecoration(
-                                        labelText: 'Date of Birth',
-                                        labelStyle: TextStyle(
-                                          fontFamily:
-                                              'ProtestRiot', // Apply ProtestRiot font to label
-                                          color: Color(0xFF076A89),
-                                        ),
-                                        fillColor: Colors.white,
-                                        filled: true,
-                                        border: InputBorder
-                                            .none, // Remove the default border
-                                        contentPadding: EdgeInsets.symmetric(
-                                            vertical: 5.0, horizontal: 15.0),
-                                      ),
-                                      controller: TextEditingController(
-                                          text: "${selectedDate.toLocal()}"
-                                              .split(' ')[0]),
-                                      enabled: false,
+                                child: TextFormField(
+                                  decoration: const InputDecoration(
+                                    labelText: 'First Name',
+                                    labelStyle: TextStyle(
+                                      fontFamily:
+                                          'ProtestRiot', // Apply ProtestRiot font to label
+                                      color: Color(0xFF076A89),
                                     ),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: InputBorder
+                                        .none, // Remove the default border
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 5.0, horizontal: 15.0),
                                   ),
-                                  IconButton(
-                                    icon: const Icon(Icons.calendar_today),
-                                    onPressed: () => _selectDate(context),
+                                  keyboardType: TextInputType.name,
+                                  style: const TextStyle(
+                                    fontFamily:
+                                        'ProtestRiot', // Apply ProtestRiot font to input text
                                   ),
-                                ],
+                                ),
+                              ),
+                            ),
+                            // const SizedBox(height: 20),
+                            // Last Name input
+                            PaddedContainer(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 0.0, vertical: 5.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: const [kBoxShadow],
+                                ),
+                                child: TextFormField(
+                                  decoration: const InputDecoration(
+                                    labelText: 'Last Name',
+                                    labelStyle: TextStyle(
+                                      fontFamily:
+                                          'ProtestRiot', // Apply ProtestRiot font to label
+                                      color: Color(0xFF076A89),
+                                    ),
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                    border: InputBorder
+                                        .none, // Remove the default border
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 5.0, horizontal: 15.0),
+                                  ),
+                                  keyboardType: TextInputType.name,
+                                  style: const TextStyle(
+                                    fontFamily:
+                                        'ProtestRiot', // Apply ProtestRiot font to input text
+                                  ),
+                                ),
+                              ),
+                            ),
+                            // const SizedBox(height: 20),
+                            // Date of Birth input
+                            PaddedContainer(
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 0.0, vertical: 5.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: const [kBoxShadow],
+                                ),
+                                child: Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: TextFormField(
+                                        decoration: const InputDecoration(
+                                          labelText: 'Date of Birth',
+                                          labelStyle: TextStyle(
+                                            fontFamily:
+                                                'ProtestRiot', // Apply ProtestRiot font to label
+                                            color: Color(0xFF076A89),
+                                          ),
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: InputBorder
+                                              .none, // Remove the default border
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 5.0, horizontal: 15.0),
+                                        ),
+                                        controller: TextEditingController(
+                                            text: "${selectedDate.toLocal()}"
+                                                .split(' ')[0]),
+                                        enabled: false,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      icon: const Icon(Icons.calendar_today),
+                                      onPressed: () => _selectDate(context),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ],

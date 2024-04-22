@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 // import 'package:mentor_shift/objects/style/paddedcontainer.dart';
 
-class MenteeHome extends StatefulWidget {
-  const MenteeHome({super.key});
+class MenteeSearch extends StatefulWidget {
+  const MenteeSearch({super.key});
 
   @override
-  State<MenteeHome> createState() => MenteeHomeState();
+  State<MenteeSearch> createState() => MenteeSearchState();
 }
 
-class MenteeHomeState extends State<MenteeHome> {
+class MenteeSearchState extends State<MenteeSearch> {
   String dropdownValue = 'NAME';
 
   @override
@@ -35,7 +35,7 @@ class MenteeHomeState extends State<MenteeHome> {
                 const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
             child: Container(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
+                  const EdgeInsets.symmetric(horizontal: 5.0, vertical: 0.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(8),
@@ -47,6 +47,7 @@ class MenteeHomeState extends State<MenteeHome> {
                 ],
               ),
               child: Row(
+                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 3.0),
@@ -101,8 +102,7 @@ class MenteeHomeState extends State<MenteeHome> {
                   Expanded(
                     child: TextFormField(
                       decoration: const InputDecoration(
-                        hintText:
-                            'Search Mentors', // change labelText to hintText
+                        hintText: 'Search Mentors',
                         fillColor: Colors.white,
                         filled: true,
                         border: InputBorder.none,
@@ -114,12 +114,56 @@ class MenteeHomeState extends State<MenteeHome> {
                       ),
                     ),
                   ),
+                  IconButton(
+                    icon: const Icon(Icons.search, color: Colors.black),
+                    onPressed: () {
+                      // handle the button press
+                    },
+                  ),
                 ],
               ),
             ),
           ),
           // Add more widgets to the column here
         ],
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 80.0,
+        child: BottomNavigationBar(
+          backgroundColor: const Color(0xFF0B6E6D),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Image.asset('images/icons/books.png',
+                    width: 35, height: 35),
+              ), // replace with your custom icon
+              label: 'Mentorships',
+            ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Image.asset('images/icons/msg.png',
+                    width: 35, height: 35),
+              ), // replace with your custom icon
+              label: 'Chat',
+            ),
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Image.asset('images/icons/profile.png',
+                    width: 35, height: 35),
+              ), // replace with your custom icon
+              label: 'Profile',
+            ),
+          ],
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
+          selectedLabelStyle:
+              const TextStyle(fontFamily: 'ProtestRiot', fontSize: 13.0), // add this line
+          unselectedLabelStyle:
+              const TextStyle(fontFamily: 'ProtestRiot', fontSize: 13.0), // add this line
+        ),
       ),
     );
   }

@@ -60,10 +60,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/mentorshift.png
-    - images/mentorshiftorig.png
-    - images/Mentee.png
-    - images/Mentor.png
+    - images/icons/mentorshift.png
+    - images/icons/mentorshiftorig.png
+    - images/icons/Mentee.png
+    - images/icons/Mentor.png
+    - images/icons/books.png
+    - images/icons/msg.png
+    - images/icons/profile.png
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

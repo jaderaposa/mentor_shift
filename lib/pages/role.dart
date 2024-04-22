@@ -25,7 +25,7 @@ class Role extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Image.asset(
-                    'images/mentorshiftorig.png',
+                    'images/icons/mentorshiftorig.png',
                     width: double.infinity, // Make the image take the full width
                     height: 120, // Keep the height fixed or adjust as needed
                     fit: BoxFit
@@ -66,7 +66,7 @@ class Role extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(20),
                                 child: Image.asset(
-                                  'images/Mentor.png',
+                                  'images/icons/Mentor.png',
                                   width: 120,
                                   height: 120,
                                 ),
@@ -103,7 +103,7 @@ class Role extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(20),
                                 child: Image.asset(
-                                  'images/Mentee.png',
+                                  'images/icons/Mentee.png',
                                   width: 120,
                                   height: 120,
                                 ),

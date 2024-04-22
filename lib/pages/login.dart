@@ -51,7 +51,7 @@ class LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
-                  'images/mentorshiftorig.png',
+                  'images/icons/mentorshiftorig.png',
                   width: double.infinity, // Make the image take the full width
                   height: 120, // Keep the height fixed or adjust as needed
                   fit: BoxFit

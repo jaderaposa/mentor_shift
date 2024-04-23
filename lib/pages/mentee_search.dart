@@ -18,6 +18,13 @@ class MenteeSearchState extends State<MenteeSearch> {
       backgroundColor: const Color(0xFF4C9A91),
       appBar: AppBar(
         backgroundColor: const Color(0xFF4C9A91),
+        leading: IconButton(
+          icon: const Icon(
+              Icons.arrow_back, color: Colors.white,), // replace with your custom back button
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: const Text(
           'Mentee',
           style: TextStyle(

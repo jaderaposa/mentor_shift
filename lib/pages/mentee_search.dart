@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 // import 'package:mentor_shift/objects/style/paddedcontainer.dart';
 
@@ -20,7 +21,9 @@ class MenteeSearchState extends State<MenteeSearch> {
         backgroundColor: const Color(0xFF4C9A91),
         leading: IconButton(
           icon: const Icon(
-              Icons.arrow_back, color: Colors.white,), // replace with your custom back button
+            Icons.arrow_back,
+            color: Colors.white,
+          ), // replace with your custom back button
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -134,43 +137,11 @@ class MenteeSearchState extends State<MenteeSearch> {
           // Add more widgets to the column here
         ],
       ),
-      bottomNavigationBar: SizedBox(
-        height: 80.0,
-        child: BottomNavigationBar(
-          backgroundColor: const Color(0xFF0B6E6D),
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 5.0),
-                child: Image.asset('images/icons/books.png',
-                    width: 35, height: 35),
-              ), // replace with your custom icon
-              label: 'Mentorships',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 5.0),
-                child: Image.asset('images/icons/msg.png',
-                    width: 35, height: 35),
-              ), // replace with your custom icon
-              label: 'Chat',
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 5.0),
-                child: Image.asset('images/icons/profile.png',
-                    width: 35, height: 35),
-              ), // replace with your custom icon
-              label: 'Profile',
-            ),
-          ],
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white,
-          selectedLabelStyle:
-              const TextStyle(fontFamily: 'ProtestRiot', fontSize: 13.0), // add this line
-          unselectedLabelStyle:
-              const TextStyle(fontFamily: 'ProtestRiot', fontSize: 13.0), // add this line
-        ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: 0, // set the currently selected item
+        onTap: (index) {
+          // handle the tap event
+        },
       ),
     );
   }

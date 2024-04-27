@@ -68,6 +68,8 @@ flutter:
     - images/icons/msg.png
     - images/icons/profile.png
     - images/icons/search.png
+    - images/icons/star.png
+    - images/icons/user_sample.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,0 +1,168 @@
+//dart basic structure import
+import 'package:flutter/material.dart';
+import 'package:mentor_shift/objects/bottomnav.dart';
+
+class Messaging extends StatefulWidget {
+  const Messaging({super.key});
+
+  @override
+  State<Messaging> createState() => _MessagingState();
+}
+
+class _MessagingState extends State<Messaging> {
+
+  final List<Map<String, dynamic>> messages = [
+  {
+    'name': 'Person 1',
+    'time': '10:00 AM',
+    'message': 'This is a short message.',
+  },
+  {
+    'name': 'Person 2',
+    'time': '9:30 AM',
+    'message': 'This is a slightly longer message that might get cut off.',
+  },
+  {
+    'name': 'Person 3',
+    'time': '9:00 AM',
+    'message': 'This is a really long message that will definitely get cut off because it just keeps going and going and going...',
+  },
+  // add more messages as needed
+];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF4C9A91),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF4C9A91),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ), // replace with your custom back button
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: const Text(
+          'Mentee',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 30.0,
+            fontFamily: 'ProtestRiot',
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Messaging',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 40.0,
+                    fontFamily: 'ProtestRiot',
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Search',
+                labelStyle: TextStyle(
+                  fontFamily: 'ProtestRiot',
+                ),
+                prefixIcon: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Icon(Icons.search),
+                ),
+                fillColor: Colors.white,
+                filled: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+              ),
+              style: TextStyle(
+                fontFamily: 'ProtestRiot',
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: messages.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: Container(
+                    width: 60.0, // adjust the size as needed
+                    height: 60.0, // adjust the size as needed
+                    decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: ClipOval(
+                        child: Image.asset(
+                          'images/icons/user_sample.png', // replace with your image URL
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ),
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            messages[index]['name'],
+                            style: const TextStyle(
+                              fontFamily: 'ProtestRiot',
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            messages[index]['time'],
+                            style: const TextStyle(
+                              fontFamily: 'ProtestRiot',
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        messages[index]['message'],
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontFamily: 'ProtestRiot',
+                          color: Color.fromARGB(255, 226, 226, 226),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        currentIndex: 0, // set the currently selected item
+        onTap: (index) {
+          // handle the tap event
+        },
+      ),
+    );
+  }
+}

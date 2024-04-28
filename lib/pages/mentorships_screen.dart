@@ -9,16 +9,26 @@ class MentorshipsPage extends StatefulWidget {
 }
 
 class _MentorshipsPageState extends State<MentorshipsPage> {
-  final List<String> mentorships = [
-    'Mentorship 1',
-    'Mentorship 2',
-    'Mentorship 3',
-    'Mentorship 4',
-    'Mentorship 5',
-    'Mentorship 6',
-    'Mentorship 7',
-    'Mentorship 8',
-    'Mentorship 9',
+  final List<Map<String, dynamic>> mentorships = [
+    {
+      'subject': 'Subject 1',
+      'mentor': 'Mentor 1',
+      'rating': 5,
+      'picture': 'images/icons/user_sample.png', // replace with your image path
+    },
+    {
+      'subject': 'Subject 2',
+      'mentor': 'Mentor 2',
+      'rating': 4,
+      'picture': 'images/icons/user_sample.png', // replace with your image path
+    },
+    {
+      'subject': 'Subject 3',
+      'mentor': 'Mentor 3',
+      'rating': 3,
+      'picture': 'images/icons/user_sample.png', // replace with your image path
+    },
+    //add more mentorships as needed
   ];
 
   @override
@@ -70,6 +80,7 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
                   onPressed: () {
                     // handle the button press
                   },
+                  tooltip: 'Search Mentors',
                 ),
               ],
             ),
@@ -92,39 +103,46 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
                   ),
                   child: Row(
                     children: [
-                       Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.only(bottom: 10.0),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
                               child: Text(
-                                'Subject Name', // replace with your subject name
-                                style: TextStyle(
+                                mentorships[index]
+                                    ['subject'], // dynamic subject name
+                                style: const TextStyle(
                                   fontFamily: 'ProtestRiot',
                                   color: Colors.white,
                                   fontSize: 35.0,
-                                  // add other text styles as needed
                                 ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(right: 60.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    'Mentor Name', // replace with your mentor name
-                                    style: TextStyle(
+                                  Text(
+                                    mentorships[index]
+                                        ['mentor'], // dynamic mentor name
+                                    style: const TextStyle(
                                       fontFamily: 'ProtestRiot',
-                                      // add other text styles as needed
+                                      color: Colors.white,
                                     ),
                                   ),
-                                  Image.asset(
-                                    'images/icons/star.png', // replace with the path to your custom star icon
-                                    height: 18, // adjust the size as needed
-                                    width: 18, // adjust the size as needed
-                                  ), // replace with your star rating widget
+                                  Row(
+                                    children: List.generate(
+                                      mentorships[index]['rating'],
+                                      (index) => Image.asset(
+                                        'images/icons/star.png', // replace with the path to your custom star icon
+                                        height: 18, // adjust the size as needed
+                                        width: 18, // adjust the size as needed
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -132,20 +150,20 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
                         ),
                       ),
                       Container(
-                        padding:
-                            const EdgeInsets.all(5), // adjust the padding as needed
+                        padding: const EdgeInsets.all(5),
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Color.fromARGB(255, 224, 224, 224),
                         ),
-                        width: 100.0, // adjust the size as needed
-                        height: 100.0, // adjust the size as needed
+                        width: 100.0,
+                        height: 100.0,
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
                               image: AssetImage(
-                                'images/icons/user_sample.png', // replace with your image path
+                                mentorships[index]
+                                    ['picture'], // dynamic picture
                               ),
                               fit: BoxFit.cover,
                             ),

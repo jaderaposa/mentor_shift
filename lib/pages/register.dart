@@ -50,7 +50,7 @@ class RegisterState extends State<Register> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Image.asset(
-                            'images/mentorshiftorig.png',
+                            'images/icons/mentorshiftorig.png',
                             width: double
                                 .infinity, // Make the image take the full width
                             height:

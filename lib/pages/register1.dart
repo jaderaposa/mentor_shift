@@ -77,12 +77,25 @@ class Register1State extends State<Register1> {
                         child: Column(
                           children: <Widget>[
                             const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment:
+                                  CrossAxisAlignment.start, // Add this line
                               children: [
                                 Text(
-                                  'Let\'s get personal.',
+                                  'Let\'s get personal',
                                   style: TextStyle(
                                     fontSize:
-                                        20, // Adjust the font size as needed
+                                        25, // Adjust the font size as needed
+                                    color: Colors.white,
+                                    fontFamily:
+                                        'ProtestRiot', // Set the text color
+                                  ),
+                                ),
+                                Text(
+                                  '2/4',
+                                  style: TextStyle(
+                                    fontSize:
+                                        40, // Adjust the font size as needed
                                     fontWeight:
                                         FontWeight.bold, // Make the text bold
                                     color: Colors.white,
@@ -92,7 +105,7 @@ class Register1State extends State<Register1> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 10),
                             // First Name input
                             PaddedContainer(
                               child: Container(
@@ -195,9 +208,12 @@ class Register1State extends State<Register1> {
                                         enabled: false,
                                       ),
                                     ),
-                                    IconButton(
-                                      icon: const Icon(Icons.calendar_today),
-                                      onPressed: () => _selectDate(context),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: IconButton(
+                                        icon: const Icon(Icons.calendar_today),
+                                        onPressed: () => _selectDate(context),
+                                      ),
                                     ),
                                   ],
                                 ),

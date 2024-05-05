@@ -71,12 +71,42 @@ class RegisterState extends State<Register> {
                             child: Column(
                               children: <Widget>[
                                 const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start, // Add this line
                                   children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Welcome to Mentor-Shift!',
+                                          style: TextStyle(
+                                            fontSize:
+                                                25, // Adjust the font size as needed
+                                            color: Colors.white,
+                                            fontFamily:
+                                                'ProtestRiot', // Set the text color
+                                          ),
+                                        ),
+                                        Text(
+                                          'First, let\'s create an account',
+                                          style: TextStyle(
+                                            fontSize:
+                                                25, // Adjust the font size as needed
+                                            color: Colors.white,
+                                            fontFamily:
+                                                'ProtestRiot', // Set the text color
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                     Text(
-                                      'Welcome to Mentor-Shift!\nFirst, let\'s create an account.',
+                                      '1/4',
                                       style: TextStyle(
                                         fontSize:
-                                            20, // Adjust the font size as needed
+                                            40, // Adjust the font size as needed
                                         fontWeight: FontWeight
                                             .bold, // Make the text bold
                                         color: Colors.white,

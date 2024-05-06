@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/pages/landing_mentee.dart';
 import 'package:mentor_shift/pages/login.dart';
 import 'package:mentor_shift/pages/register.dart';
 import 'package:mentor_shift/pages/register2_mentee.dart';
@@ -10,7 +11,7 @@ import 'package:mentor_shift/pages/mentorships_screen.dart';
 import 'package:mentor_shift/pages/messaging.dart';
 import 'package:mentor_shift/pages/view_mentor.dart';
 
-void main() => runApp(MaterialApp(initialRoute: '/register1', routes: {
+void main() => runApp(MaterialApp(initialRoute: '/landingmentee', routes: {
       // '/': (context) => Loading(),
       '/login': (context) => const Login(),
       '/register': (context) => const Register(),
@@ -22,4 +23,5 @@ void main() => runApp(MaterialApp(initialRoute: '/register1', routes: {
       '/viewmentor': (context) => const ViewMentor(),
       '/register2': (context) => const Register2(),
       '/register3': (context) => const Register3(),
+      '/landingmentee': (context) => const LandingMentee(),
     }));

@@ -26,10 +26,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
             ),
             label: 'Mentorships',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Padding(
-              padding: EdgeInsets.only(bottom: 5),
-              child: Icon(Icons.search, size: 30, color: Colors.white),
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Image.asset('images/icons/icon-search.png', width: 30, height: 30),
             ),
             label: 'Search',
           ),

@@ -70,6 +70,7 @@ flutter:
     - images/icons/search.png
     - images/icons/star.png
     - images/icons/user_sample.png
+    - images/icons/icon-search.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

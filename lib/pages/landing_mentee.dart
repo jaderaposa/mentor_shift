@@ -181,10 +181,11 @@ class _LandingMenteeState extends State<LandingMentee> {
                   ),
                 ),
                 SizedBox(
-                  height: 220,
+                  height: MediaQuery.of(context).size.height * 0.3 -
+                      5.0, // Subtract the height of the Padding widget
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: mentors.length + 2, // Increase itemCount by 2
+                    itemCount: mentors.length + 2,
                     itemBuilder: (BuildContext context, int index) {
                       if (index == 0) {
                         // If this is the first item
@@ -317,10 +318,11 @@ class _LandingMenteeState extends State<LandingMentee> {
                   ),
                 ),
                 SizedBox(
-                  height: 220,
+                  height: MediaQuery.of(context).size.height * 0.3 -
+                      5.0, // Subtract the height of the Padding widget
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: mentors.length + 2, // Increase itemCount by 2
+                    itemCount: mentors.length + 2,
                     itemBuilder: (BuildContext context, int index) {
                       mentors.sort(
                           (a, b) => b.totalMentees.compareTo(a.totalMentees));

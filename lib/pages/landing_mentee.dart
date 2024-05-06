@@ -201,7 +201,7 @@ class _LandingMenteeState extends State<LandingMentee> {
                       } else {
                         mentors.sort((a, b) => b.stars.compareTo(a.stars));
                         return SizedBox(
-                          width: 180.0,
+                          width: 160.0,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
@@ -272,11 +272,14 @@ class _LandingMenteeState extends State<LandingMentee> {
                                         children: List.generate(
                                           mentors[index - 1]
                                               .stars, // Subtract 1 from the index
-                                          (index) => const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 2.0),
-                                            child: Icon(Icons.star,
-                                                size: 16, color: Colors.yellow),
+                                          (index) => Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2.0, vertical: 2),
+                                            child: Image.asset(
+                                              'images/icons/star.png',
+                                              width: 16,
+                                              height: 16,
+                                            ),
                                           ),
                                         ),
                                       ),

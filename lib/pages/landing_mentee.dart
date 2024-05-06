@@ -201,7 +201,7 @@ class _LandingMenteeState extends State<LandingMentee> {
                       } else {
                         mentors.sort((a, b) => b.stars.compareTo(a.stars));
                         return SizedBox(
-                          width: 160.0,
+                          width: 180.0,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),

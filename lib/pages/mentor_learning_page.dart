@@ -74,9 +74,10 @@ class _MentorLearningPageState extends State<MentorLearningPage>
             child: TabBar(
               controller: _tabController,
               labelColor: Colors.white, // Set the color of the text
-              labelStyle: const TextStyle(
+              labelStyle: TextStyle(
                 // Set the style of the text
-                fontSize: 18,
+                fontSize: MediaQuery.of(context).size.width *
+                    0.03, // Adjust the font size based on the screen width
                 fontFamily: 'ProtestRiot',
               ),
               unselectedLabelColor:
@@ -89,18 +90,49 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                   width: 3.0, // Set the width of the line
                 ),
               ),
-              tabs: const [
+              tabs: [
                 Padding(
-                  padding: EdgeInsets.all(10.0), // Add padding to the tabs
-                  child: Text('Lessons'),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10, horizontal: 5), // Add padding to the tabs
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: FittedBox(child: Text('Lessons')),
+                      ),
+                      const SizedBox(width: 5,),
+                      Image.asset('images/icons/lessons.png',
+                          width: 20, height: 20),
+                    ],
+                  ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(10.0), // Add padding to the tabs
-                  child: Text('Activities'),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10, horizontal: 5), // Add padding to the tabs
+                  child: Row(
+                    children: [
+                      const Expanded(
+                          child: FittedBox(child: Text('Activities'))),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Image.asset('images/icons/activities.png',
+                          width: 20, height: 20),
+                    ],
+                  ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(10.0), // Add padding to the tabs
-                  child: Text('Reports'),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10, horizontal: 5), // Add padding to the tabs
+                  child: Row(
+                    children: [
+                      const Expanded(child: FittedBox(child: Text('Reports'))),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Image.asset('images/icons/reports.png',
+                          width: 20, height: 20),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -114,7 +146,8 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                       lessons.length, // Use the length of the lessons list
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 20),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
@@ -125,7 +158,7 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                         ),
                         border: Border.all(
                           color: Colors.black, // Set the color of the border
-                          width: 2.0, // Set the width of the border
+                          width: 1.5, // Set the width of the border
                         ),
                         boxShadow: const [kBoxShadow],
                       ),

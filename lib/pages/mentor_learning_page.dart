@@ -224,12 +224,7 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                           'Advanced',
                           'Expert'
                         ])
-                          Container(
-                            height: 40,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            color: Colors.green,
-                            child: Center(child: Text(difficulty)),
-                          ),
+                          _buildDifficultyContainer(difficulty),
                       ],
                     );
                   },
@@ -245,6 +240,34 @@ class _MentorLearningPageState extends State<MentorLearningPage>
         onTap: (index) {
           // handle the tap event
         },
+      ),
+    );
+  }
+
+  Widget _buildDifficultyContainer(String difficulty) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(35, 3, 25, 3),
+      child: Container(
+        padding: const EdgeInsets.all(8), // Adjust padding as needed
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: const Color(0xff95416f),
+          border: Border.all(
+            color: Colors.black, // Set the color of the border
+            width: 1.5, // Set the width of the border
+          ),
+          boxShadow: const [kBoxShadow],
+        ),
+        child: Center(
+          child: Text(
+            difficulty,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18, // Adjust font size as needed
+              fontFamily: 'ProtestRiot',
+            ),
+          ),
+        ),
       ),
     );
   }

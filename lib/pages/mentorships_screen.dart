@@ -10,24 +10,24 @@ class MentorshipsPage extends StatefulWidget {
 
 class _MentorshipsPageState extends State<MentorshipsPage> {
   final List<Map<String, dynamic>> mentorships = [
-    {
-      'subject': 'Subject 1',
-      'mentor': 'Mentor 1',
-      'rating': 5,
-      'picture': 'images/icons/user_sample.png', // replace with your image path
-    },
-    {
-      'subject': 'Subject 2',
-      'mentor': 'Mentor 2',
-      'rating': 4,
-      'picture': 'images/icons/user_sample.png', // replace with your image path
-    },
-    {
-      'subject': 'Subject 3',
-      'mentor': 'Mentor 3',
-      'rating': 3,
-      'picture': 'images/icons/user_sample.png', // replace with your image path
-    },
+    // {
+    //   'subject': 'Subject 1',
+    //   'mentor': 'Mentor 1',
+    //   'rating': 5,
+    //   'picture': 'images/icons/user_sample.png', // replace with your image path
+    // },
+    // {
+    //   'subject': 'Subject 2',
+    //   'mentor': 'Mentor 2',
+    //   'rating': 4,
+    //   'picture': 'images/icons/user_sample.png', // replace with your image path
+    // },
+    // {
+    //   'subject': 'Subject 3',
+    //   'mentor': 'Mentor 3',
+    //   'rating': 3,
+    //   'picture': 'images/icons/user_sample.png', // replace with your image path
+    // },
     //add more mentorships as needed
   ];
 
@@ -86,9 +86,56 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: mentorships.length,
-              itemBuilder: (context, index) {
+            child: mentorships.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                         const Center(
+                            child: Text(
+                              'You have not enrolled into any mentorships/s yet',
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: Colors.white, // Add this line
+                                fontFamily:
+                                    'ProtestRiot', // Replace with your actual font family
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          const SizedBox(height: 20.0),
+                          Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'Click this icon at the top\n to look for one now.',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white, // Add this line
+                                    fontFamily:
+                                        'ProtestRiot', // Replace with your actual font family
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(width: 10.0),
+                                Image.asset(
+                                  'images/icons/search.png',
+                                  width: 35,
+                                  height: 35,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: mentorships.length,
+                    itemBuilder: (context, index) {
                 return Container(
                   margin:
                       const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),

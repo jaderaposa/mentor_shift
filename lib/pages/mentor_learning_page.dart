@@ -1,6 +1,7 @@
 //import dart
 import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/bottomnav.dart';
+import 'package:mentor_shift/objects/cet.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 
 class MentorLearningPage extends StatefulWidget {
@@ -70,7 +71,7 @@ class _MentorLearningPageState extends State<MentorLearningPage>
           ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: TabBar(
               controller: _tabController,
               labelColor: Colors.white, // Set the color of the text
@@ -99,7 +100,9 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                       const Expanded(
                         child: FittedBox(child: Text('Lessons')),
                       ),
-                      const SizedBox(width: 5,),
+                      const SizedBox(
+                        width: 5,
+                      ),
                       Image.asset('images/icons/lessons.png',
                           width: 20, height: 20),
                     ],
@@ -176,7 +179,61 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                     );
                   },
                 ),
-                const Center(child: Text('Activities Content')),
+                ListView.builder(
+                  itemCount: lessons.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CustomExpansionTile(
+                      title: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color: const Color(0xffed2591),
+                          border: Border.all(
+                            color: Colors.black, // Set the color of the border
+                            width: 1.5, // Set the width of the border
+                          ),
+                          boxShadow: const [kBoxShadow],
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                  lessons[
+                                      index], // Use the lesson name from the list
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontFamily: 'ProtestRiot',
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Icon(Icons.arrow_drop_down,
+                                color: Colors
+                                    .white), // This adds a new icon at the end
+                          ],
+                        ),
+                      ),
+                      children: <Widget>[
+                        for (var difficulty in [
+                          'Beginner',
+                          'Intermediate',
+                          'Advanced',
+                          'Expert'
+                        ])
+                          Container(
+                            height: 40,
+                            margin: const EdgeInsets.symmetric(vertical: 5),
+                            color: Colors.green,
+                            child: Center(child: Text(difficulty)),
+                          ),
+                      ],
+                    );
+                  },
+                ),
                 const Center(child: Text('Reports Content')),
               ],
             ),

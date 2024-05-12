@@ -12,17 +12,48 @@ class MentorLearningPage extends StatefulWidget {
   State<MentorLearningPage> createState() => _MentorLearningPageState();
 }
 
+class Activity {
+  Activity({required this.title, required this.difficulty});
+
+  String title;
+  String difficulty;
+}
+
+class Difficulty {
+  Difficulty(
+      {required this.title, this.isExpanded = false, required this.activities});
+
+  String title;
+  bool isExpanded;
+  List<Activity> activities;
+}
+
+class Lesson {
+  Lesson({required this.title, required this.difficulties});
+
+  String title;
+  List<Difficulty> difficulties;
+}
+
 class _MentorLearningPageState extends State<MentorLearningPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   String mentorName = 'John Doe'; // Add this line
-  // Sample data
-  final List<String> lessons = [
-    'Lesson 1',
-    'Lesson 2',
-    'Lesson 3',
-    'Lesson 4',
-    'Lesson 5',
+
+  final List<Lesson> lessons = [
+    Lesson(title: 'Lesson 1', difficulties: [
+      Difficulty(title: 'Beginner', activities: [
+        Activity(title: 'Activity 1', difficulty: 'Beginner'),
+        Activity(title: 'Activity 2', difficulty: 'Beginner'),
+        // Add more activities as needed
+      ]),
+      Difficulty(title: 'Intermediate', activities: [
+        Activity(title: 'Activity 3', difficulty: 'Intermediate'),
+        Activity(title: 'Activity 4', difficulty: 'Intermediate'),
+        // Add more activities as needed
+      ]),
+      // Add more difficulties as needed
+    ]),
     // Add more lessons as needed
   ];
 
@@ -169,7 +200,8 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Text(
-                          lessons[index], // Use the lesson name from the list
+                          lessons[index]
+                              .title, // Use the lesson title from the list
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -202,8 +234,8 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(
-                                  lessons[
-                                      index], // Use the lesson name from the list
+                                  lessons[index]
+                                      .title, // Use the lesson title from the list
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -222,15 +254,11 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                           ],
                         ),
                       ),
-                      children: <Widget>[
-                        for (var difficulty in [
-                          'Beginner',
-                          'Intermediate',
-                          'Advanced',
-                          'Expert'
-                        ])
-                          _buildDifficultyContainer(difficulty),
-                      ],
+                      children: lessons[index]
+                          .difficulties
+                          .map<Widget>((Difficulty difficulty) {
+                        return _buildDifficultyContainer(difficulty);
+                      }).toList(),
                     );
                   },
                 ),
@@ -249,28 +277,89 @@ class _MentorLearningPageState extends State<MentorLearningPage>
     );
   }
 
-  Widget _buildDifficultyContainer(String difficulty) {
+  Widget _buildDifficultyContainer(Difficulty difficulty) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(35, 3, 25, 3),
-      child: Container(
-        padding: const EdgeInsets.all(8), // Adjust padding as needed
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: const Color(0xff95416f),
-          border: Border.all(
-            color: Colors.black, // Set the color of the border
-            width: 1.5, // Set the width of the border
-          ),
-          boxShadow: const [kBoxShadow],
-        ),
-        child: Center(
-          child: Text(
-            difficulty,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 18, // Adjust font size as needed
-              fontFamily: 'ProtestRiot',
+      padding: const EdgeInsets.fromLTRB(40, 0, 0, 0),
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: CustomExpansionTile(
+          titleBuilder: (bool isExpanded) => Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: const Color(0xff95416f),
+              border: Border.all(
+                color: Colors.black, // Set the color of the border
+                width: 1.5, // Set the width of the border
+              ),
+              boxShadow: const [kBoxShadow],
             ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Text(
+                      difficulty
+                          .title, // Use the difficulty title from the list
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontFamily: 'ProtestRiot',
+                      ),
+                    ),
+                  ),
+                ),
+                Transform.rotate(
+                  angle: isExpanded ? math.pi : 0,
+                  child: const Icon(
+                    Icons.arrow_drop_up,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          children: difficulty.activities.map<Widget>((Activity activity) {
+            return _buildActivityContainer(activity);
+          }).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActivityContainer(Activity activity) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(65, 5, 25, 5),
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: const Color(0xff95416f),
+            border: Border.all(
+              color: Colors.black, // Set the color of the border
+              width: 1.5, // Set the width of the border
+            ),
+            boxShadow: const [kBoxShadow],
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Text(
+                    activity.title, // Use the activity title from the list
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'ProtestRiot',
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

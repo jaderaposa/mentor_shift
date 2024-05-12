@@ -58,34 +58,44 @@ class _MentorLearningPageState extends State<MentorLearningPage>
       'Expert'
     ];
 
-    // Define your activities
-    List<Activity> activities = [
-      Activity(title: 'Activity 1', difficulty: 'Beginner'),
-      Activity(title: 'Activity 2', difficulty: 'Intermediate'),
-      Activity(title: 'Activity 3', difficulty: 'Advanced'),
-      Activity(title: 'Activity 4', difficulty: 'Expert'),
-      Activity(title: 'Activity 5', difficulty: 'Beginner'),
-      // Add more activities as needed
-    ];
+    // Define your activities for each lesson
+    Map<String, List<Activity>> lessonActivities = {
+      'Lesson 1': [
+        Activity(title: 'Activity 1', difficulty: 'Beginner'),
+        Activity(title: 'Activity 2', difficulty: 'Beginner'),
+        Activity(title: 'Activity 3', difficulty: 'Beginner'),
+        Activity(title: 'Activity 4', difficulty: 'Beginner'),
+      ],
+      'Lesson 2': [
+        Activity(title: 'Activity 5', difficulty: 'Expert'),
+        Activity(title: 'Activity 6', difficulty: 'Intermediate'),
+        Activity(title: 'Activity 7', difficulty: 'Advanced'),
+        Activity(title: 'Activity 8', difficulty: 'Expert'),
+      ],
+      // Add more lessons as needed
+    };
 
-    List<Difficulty> lessonDifficulties =
-        []; // Create a list to hold the Difficulty objects
+    for (String lessonTitle in lessonActivities.keys) {
+      List<Activity> activities = lessonActivities[lessonTitle] ?? [];
+      List<Difficulty> lessonDifficulties =
+          []; // Create a list to hold the Difficulty objects
 
-    for (String difficulty in difficulties) {
-      // Filter the activities for the current difficulty level
-      List<Activity> activitiesForDifficulty = activities
-          .where((activity) => activity.difficulty == difficulty)
-          .toList();
-      lessonDifficulties.add(Difficulty(
-          title: difficulty,
-          activities:
-              activitiesForDifficulty)); // Add the Difficulty object to the list
+      for (String difficulty in difficulties) {
+        // Filter the activities for the current difficulty level
+        List<Activity> activitiesForDifficulty = activities
+            .where((activity) => activity.difficulty == difficulty)
+            .toList();
+        lessonDifficulties.add(Difficulty(
+            title: difficulty,
+            activities:
+                activitiesForDifficulty)); // Add the Difficulty object to the list
+      }
+
+      lessons.add(Lesson(
+          title: lessonTitle,
+          difficulties:
+              lessonDifficulties)); // Add a Lesson object to the lessons list for each lesson
     }
-
-    lessons.add(Lesson(
-        title: 'Lesson 1',
-        difficulties:
-            lessonDifficulties)); // Add a single Lesson object to the lessons list
 
     setState(() {}); // Call setState to update the UI
   }

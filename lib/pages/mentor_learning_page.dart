@@ -54,6 +54,45 @@ class _MentorLearningPageState extends State<MentorLearningPage>
       ]),
       // Add more difficulties as needed
     ]),
+    Lesson(title: 'Lesson 2', difficulties: [
+      Difficulty(title: 'Advanced', activities: [
+        Activity(title: 'Activity 1', difficulty: 'Advanced'),
+        Activity(title: 'Activity 2', difficulty: 'Advanced'),
+        // Add more activities as needed
+      ]),
+      Difficulty(title: 'Expert', activities: [
+        Activity(title: 'Activity 3', difficulty: 'Expert'),
+        Activity(title: 'Activity 4', difficulty: 'Expert'),
+        // Add more activities as needed
+      ]),
+      // Add more difficulties as needed
+    ]),
+    Lesson(title: 'Lesson 3', difficulties: [
+      Difficulty(title: 'Beginner', activities: [
+        Activity(title: 'Activity 1', difficulty: 'Beginner'),
+        Activity(title: 'Activity 2', difficulty: 'Intermediate'),
+        // Add more activities as needed
+      ]),
+      Difficulty(title: 'Intermediate', activities: [
+        Activity(title: 'Activity 3', difficulty: 'Advanced'),
+        Activity(title: 'Activity 4', difficulty: 'Expert'),
+        // Add more activities as needed
+      ]),
+      // Add more difficulties as needed
+    ]),
+    Lesson(title: 'Lesson 4', difficulties: [
+      Difficulty(title: 'Beginner', activities: [
+        Activity(title: 'Activity 1', difficulty: 'Beginner'),
+        Activity(title: 'Activity 2', difficulty: 'Intermediate'),
+        // Add more activities as needed
+      ]),
+      Difficulty(title: 'Intermediate', activities: [
+        Activity(title: 'Activity 3', difficulty: 'Advanced'),
+        Activity(title: 'Activity 4', difficulty: 'Expert'),
+        // Add more activities as needed
+      ]),
+      // Add more difficulties as needed
+    ]),
     // Add more lessons as needed
   ];
 
@@ -182,7 +221,7 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       margin: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 20),
+                          vertical: 8, horizontal: 20),
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),

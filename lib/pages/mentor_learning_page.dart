@@ -40,66 +40,54 @@ class _MentorLearningPageState extends State<MentorLearningPage>
   late TabController _tabController;
   String mentorName = 'John Doe'; // Add this line
 
-  final List<Lesson> lessons = [
-    Lesson(title: 'Lesson 1', difficulties: [
-      Difficulty(title: 'Beginner', activities: [
-        Activity(title: 'Activity 1', difficulty: 'Beginner'),
-        Activity(title: 'Activity 2', difficulty: 'Beginner'),
-        // Add more activities as needed
-      ]),
-      Difficulty(title: 'Intermediate', activities: [
-        Activity(title: 'Activity 3', difficulty: 'Intermediate'),
-        Activity(title: 'Activity 4', difficulty: 'Intermediate'),
-        // Add more activities as needed
-      ]),
-      // Add more difficulties as needed
-    ]),
-    Lesson(title: 'Lesson 2', difficulties: [
-      Difficulty(title: 'Advanced', activities: [
-        Activity(title: 'Activity 1', difficulty: 'Advanced'),
-        Activity(title: 'Activity 2', difficulty: 'Advanced'),
-        // Add more activities as needed
-      ]),
-      Difficulty(title: 'Expert', activities: [
-        Activity(title: 'Activity 3', difficulty: 'Expert'),
-        Activity(title: 'Activity 4', difficulty: 'Expert'),
-        // Add more activities as needed
-      ]),
-      // Add more difficulties as needed
-    ]),
-    Lesson(title: 'Lesson 3', difficulties: [
-      Difficulty(title: 'Beginner', activities: [
-        Activity(title: 'Activity 1', difficulty: 'Beginner'),
-        Activity(title: 'Activity 2', difficulty: 'Intermediate'),
-        // Add more activities as needed
-      ]),
-      Difficulty(title: 'Intermediate', activities: [
-        Activity(title: 'Activity 3', difficulty: 'Advanced'),
-        Activity(title: 'Activity 4', difficulty: 'Expert'),
-        // Add more activities as needed
-      ]),
-      // Add more difficulties as needed
-    ]),
-    Lesson(title: 'Lesson 4', difficulties: [
-      Difficulty(title: 'Beginner', activities: [
-        Activity(title: 'Activity 1', difficulty: 'Beginner'),
-        Activity(title: 'Activity 2', difficulty: 'Intermediate'),
-        // Add more activities as needed
-      ]),
-      Difficulty(title: 'Intermediate', activities: [
-        Activity(title: 'Activity 3', difficulty: 'Advanced'),
-        Activity(title: 'Activity 4', difficulty: 'Expert'),
-        // Add more activities as needed
-      ]),
-      // Add more difficulties as needed
-    ]),
-    // Add more lessons as needed
-  ];
+  List<Lesson> lessons = []; // Initialize lessons as an empty list
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    fetchLessons(); // Fetch lessons when the state is initialized
+  }
+
+  Future<void> fetchLessons() async {
+    // Define your difficulty levels
+    List<String> difficulties = [
+      'Beginner',
+      'Intermediate',
+      'Advanced',
+      'Expert'
+    ];
+
+    // Define your activities
+    List<Activity> activities = [
+      Activity(title: 'Activity 1', difficulty: 'Beginner'),
+      Activity(title: 'Activity 2', difficulty: 'Intermediate'),
+      Activity(title: 'Activity 3', difficulty: 'Advanced'),
+      Activity(title: 'Activity 4', difficulty: 'Expert'),
+      Activity(title: 'Activity 5', difficulty: 'Beginner'),
+      // Add more activities as needed
+    ];
+
+    List<Difficulty> lessonDifficulties =
+        []; // Create a list to hold the Difficulty objects
+
+    for (String difficulty in difficulties) {
+      // Filter the activities for the current difficulty level
+      List<Activity> activitiesForDifficulty = activities
+          .where((activity) => activity.difficulty == difficulty)
+          .toList();
+      lessonDifficulties.add(Difficulty(
+          title: difficulty,
+          activities:
+              activitiesForDifficulty)); // Add the Difficulty object to the list
+    }
+
+    lessons.add(Lesson(
+        title: 'Lesson 1',
+        difficulties:
+            lessonDifficulties)); // Add a single Lesson object to the lessons list
+
+    setState(() {}); // Call setState to update the UI
   }
 
   @override

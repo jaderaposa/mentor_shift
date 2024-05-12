@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/cet.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
+import 'dart:math' as math;
 
 class MentorLearningPage extends StatefulWidget {
   const MentorLearningPage({super.key});
@@ -183,7 +184,7 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                   itemCount: lessons.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CustomExpansionTile(
-                      title: Container(
+                      titleBuilder: (bool isExpanded) => Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(14),
@@ -211,9 +212,13 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                                 ),
                               ),
                             ),
-                            const Icon(Icons.arrow_drop_down,
-                                color: Colors
-                                    .white), // This adds a new icon at the end
+                            Transform.rotate(
+                              angle: isExpanded ? math.pi : 0,
+                              child: const Icon(
+                                Icons.arrow_drop_up,
+                                color: Colors.white,
+                              ),
+                            ),
                           ],
                         ),
                       ),

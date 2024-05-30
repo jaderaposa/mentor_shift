@@ -32,6 +32,9 @@ class _MessagingState extends State<Messaging> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xFF4C9A91),
       appBar: AppBar(
@@ -45,11 +48,11 @@ class _MessagingState extends State<Messaging> {
             Navigator.of(context).pop();
           },
         ),
-        title: const Text(
+        title: Text(
           'Mentee',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 30.0,
+            fontSize: screenHeight * 0.035,
             fontFamily: 'ProtestRiot',
           ),
         ),
@@ -57,8 +60,8 @@ class _MessagingState extends State<Messaging> {
       ),
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -66,37 +69,37 @@ class _MessagingState extends State<Messaging> {
                   'Messaging',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 40.0,
+                    fontSize: screenHeight * 0.04,
                     fontFamily: 'ProtestRiot',
                   ),
                 ),
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                labelStyle: TextStyle(
-                  fontFamily: 'ProtestRiot',
-                ),
-                prefixIcon: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Icon(Icons.search),
-                ),
-                fillColor: Colors.white,
-                filled: true,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-              ),
-              style: TextStyle(
-                fontFamily: 'ProtestRiot',
-              ),
-            ),
-          ),
+          // const Padding(
+          //   padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+          //   child: TextField(
+          //     decoration: InputDecoration(
+          //       hintText: 'Search',
+          //       labelStyle: TextStyle(
+          //         fontFamily: 'ProtestRiot',
+          //       ),
+          //       prefixIcon: Padding(
+          //         padding: EdgeInsets.symmetric(horizontal: 10.0),
+          //         child: Icon(Icons.search),
+          //       ),
+          //       fillColor: Colors.white,
+          //       filled: true,
+          //       border: OutlineInputBorder(
+          //         borderRadius: BorderRadius.all(Radius.circular(25.0)),
+          //         borderSide: BorderSide(color: Colors.white),
+          //       ),
+          //     ),
+          //     style: TextStyle(
+          //       fontFamily: 'ProtestRiot',
+          //     ),
+          //   ),
+          // ),
           Expanded(
             child: ListView.builder(
               itemCount: messages.length,

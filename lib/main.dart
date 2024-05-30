@@ -11,8 +11,9 @@ import 'package:mentor_shift/pages/mentee_search.dart';
 import 'package:mentor_shift/pages/mentorships_screen.dart';
 import 'package:mentor_shift/pages/messaging.dart';
 import 'package:mentor_shift/pages/view_mentor.dart';
+import 'package:mentor_shift/pages/view_messaging.dart';
 
-void main() => runApp(MaterialApp(initialRoute: '/viewmentor', routes: {
+void main() => runApp(MaterialApp(initialRoute: '/viewmessage', routes: {
       // '/': (context) => Loading(),
       '/login': (context) => const Login(),
       '/register': (context) => const Register(),
@@ -21,6 +22,7 @@ void main() => runApp(MaterialApp(initialRoute: '/viewmentor', routes: {
       '/menteehome': (context) => const MenteeSearch(),
       '/mentorships': (context) => const MentorshipsPage(),
       '/message': (context) => const Messaging(),
+      '/viewmessage': (context) => const ViewMessaging(),
       '/viewmentor': (context) => const ViewMentor(),
       '/register2': (context) => const Register2(),
       '/register3': (context) => const Register3(),

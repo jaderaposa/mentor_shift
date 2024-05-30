@@ -10,8 +10,8 @@ class ViewMentor extends StatefulWidget {
 }
 
 class _ViewMentorState extends State<ViewMentor> {
-
-  String bio = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'; // replace with your data
+  String bio =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'; // replace with your data
 
   int numberOfMentees = 24; // replace with your data
   List<String> expertise = [
@@ -20,9 +20,11 @@ class _ViewMentorState extends State<ViewMentor> {
     'Angular'
   ]; // replace with your data
 
-
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xFF4C9A91),
       appBar: AppBar(
@@ -49,7 +51,8 @@ class _ViewMentorState extends State<ViewMentor> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 120.0),
+            padding: EdgeInsets.symmetric(
+                horizontal: screenWidth * 0.22), // 10% of screen width
             child: Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
@@ -63,14 +66,15 @@ class _ViewMentorState extends State<ViewMentor> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
+                  padding: EdgeInsets.symmetric(
+                      vertical: screenHeight * 0.02), // 2% of screen height
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        width: 120.0,
-                        height: 120.0,
+                        width: screenWidth * 0.4, // 30% of screen width
+                        height: screenHeight * 0.2, // 15% of screen height
                         decoration: const BoxDecoration(
                           color: Color(0xFF936030),
                           shape: BoxShape.circle,
@@ -90,9 +94,9 @@ class _ViewMentorState extends State<ViewMentor> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                          height:
-                              10.0), // added SizedBox to separate the widgets
+                      SizedBox(
+                          height: screenHeight * 0.01), // 1% of screen height
+                      // added SizedBox to separate the widgets
                       const Text(
                         'Mentor Name', // replace with your mentor's name
                         style: TextStyle(
@@ -129,8 +133,10 @@ class _ViewMentorState extends State<ViewMentor> {
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 70.0, vertical: 5.0),
+            padding: EdgeInsets.symmetric(
+                horizontal: screenWidth * 0.1,
+                vertical: screenHeight *
+                    0.01),
             child: Row(
               children: [
                 Expanded(
@@ -154,22 +160,23 @@ class _ViewMentorState extends State<ViewMentor> {
                         ),
                         backgroundColor: const Color(
                             0xff00312e), // adjust the background color as needed
-                        minimumSize: const Size(double.infinity, 50),
+                        minimumSize: Size(double.infinity,
+                            screenHeight * 0.06), // 6% of screen height
                       ),
-                      child: const Text(
+                      child:  Text(
                         'Request Mentorship',
                         style: TextStyle(
                           color:
                               Colors.white, // adjust the text color as needed
                           fontFamily:
                               'ProtestRiot', // replace with your custom font name
-                          fontSize: 14,
+                          fontSize: screenWidth * 0.03, // 3.5% of screen width
                         ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width: 10.0),
+                SizedBox(width: screenWidth * 0.01), // 1% of screen width
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
@@ -191,17 +198,18 @@ class _ViewMentorState extends State<ViewMentor> {
                         ),
                         backgroundColor: const Color(
                             0xff00312e), // adjust the background color as needed
-                        minimumSize: const Size(
-                            double.infinity, 50), // adjust the height as needed
+                        minimumSize: Size(double.infinity,
+                            screenHeight * 0.06), // 6% of screen height
+                        // adjust the height as needed
                       ),
-                      child: const Text(
+                      child: Text(
                         'Send A Message',
                         style: TextStyle(
                           color:
                               Colors.white, // adjust the text color as needed
                           fontFamily:
                               'ProtestRiot', // replace with your custom font name
-                          fontSize: 14,
+                          fontSize: screenWidth * 0.035, // 3.5% of screen width
                         ),
                       ),
                     ),
@@ -299,7 +307,8 @@ class _ViewMentorState extends State<ViewMentor> {
                       children: [
                         for (var item in expertise)
                           Padding(
-                            padding: const EdgeInsets.only(left: 10.0, top: 10.0),
+                            padding:
+                                const EdgeInsets.only(left: 10.0, top: 10.0),
                             child: Row(
                               children: [
                                 Stack(

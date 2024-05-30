@@ -12,7 +12,7 @@ import 'package:mentor_shift/pages/mentorships_screen.dart';
 import 'package:mentor_shift/pages/messaging.dart';
 import 'package:mentor_shift/pages/view_mentor.dart';
 
-void main() => runApp(MaterialApp(initialRoute: '/mlp', routes: {
+void main() => runApp(MaterialApp(initialRoute: '/viewmentor', routes: {
       // '/': (context) => Loading(),
       '/login': (context) => const Login(),
       '/register': (context) => const Register(),

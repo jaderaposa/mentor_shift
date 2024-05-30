@@ -171,7 +171,7 @@ class ViewMessagingState extends State<ViewMessaging> {
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Type a message',
+                hintText: 'Type A Message',
                 fillColor: Colors.white,
                 filled: true,
                 border: const OutlineInputBorder(
@@ -198,12 +198,12 @@ class ViewMessagingState extends State<ViewMessaging> {
           )
         ],
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: 0, // set the currently selected item
-        onTap: (index) {
-          // handle the tap event
-        },
-      ),
+      // bottomNavigationBar: CustomBottomNavigationBar(
+      //   currentIndex: 0, // set the currently selected item
+      //   onTap: (index) {
+      //     // handle the tap event
+      //   },
+      // ),
     );
   }
 }

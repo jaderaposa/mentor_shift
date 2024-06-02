@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/classes/achievement.dart';
 import 'package:mentor_shift/objects/bottomnav.dart';
+import 'dart:ui';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -16,17 +18,43 @@ class CustomIcon {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  List<CustomIcon> icons = [
-    const CustomIcon(path: 'images/icons/hands.png', label: 'Active Mentee'),
-    const CustomIcon(
-        path: 'images/icons/dragonball.png', label: 'Mentee of the Month'),
-    const CustomIcon(path: 'images/icons/hands.png', label: 'Dakilang Supot'),
-    const CustomIcon(
-        path: 'images/icons/dragonball.png', label: 'Best Depressed'),
-    const CustomIcon(path: 'images/icons/hands.png', label: 'Fuck You'),
-    const CustomIcon(
-        path: 'images/icons/dragonball.png', label: 'Suck My Dick'),
-    // Add more icons here...
+  List<Achievement> achievements = [
+    Achievement(
+        name: 'Achievement 1',
+        icon: Icons.star,
+        color: const Color(0xffB74D00),
+        isLocked: false),
+    Achievement(
+        name: 'Achievement 2',
+        icon: Icons.star,
+        color: const Color(0xffB74D00),
+        isLocked: false),
+    Achievement(
+        name: 'Achievement 3',
+        icon: Icons.star,
+        color: const Color(0xffB74D00),
+        isLocked: false),
+    Achievement(
+        name: 'Achievement 3',
+        icon: Icons.star,
+        color: const Color(0xffB74D00),
+        isLocked: true),
+    Achievement(
+        name: 'Achievement 3',
+        icon: Icons.star,
+        color: const Color(0xffB74D00),
+        isLocked: true),
+    Achievement(
+        name: 'Achievement 3',
+        icon: Icons.star,
+        color: const Color(0xffB74D00),
+        isLocked: true),
+    Achievement(
+        name: 'Achievement 3',
+        icon: Icons.star,
+        color: const Color(0xffB74D00),
+        isLocked: true),
+    // Add more achievements as needed
   ];
 
   @override
@@ -145,7 +173,6 @@ class _UserProfileState extends State<UserProfile> {
                                 child: Text(
                                   'About',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
                                       // fontSize: 18,
                                       color: Colors.white,
                                       fontFamily: 'ProtestRiot'),
@@ -159,7 +186,6 @@ class _UserProfileState extends State<UserProfile> {
                                 child: Text(
                                   'Achievements',
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
                                       // fontSize: 18,
                                       color: Colors.white,
                                       fontFamily: 'ProtestRiot'),
@@ -209,84 +235,64 @@ class _UserProfileState extends State<UserProfile> {
                                     ),
                                   ),
                                 ),
-                                SingleChildScrollView(
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02), // 2% of screen width
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Center(
-                                          child: GridView.builder(
-                                            padding: EdgeInsets.all(
-                                                screenWidth *
-                                                    0.04), // 2% of screen width
-                                            shrinkWrap: true,
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            gridDelegate:
-                                                SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: screenWidth > 600
-                                                  ? 4
-                                                  : 3, // 4 columns for large screens, 3 for small screens
-                                              mainAxisSpacing: screenWidth *
-                                                  0.02, // 2% of screen width
-                                              crossAxisSpacing: screenWidth *
-                                                  0.02, // 2% of screen width
+                                GridView.count(
+                                  crossAxisCount: 3,
+                                  childAspectRatio: 1.0,
+                                  padding: const EdgeInsets.all(20.0),
+                                  mainAxisSpacing: 4.0,
+                                  crossAxisSpacing: 4.0,
+                                  children: achievements
+                                      .map((Achievement achievement) {
+                                    return GridTile(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Container(
+                                            padding: const EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                              color: achievement.isLocked
+                                                  ? Colors.grey
+                                                  : achievement.color,
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color: Colors.black,
+                                                width: 2,
+                                              ),
                                             ),
-                                            itemCount: icons.length,
-                                            itemBuilder: (context, index) {
-                                              return Column(
-                                                children: [
-                                                  Image.asset(
-                                                      icons[index].path),
-                                                  const SizedBox(
-                                                    height: 5,
+                                            child: Icon(achievement.icon,
+                                                color: achievement.isLocked
+                                                    ? Colors.black
+                                                    : Colors.yellow),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Flexible(
+                                            child: Text(
+                                              achievement.name,
+                                              textAlign: TextAlign.center,
+                                              style: const TextStyle(
+                                                fontSize: 15,
+                                                color: Colors.white,
+                                                fontFamily: 'ProtestRiot',
+                                                shadows: <Shadow>[
+                                                  Shadow(
+                                                    offset: Offset(1.0, 1.0),
+                                                    blurRadius: 3.0,
+                                                    color: Colors.black,
                                                   ),
-                                                  Stack(
-                                                    children: [
-                                                      // Border
-                                                      Text(
-                                                        icons[index].label,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                          fontSize: screenWidth *
-                                                              0.03, // 3% of screen width
-                                                          foreground: Paint()
-                                                            ..style =
-                                                                PaintingStyle
-                                                                    .stroke
-                                                            ..strokeWidth = 2
-                                                            ..color =
-                                                                Colors.black,
-                                                          fontFamily:
-                                                              'ProtestRiot',
-                                                        ),
-                                                      ),
-                                                      // Fill
-                                                      Text(
-                                                        icons[index].label,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: TextStyle(
-                                                          fontSize: screenWidth *
-                                                              0.03, // 3% of screen width
-                                                          color: Colors.white,
-                                                          fontFamily:
-                                                              'ProtestRiot',
-                                                        ),
-                                                      ),
-                                                    ],
+                                                  Shadow(
+                                                    offset: Offset(1.0, 1.0),
+                                                    blurRadius: 3.0,
+                                                    color: Colors.black,
                                                   ),
                                                 ],
-                                              );
-                                            },
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
                                 ),
                               ],
                             ),

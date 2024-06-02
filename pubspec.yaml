@@ -78,6 +78,8 @@ flutter:
     - images/icons/lessons.png
     - images/icons/activities.png
     - images/icons/send.png
+    - images/icons/hands.png
+    - images/icons/dragonball.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

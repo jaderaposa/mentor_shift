@@ -10,10 +10,11 @@ import 'package:mentor_shift/pages/register1.dart';
 import 'package:mentor_shift/pages/mentee_search.dart';
 import 'package:mentor_shift/pages/mentorships_screen.dart';
 import 'package:mentor_shift/pages/messaging.dart';
+import 'package:mentor_shift/pages/user_profile.dart';
 import 'package:mentor_shift/pages/view_mentor.dart';
 import 'package:mentor_shift/pages/view_messaging.dart';
 
-void main() => runApp(MaterialApp(initialRoute: '/viewmessage', routes: {
+void main() => runApp(MaterialApp(initialRoute: '/userprofile', routes: {
       // '/': (context) => Loading(),
       '/login': (context) => const Login(),
       '/register': (context) => const Register(),
@@ -28,4 +29,5 @@ void main() => runApp(MaterialApp(initialRoute: '/viewmessage', routes: {
       '/register3': (context) => const Register3(),
       '/landingmentee': (context) => const LandingMentee(),
       '/mlp': (context) => const MentorLearningPage(),
+      '/userprofile': (context) => const UserProfile(),
     }));

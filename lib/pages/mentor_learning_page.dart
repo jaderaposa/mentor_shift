@@ -190,26 +190,43 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                   controller: _tabController,
                   labelColor: Colors.white, // Set the color of the text
                   labelStyle: TextStyle(
-                      // Set the style of the text
-                      fontSize: MediaQuery.of(context).size.width *
-                          0.03, // Adjust the font size based on the screen width
-                      fontFamily: 'ProtestRiot'),
+                    fontSize: MediaQuery.of(context).size.width * 0.03,
+                    fontFamily: 'ProtestRiot',
+                    shadows: const <Shadow>[
+                      Shadow(
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 1.0,
+                        color: Colors.black,
+                      ),
+                      Shadow(
+                        offset: Offset(1.0, 1.0),
+                        blurRadius: 1.0,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
                   unselectedLabelColor:
-                      Colors.grey, // Set the color of the unselected tabs
+                      Colors.white,
+                  indicator: BoxDecoration(
+                    borderRadius:
+                        BorderRadius.circular(15), // Add this to give radius
+                    color: const Color.fromARGB(80, 61, 61, 61), // This is your selected color
+                  ),
                   indicatorColor:
                       Colors.transparent, // This will make the line invisible
+                  dividerColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize
                       .label, // This will make the line under the tabs disappear
-                  indicator: const UnderlineTabIndicator(
-                      borderSide: BorderSide(
-                          color: Colors.white, // Set the color of the line
-                          width: 3.0 // Set the width of the line
-                          )),
+                  // indicator: const UnderlineTabIndicator(
+                  //     borderSide: BorderSide(
+                  //         color: Colors.white, // Set the color of the line
+                  //         width: 3.0 // Set the width of the line
+                  //         )),
                   tabs: [
                     Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10,
-                            horizontal: 5), // Add padding to the tabs
+                            horizontal: 10), // Add padding to the tabs
                         child: Row(children: [
                           const Expanded(
                               child: FittedBox(child: Text('Lessons'))),
@@ -220,7 +237,7 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                     Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10,
-                            horizontal: 5), // Add padding to the tabs
+                            horizontal: 10), // Add padding to the tabs
                         child: Row(children: [
                           const Expanded(
                               child: FittedBox(child: Text('Activities'))),
@@ -231,7 +248,7 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                     Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 10,
-                            horizontal: 5), // Add padding to the tabs
+                            horizontal: 10), // Add padding to the tabs
                         child: Row(children: [
                           const Expanded(
                               child: FittedBox(child: Text('Reports'))),
@@ -366,7 +383,8 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              lessons[index].title
+                                              lessons[index]
+                                                  .title
                                                   .toUpperCase(),
                                               style: const TextStyle(
                                                   fontSize: 20,
@@ -397,7 +415,9 @@ class _MentorLearningPageState extends State<MentorLearningPage>
                                                 ],
                                               );
                                             }).toList(),
-                                            const SizedBox(height: 10,),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
                                           ],
                                         );
                                       },

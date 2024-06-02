@@ -14,7 +14,7 @@ import 'package:mentor_shift/pages/user_profile.dart';
 import 'package:mentor_shift/pages/view_mentor.dart';
 import 'package:mentor_shift/pages/view_messaging.dart';
 
-void main() => runApp(MaterialApp(initialRoute: '/userprofile', routes: {
+void main() => runApp(MaterialApp(initialRoute: '/mlp', routes: {
       // '/': (context) => Loading(),
       '/login': (context) => const Login(),
       '/register': (context) => const Register(),

@@ -157,9 +157,9 @@ class _UserProfileState extends State<UserProfile> {
                     child: Column(
                       children: [
                         TabBar(
-                          indicator: BoxDecoration(
-                            color: Colors.teal[800],
-                            borderRadius: const BorderRadius.only(
+                          indicator: const BoxDecoration(
+                            color: Color(0xFF00312E),
+                            borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20),
                             ),

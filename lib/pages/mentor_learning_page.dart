@@ -180,146 +180,187 @@ class _MentorLearningPageState extends State<MentorLearningPage>
         ),
         body: Column(children: [
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: TabBar(
-                  controller: _tabController,
-                  labelColor: Colors.white, // Set the color of the text
-                  labelStyle: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.03,
-                    fontFamily: 'ProtestRiot',
-                    shadows: const <Shadow>[
-                      Shadow(
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 1.0,
-                        color: Colors.black,
-                      ),
-                      Shadow(
-                        offset: Offset(1.0, 1.0),
-                        blurRadius: 1.0,
-                        color: Colors.black,
-                      ),
-                    ],
+                controller: _tabController,
+                labelColor: Colors.white, // Set the color of the text
+                labelStyle: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.03,
+                  fontFamily: 'ProtestRiot',
+                  shadows: const <Shadow>[
+                    Shadow(
+                      offset: Offset(1.0, 1.0),
+                      blurRadius: 1.0,
+                      color: Colors.black,
+                    ),
+                    Shadow(
+                      offset: Offset(1.0, 1.0),
+                      blurRadius: 1.0,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                unselectedLabelColor: Colors.white,
+                indicator: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(15), // Add this to give radius
+                  color: const Color.fromARGB(
+                      80, 61, 61, 61), // This is your selected color
+                ),
+                indicatorColor:
+                    Colors.transparent, // This will make the line invisible
+                dividerColor: Colors.transparent,
+                indicatorSize: TabBarIndicatorSize
+                    .tab, // This will make the line under the tabs disappear
+                tabs: [
+                  FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Lessons',
+                          style: TextStyle(
+                            fontSize: math.min(
+                                    MediaQuery.of(context).size.width,
+                                    MediaQuery.of(context).size.height) *
+                                0.04, // Adjust this value
+                          ),
+                        ),
+                        const SizedBox(width: 7),
+                        Image.asset('images/icons/lessons.png',
+                            width: MediaQuery.of(context).size.width *
+                                0.05, // Adjust this value
+                            height: MediaQuery.of(context).size.height *
+                                0.05), // Adjust this value
+                      ],
+                    ),
                   ),
-                  unselectedLabelColor:
-                      Colors.white,
-                  indicator: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(15), // Add this to give radius
-                    color: const Color.fromARGB(80, 61, 61, 61), // This is your selected color
+                  FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Activities',
+                          style: TextStyle(
+                            fontSize: math.min(
+                                    MediaQuery.of(context).size.width,
+                                    MediaQuery.of(context).size.height) *
+                                0.035, // Adjust this value
+                          ),
+                        ),
+                        const SizedBox(width: 7),
+                        Image.asset('images/icons/activities.png',
+                            width: MediaQuery.of(context).size.width *
+                                0.05, // Adjust this value
+                            height: MediaQuery.of(context).size.height *
+                                0.05), // Adjust this value
+                      ],
+                    ),
                   ),
-                  indicatorColor:
-                      Colors.transparent, // This will make the line invisible
-                  dividerColor: Colors.transparent,
-                  indicatorSize: TabBarIndicatorSize
-                      .label, // This will make the line under the tabs disappear
-                  // indicator: const UnderlineTabIndicator(
-                  //     borderSide: BorderSide(
-                  //         color: Colors.white, // Set the color of the line
-                  //         width: 3.0 // Set the width of the line
-                  //         )),
-                  tabs: [
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 10), // Add padding to the tabs
-                        child: Row(children: [
-                          const Expanded(
-                              child: FittedBox(child: Text('Lessons'))),
-                          const SizedBox(width: 5),
-                          Image.asset('images/icons/lessons.png',
-                              width: 20, height: 20)
-                        ])),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 10), // Add padding to the tabs
-                        child: Row(children: [
-                          const Expanded(
-                              child: FittedBox(child: Text('Activities'))),
-                          const SizedBox(width: 5),
-                          Image.asset('images/icons/activities.png',
-                              width: 20, height: 20)
-                        ])),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 10), // Add padding to the tabs
-                        child: Row(children: [
-                          const Expanded(
-                              child: FittedBox(child: Text('Reports'))),
-                          const SizedBox(width: 5),
-                          Image.asset('images/icons/reports.png',
-                              width: 20, height: 20)
-                        ]))
-                  ])),
+                  FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Reports',
+                          style: TextStyle(
+                            fontSize: math.min(
+                                    MediaQuery.of(context).size.width,
+                                    MediaQuery.of(context).size.height) *
+                                0.04, // Adjust this value
+                          ),
+                        ),
+                        const SizedBox(width: 7),
+                        Image.asset('images/icons/reports.png',
+                            width: MediaQuery.of(context).size.width *
+                                0.05, // Adjust this value
+                            height: MediaQuery.of(context).size.height *
+                                0.05), // Adjust this value
+                      ],
+                    ),
+                  ),
+                ],
+              )),
           Expanded(
               child: TabBarView(controller: _tabController, children: [
             ListView.builder(
-                itemCount: lessons.length, // Use the length of the lessons list
+                itemCount: lessons.length + 1, // Increase the itemCount by 1
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 20),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Color(0xff00978e), Color(0xff00312e)]),
-                          border: Border.all(
-                              color:
-                                  Colors.black, // Set the color of the border
-                              width: 1.5 // Set the width of the border
-                              ),
-                          boxShadow: const [kBoxShadow]),
-                      child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text(
-                              lessons[index]
-                                  .title, // Use the lesson title from the list
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: 'ProtestRiot'))));
+                  if (index == lessons.length) {
+                    return const Padding(
+                        padding: EdgeInsets.only(
+                            bottom: 20.0)); // Add your desired space here
+                  } else {
+                    return Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 20),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            gradient: const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Color(0xff00978e), Color(0xff00312e)]),
+                            border: Border.all(
+                                color:
+                                    Colors.black, // Set the color of the border
+                                width: 1.5 // Set the width of the border
+                                ),
+                            boxShadow: const [kBoxShadow]),
+                        child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: Text(
+                                lessons[index]
+                                    .title, // Use the lesson title from the list
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontFamily: 'ProtestRiot'))));
+                  }
                 }),
             ListView.builder(
-                itemCount: lessons.length,
+                itemCount: lessons.length + 1, // Increase the itemCount by 1
                 itemBuilder: (BuildContext context, int index) {
-                  return CustomExpansionTile(
-                      titleBuilder: (bool isExpanded) => Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
-                              color: const Color(0xffed2591),
-                              border: Border.all(
-                                  color: Colors
-                                      .black, // Set the color of the border
-                                  width: 1.5 // Set the width of the border
-                                  ),
-                              boxShadow: const [kBoxShadow]),
-                          child: Row(children: [
-                            Expanded(
-                                child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    child: Text(
-                                        lessons[index]
-                                            .title, // Use the lesson title from the list
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontFamily: 'ProtestRiot')))),
-                            Transform.rotate(
-                                angle: isExpanded ? math.pi : 0,
-                                child: const Icon(Icons.arrow_drop_up,
-                                    color: Colors.white))
-                          ])),
-                      children: lessons[index]
-                          .difficulties
-                          .map<Widget>((Difficulty difficulty) {
-                        return _buildDifficultyContainer(difficulty);
-                      }).toList());
+                  if (index == lessons.length) {
+                    return const Padding(
+                        padding: EdgeInsets.only(
+                            bottom: 20.0)); // Add your desired space here
+                  } else {
+                    return CustomExpansionTile(
+                        titleBuilder: (bool isExpanded) => Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14),
+                                color: const Color(0xffed2591),
+                                border: Border.all(
+                                    color: Colors
+                                        .black, // Set the color of the border
+                                    width: 1.5 // Set the width of the border
+                                    ),
+                                boxShadow: const [kBoxShadow]),
+                            child: Row(children: [
+                              Expanded(
+                                  child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: Text(
+                                          lessons[index]
+                                              .title, // Use the lesson title from the list
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontFamily: 'ProtestRiot')))),
+                              Transform.rotate(
+                                  angle: isExpanded ? math.pi : 0,
+                                  child: const Icon(Icons.arrow_drop_up,
+                                      color: Colors.white))
+                            ])),
+                        children: lessons[index]
+                            .difficulties
+                            .map<Widget>((Difficulty difficulty) {
+                          return _buildDifficultyContainer(difficulty);
+                        }).toList());
+                  }
                 }),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),

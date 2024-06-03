@@ -151,30 +151,31 @@ class _MentorContentPageState extends State<MentorContentPage>
     return Scaffold(
       backgroundColor: const Color(0xFF0B6E6D),
       appBar: AppBar(
-          backgroundColor: const Color(0xFF0B6E6D),
-          leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () {
-                Navigator.of(context).pop();
-              }),
-          centerTitle: true),
-      body: Column(children: [
-        Container(
+        backgroundColor: const Color(0xFF0B6E6D),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        centerTitle: true,
+        title: Container(
           decoration: BoxDecoration(
             color: const Color(0xFF00312E),
-            borderRadius: BorderRadius.circular(12.0), // Set the border radius
+            borderRadius: BorderRadius.circular(8.0),
           ),
-          padding: const EdgeInsets.all(15.0),
-          child: Text(
+          padding: const EdgeInsets.all(8.0),
+          child: const Text(
             'My Content',
             style: TextStyle(
-              fontSize:
-                  MediaQuery.of(context).size.width * 0.07, // Adjust this value
+              fontSize: 24, // Adjust this value
               color: Colors.white,
               fontFamily: 'ProtestRiot',
             ),
           ),
         ),
+      ),
+      body: Column(children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: TabBar(
@@ -210,7 +211,7 @@ class _MentorContentPageState extends State<MentorContentPage>
               // indicatorSize: TabBarIndicatorSize.label, // Change this line
               tabs: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                   Text(
                     'Lessons',
@@ -221,15 +222,14 @@ class _MentorContentPageState extends State<MentorContentPage>
                             0.06, // Adjust this value
                         ),
                   ),
+                  const SizedBox(width: 10),
                   Image.asset('images/icons/lessons.png',
                       width: MediaQuery.of(context).size.width *
                           0.07, // Adjust this value
                       height: MediaQuery.of(context).size.height *
                           0.07), // Adjust this value
                 ]),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text(
                     'Activities',
                     style: TextStyle(
@@ -239,6 +239,7 @@ class _MentorContentPageState extends State<MentorContentPage>
                             0.06, // Adjust this value
                         ),
                   ),
+                  const SizedBox(width: 10),
                   Image.asset('images/icons/activities.png',
                       width: MediaQuery.of(context).size.width *
                           0.07, // Adjust this value

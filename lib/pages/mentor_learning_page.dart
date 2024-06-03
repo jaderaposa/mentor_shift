@@ -154,36 +154,31 @@ class _MentorLearningPageState extends State<MentorLearningPage>
     return Scaffold(
         backgroundColor: const Color(0xFF4C9A91),
         appBar: AppBar(
-            backgroundColor: const Color(0xFF4C9A91),
-            leading: IconButton(
-                icon: const Icon(Icons.arrow_back,
-                    color:
-                        Colors.white), // replace with your custom back button
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-            // title: const Text(
-            //   'Mentee',
-            //   style: TextStyle(
-            //     color: Colors.white,
-            //     fontSize: 30.0,
-            //     fontFamily: 'ProtestRiot',
-            //   ),
-            // ),
-            centerTitle: true),
+          backgroundColor: const Color(0xFF4C9A91),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          centerTitle: true,
+          title: Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFF00312E),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              '$mentorName\'s Classroom',
+              style: const TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+                fontFamily: 'ProtestRiot',
+              ),
+            ),
+          ),
+        ),
         body: Column(children: [
-          Container(
-              decoration: BoxDecoration(
-                  color: const Color(0xFF00312E),
-                  borderRadius:
-                      BorderRadius.circular(8.0) // Set the border radius
-                  ),
-              padding: const EdgeInsets.all(8.0),
-              child: Text('$mentorName\'s Classroom',
-                  style: const TextStyle(
-                      fontSize: 24,
-                      color: Colors.white,
-                      fontFamily: 'ProtestRiot'))),
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: TabBar(

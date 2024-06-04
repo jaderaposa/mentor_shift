@@ -171,7 +171,7 @@ class _MentorLearningPageState extends State<MentorLearningPage>
             child: Text(
               '$mentorName\'s Classroom',
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 30,
                 color: Colors.white,
                 fontFamily: 'ProtestRiot',
               ),

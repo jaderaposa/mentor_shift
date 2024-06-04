@@ -38,7 +38,7 @@ class _MenteesEnrolledState extends State<MenteesEnrolled> {
             'Mentees Enrolled',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 24.0,
+              fontSize: 30.0,
               fontFamily: 'ProtestRiot',
             ),
           ),
@@ -86,6 +86,7 @@ class _MenteesEnrolledState extends State<MenteesEnrolled> {
                         ),
                         boxShadow: const [kBoxShadow]),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
                           width: screenSize.width * 0.1, // 10% of screen width

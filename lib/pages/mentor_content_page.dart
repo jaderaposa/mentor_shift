@@ -168,7 +168,7 @@ class _MentorContentPageState extends State<MentorContentPage>
             child: const Text(
               'My Content',
               style: TextStyle(
-                fontSize: 24, // Adjust this value
+                fontSize: 30, // Adjust this value
                 color: Colors.white,
                 fontFamily: 'ProtestRiot',
               ),

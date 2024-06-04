@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_shift/pages/landing_mentee.dart';
 import 'package:mentor_shift/pages/login.dart';
+import 'package:mentor_shift/pages/mentee_requests.dart';
 import 'package:mentor_shift/pages/mentees_enrolled.dart';
 import 'package:mentor_shift/pages/mentor_content_page.dart';
 import 'package:mentor_shift/pages/mentor_learning_page.dart';
@@ -16,7 +17,7 @@ import 'package:mentor_shift/pages/user_profile.dart';
 import 'package:mentor_shift/pages/view_mentor.dart';
 import 'package:mentor_shift/pages/view_messaging.dart';
 
-void main() => runApp(MaterialApp(initialRoute: '/enrolled', routes: {
+void main() => runApp(MaterialApp(initialRoute: '/requests', routes: {
       // '/': (context) => Loading(),
       '/login': (context) => const Login(),
       '/register': (context) => const Register(),
@@ -34,4 +35,5 @@ void main() => runApp(MaterialApp(initialRoute: '/enrolled', routes: {
       '/userprofile': (context) => const UserProfile(),
       '/mcp': (context) => const MentorContentPage(),
       '/enrolled': (context) => const MenteesEnrolled(),
+      '/requests': (context) => const MenteeRequests(),
     }));

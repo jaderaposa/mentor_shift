@@ -68,7 +68,7 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: MediaQuery.of(context).size.width *
-                        0.09, // 5% of screen width
+                        0.08, // 5% of screen width
                     fontFamily: 'ProtestRiot',
                   ),
                 ),
@@ -152,24 +152,23 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
                           ),
                         ),
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
                               child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 10.0),
-                                    child: Text(
-                                      mentorships[index]
-                                          ['subject'], // dynamic subject name
-                                      style: const TextStyle(
-                                        fontFamily: 'ProtestRiot',
-                                        color: Colors.white,
-                                        fontSize: 35.0,
-                                      ),
+                                  Text(
+                                    mentorships[index]
+                                        ['subject'], // dynamic subject name
+                                    style: const TextStyle(
+                                      fontFamily: 'ProtestRiot',
+                                      color: Colors.white,
+                                      fontSize: 35.0,
                                     ),
                                   ),
+                                  const SizedBox(height: 20,),
                                   Padding(
                                     padding: const EdgeInsets.only(right: 20.0),
                                     child: Row(

@@ -29,7 +29,7 @@ class MenteeSearchState extends State<MenteeSearch> {
           },
         ),
         title: const Text(
-          'Mentee',
+          'Search',
           style: TextStyle(
             color: Colors.white,
             fontSize: 30.0,
@@ -136,12 +136,6 @@ class MenteeSearchState extends State<MenteeSearch> {
           ),
           // Add more widgets to the column here
         ],
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: 0, // set the currently selected item
-        onTap: (index) {
-          // handle the tap event
-        },
       ),
     );
   }

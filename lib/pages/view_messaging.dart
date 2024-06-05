@@ -37,7 +37,7 @@ class ViewMessagingState extends State<ViewMessaging> {
       'message': 'THAT\'S AWESOME! great to hear that! keep it up.',
       'time': '10:15 AM',
     },
-    
+
     // add more messages as needed
   ];
 
@@ -198,12 +198,6 @@ class ViewMessagingState extends State<ViewMessaging> {
           )
         ],
       ),
-      // bottomNavigationBar: CustomBottomNavigationBar(
-      //   currentIndex: 0, // set the currently selected item
-      //   onTap: (index) {
-      //     // handle the tap event
-      //   },
-      // ),
     );
   }
 }

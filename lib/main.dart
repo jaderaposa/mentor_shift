@@ -16,24 +16,29 @@ import 'package:mentor_shift/pages/messaging.dart';
 import 'package:mentor_shift/pages/user_profile.dart';
 import 'package:mentor_shift/pages/view_mentor.dart';
 import 'package:mentor_shift/pages/view_messaging.dart';
+import 'package:mentor_shift/mainscaffold.dart';
 
-void main() => runApp(MaterialApp(initialRoute: '/requests', routes: {
-      // '/': (context) => Loading(),
-      '/login': (context) => const Login(),
-      '/register': (context) => const Register(),
-      '/register1': (context) => const Register1(),
-      '/role': (context) => const Role(),
-      '/menteehome': (context) => const MenteeSearch(),
-      '/mentorships': (context) => const MentorshipsPage(),
-      '/message': (context) => const Messaging(),
-      '/viewmessage': (context) => const ViewMessaging(),
-      '/viewmentor': (context) => const ViewMentor(),
-      '/register2': (context) => const Register2(),
-      '/register3': (context) => const Register3(),
-      '/landingmentee': (context) => const LandingMentee(),
-      '/mlp': (context) => const MentorLearningPage(),
-      '/userprofile': (context) => const UserProfile(),
-      '/mcp': (context) => const MentorContentPage(),
-      '/enrolled': (context) => const MenteesEnrolled(),
-      '/requests': (context) => const MenteeRequests(),
-    }));
+void main() => runApp(MaterialApp(
+      initialRoute: '/main', // Change this to '/main'
+      routes: {
+        '/main': (context) => const MainScaffold(), // Add this line
+        // '/': (context) => Loading(),
+        '/login': (context) => const Login(),
+        '/register': (context) => const Register(),
+        '/register1': (context) => const Register1(),
+        '/role': (context) => const Role(),
+        '/menteehome': (context) => const MenteeSearch(),
+        '/mentorships': (context) => const MentorshipsPage(),
+        '/message': (context) => const Messaging(),
+        '/viewmessage': (context) => const ViewMessaging(),
+        '/viewmentor': (context) => const ViewMentor(),
+        '/register2': (context) => const Register2(),
+        '/register3': (context) => const Register3(),
+        '/landingmentee': (context) => const LandingMentee(),
+        '/mlp': (context) => const MentorLearningPage(),
+        '/userprofile': (context) => const UserProfile(),
+        '/mcp': (context) => const MentorContentPage(),
+        '/enrolled': (context) => const MenteesEnrolled(),
+        '/requests': (context) => const MenteeRequests(),
+      },
+    ));

@@ -10,25 +10,25 @@ class Messaging extends StatefulWidget {
 }
 
 class _MessagingState extends State<Messaging> {
-
   final List<Map<String, dynamic>> messages = [
-  {
-    'name': 'Person 1',
-    'time': '10:00 AM',
-    'message': 'This is a short message.',
-  },
-  {
-    'name': 'Person 2',
-    'time': '9:30 AM',
-    'message': 'This is a slightly longer message that might get cut off.',
-  },
-  {
-    'name': 'Person 3',
-    'time': '9:00 AM',
-    'message': 'This is a really long message that will definitely get cut off because it just keeps going and going and going...',
-  },
-  // add more messages as needed
-];
+    {
+      'name': 'Person 1',
+      'time': '10:00 AM',
+      'message': 'This is a short message.',
+    },
+    {
+      'name': 'Person 2',
+      'time': '9:30 AM',
+      'message': 'This is a slightly longer message that might get cut off.',
+    },
+    {
+      'name': 'Person 3',
+      'time': '9:00 AM',
+      'message':
+          'This is a really long message that will definitely get cut off because it just keeps going and going and going...',
+    },
+    // add more messages as needed
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -60,22 +60,22 @@ class _MessagingState extends State<Messaging> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Messaging',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: screenHeight * 0.04,
-                    fontFamily: 'ProtestRiot',
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Text(
+          //         'Messaging',
+          //         style: TextStyle(
+          //           color: Colors.white,
+          //           fontSize: screenHeight * 0.04,
+          //           fontFamily: 'ProtestRiot',
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           // const Padding(
           //   padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
           //   child: TextField(
@@ -159,12 +159,6 @@ class _MessagingState extends State<Messaging> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: 0, // set the currently selected item
-        onTap: (index) {
-          // handle the tap event
-        },
       ),
     );
   }

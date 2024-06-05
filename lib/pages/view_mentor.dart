@@ -134,9 +134,7 @@ class _ViewMentorState extends State<ViewMentor> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(
-                horizontal: screenWidth * 0.1,
-                vertical: screenHeight *
-                    0.01),
+                horizontal: screenWidth * 0.1, vertical: screenHeight * 0.01),
             child: Row(
               children: [
                 Expanded(
@@ -163,7 +161,7 @@ class _ViewMentorState extends State<ViewMentor> {
                         minimumSize: Size(double.infinity,
                             screenHeight * 0.06), // 6% of screen height
                       ),
-                      child:  Text(
+                      child: Text(
                         'Request Mentorship',
                         style: TextStyle(
                           color:
@@ -429,12 +427,6 @@ class _ViewMentorState extends State<ViewMentor> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: 0, // set the currently selected item
-        onTap: (index) {
-          // handle the tap event
-        },
       ),
     );
   }

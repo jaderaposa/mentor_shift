@@ -149,285 +149,279 @@ class _MentorContentPageState extends State<MentorContentPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0B6E6D),
+      appBar: AppBar(
         backgroundColor: const Color(0xFF0B6E6D),
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF0B6E6D),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        centerTitle: true,
+        title: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFF00312E),
+            borderRadius: BorderRadius.circular(8.0),
           ),
-          centerTitle: true,
-          title: Container(
-            decoration: BoxDecoration(
-              color: const Color(0xFF00312E),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            padding: const EdgeInsets.all(8.0),
-            child: const Text(
-              'My Content',
-              style: TextStyle(
-                fontSize: 30, // Adjust this value
-                color: Colors.white,
-                fontFamily: 'ProtestRiot',
-              ),
+          padding: const EdgeInsets.all(8.0),
+          child: const Text(
+            'My Content',
+            style: TextStyle(
+              fontSize: 30, // Adjust this value
+              color: Colors.white,
+              fontFamily: 'ProtestRiot',
             ),
           ),
         ),
-        body: Column(children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            child: TabBar(
-                controller: _tabController,
-                labelColor: Colors.white,
-                labelStyle: const TextStyle(
-                  fontFamily: 'ProtestRiot',
-                  shadows: <Shadow>[
-                    Shadow(
-                      offset: Offset(1.0, 1.0),
-                      blurRadius: 1.0,
-                      color: Colors.black,
-                    ),
-                    Shadow(
-                      offset: Offset(1.0, 1.0),
-                      blurRadius: 1.0,
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-                unselectedLabelColor: Colors.white,
-                indicator: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(15), // Add this to give radius
-                  color: const Color.fromARGB(
-                      80, 61, 61, 61), // This is your selected color
-                ),
-                indicatorColor: Colors.transparent,
-                dividerColor: Colors.transparent,
-                indicatorSize: TabBarIndicatorSize.tab, // Change this line
-                tabs: [
-                  FittedBox(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Lessons',
-                            style: TextStyle(
-                              fontSize: math.min(
-                                      MediaQuery.of(context).size.width,
-                                      MediaQuery.of(context).size.height) *
-                                  0.05, // Adjust this value
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Image.asset('images/icons/lessons.png',
-                              width: MediaQuery.of(context).size.width *
-                                  0.06, // Adjust this value
-                              height: MediaQuery.of(context).size.height *
-                                  0.06), // Adjust this value
-                        ]),
+      ),
+      body: Column(children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: TabBar(
+              controller: _tabController,
+              labelColor: Colors.white,
+              labelStyle: const TextStyle(
+                fontFamily: 'ProtestRiot',
+                shadows: <Shadow>[
+                  Shadow(
+                    offset: Offset(1.0, 1.0),
+                    blurRadius: 1.0,
+                    color: Colors.black,
                   ),
-                  FittedBox(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Activities',
-                            style: TextStyle(
-                              fontSize: math.min(
-                                      MediaQuery.of(context).size.width,
-                                      MediaQuery.of(context).size.height) *
-                                  0.05, // Adjust this value
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Image.asset('images/icons/activities.png',
-                              width: MediaQuery.of(context).size.width *
-                                  0.06, // Adjust this value
-                              height: MediaQuery.of(context).size.height *
-                                  0.06), // Adjust this value
-                        ]),
+                  Shadow(
+                    offset: Offset(1.0, 1.0),
+                    blurRadius: 1.0,
+                    color: Colors.black,
                   ),
-                ]),
-          ),
-          Expanded(
-            child: TabBarView(controller: _tabController, children: [
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  ListView.builder(
-                      itemCount:
-                          lessons.length + 1, // Increase the itemCount by 1
-                      itemBuilder: (BuildContext context, int index) {
-                        if (index == lessons.length) {
-                          return const Padding(
-                              padding: EdgeInsets.only(
-                                  bottom: 20.0)); // Add your desired space here
-                        } else {
-                          return Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 20),
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: const LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Color(0xff00978e),
-                                        Color(0xff00312e)
-                                      ]),
-                                  border: Border.all(
-                                      color: Colors
-                                          .black, // Set the color of the border
-                                      width: 1.5 // Set the width of the border
-                                      ),
-                                  boxShadow: const [kBoxShadow]),
-                              child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 5),
-                                  child: Text(
-                                      lessons[index]
-                                          .title, // Use the lesson title from the list
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontFamily: 'ProtestRiot'))));
-                        }
-                      }),
-                  Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.width *
-                        0.04), // 4% of screen width
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            color: Colors.white,
+                ],
+              ),
+              unselectedLabelColor: Colors.white,
+              indicator: BoxDecoration(
+                borderRadius:
+                    BorderRadius.circular(15), // Add this to give radius
+                color: const Color.fromARGB(
+                    80, 61, 61, 61), // This is your selected color
+              ),
+              indicatorColor: Colors.transparent,
+              dividerColor: Colors.transparent,
+              indicatorSize: TabBarIndicatorSize.tab, // Change this line
+              tabs: [
+                FittedBox(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Lessons',
+                          style: TextStyle(
+                            fontSize: math.min(
+                                    MediaQuery.of(context).size.width,
+                                    MediaQuery.of(context).size.height) *
+                                0.05, // Adjust this value
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Image.asset('images/icons/lessons.png',
                             width: MediaQuery.of(context).size.width *
-                                0.005), // 0.5% of screen width
-                      ),
-                      child: Material(
-                        color: Colors.transparent,
-                        clipBehavior: Clip.antiAlias,
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: () {
-                            // Add your onPressed logic here
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.all(
-                                MediaQuery.of(context).size.width *
-                                    0.05), // 5% of screen width
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: MediaQuery.of(context).size.width *
-                                  0.075, // 7.5% of screen width
-                            ),
+                                0.06, // Adjust this value
+                            height: MediaQuery.of(context).size.height *
+                                0.06), // Adjust this value
+                      ]),
+                ),
+                FittedBox(
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Activities',
+                          style: TextStyle(
+                            fontSize: math.min(
+                                    MediaQuery.of(context).size.width,
+                                    MediaQuery.of(context).size.height) *
+                                0.05, // Adjust this value
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Image.asset('images/icons/activities.png',
+                            width: MediaQuery.of(context).size.width *
+                                0.06, // Adjust this value
+                            height: MediaQuery.of(context).size.height *
+                                0.06), // Adjust this value
+                      ]),
+                ),
+              ]),
+        ),
+        Expanded(
+          child: TabBarView(controller: _tabController, children: [
+            Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                ListView.builder(
+                    itemCount:
+                        lessons.length + 1, // Increase the itemCount by 1
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == lessons.length) {
+                        return const Padding(
+                            padding: EdgeInsets.only(
+                                bottom: 20.0)); // Add your desired space here
+                      } else {
+                        return Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 20),
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Color(0xff00978e),
+                                      Color(0xff00312e)
+                                    ]),
+                                border: Border.all(
+                                    color: Colors
+                                        .black, // Set the color of the border
+                                    width: 1.5 // Set the width of the border
+                                    ),
+                                boxShadow: const [kBoxShadow]),
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                child: Text(
+                                    lessons[index]
+                                        .title, // Use the lesson title from the list
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: 'ProtestRiot'))));
+                      }
+                    }),
+                Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.width *
+                      0.04), // 4% of screen width
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          color: Colors.white,
+                          width: MediaQuery.of(context).size.width *
+                              0.005), // 0.5% of screen width
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      clipBehavior: Clip.antiAlias,
+                      shape: const CircleBorder(),
+                      child: InkWell(
+                        onTap: () {
+                          // Add your onPressed logic here
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width *
+                                  0.05), // 5% of screen width
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: MediaQuery.of(context).size.width *
+                                0.075, // 7.5% of screen width
                           ),
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  ListView.builder(
-                      itemCount:
-                          lessons.length + 1, // Increase the itemCount by 1
-                      itemBuilder: (BuildContext context, int index) {
-                        if (index == lessons.length) {
-                          return const Padding(
-                              padding: EdgeInsets.only(
-                                  bottom: 20.0)); // Add your desired space here
-                        } else {
-                          return CustomExpansionTile(
-                              titleBuilder: (bool isExpanded) => Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(14),
-                                      color: const Color(0xffed2591),
-                                      border: Border.all(
-                                          color: Colors
-                                              .black, // Set the color of the border
-                                          width: 1.5 // Set the width of the border
-                                          ),
-                                      boxShadow: const [
-                                        kBoxShadow
-                                      ]),
-                                  child: Row(children: [
-                                    Expanded(
-                                        child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 5),
-                                            child: Text(
-                                                lessons[index]
-                                                    .title, // Use the lesson title from the list
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20,
-                                                    fontFamily:
-                                                        'ProtestRiot')))),
-                                    Transform.rotate(
-                                        angle: isExpanded ? math.pi : 0,
-                                        child: const Icon(Icons.arrow_drop_up,
-                                            color: Colors.white))
-                                  ])),
-                              children: lessons[index]
-                                  .difficulties
-                                  .map<Widget>((Difficulty difficulty) {
-                                return _buildDifficultyContainer(difficulty);
-                              }).toList());
-                        }
-                      }),
-                  Padding(
-                    padding: EdgeInsets.all(MediaQuery.of(context).size.width *
-                        0.04), // 4% of screen width
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
+                  ),
+                )
+              ],
+            ),
+            Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                ListView.builder(
+                    itemCount:
+                        lessons.length + 1, // Increase the itemCount by 1
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index == lessons.length) {
+                        return const Padding(
+                            padding: EdgeInsets.only(
+                                bottom: 20.0)); // Add your desired space here
+                      } else {
+                        return CustomExpansionTile(
+                            titleBuilder: (bool isExpanded) => Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(14),
+                                    color: const Color(0xffed2591),
+                                    border: Border.all(
+                                        color: Colors
+                                            .black, // Set the color of the border
+                                        width: 1.5 // Set the width of the border
+                                        ),
+                                    boxShadow: const [
+                                      kBoxShadow
+                                    ]),
+                                child: Row(children: [
+                                  Expanded(
+                                      child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          child: Text(
+                                              lessons[index]
+                                                  .title, // Use the lesson title from the list
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontFamily: 'ProtestRiot')))),
+                                  Transform.rotate(
+                                      angle: isExpanded ? math.pi : 0,
+                                      child: const Icon(Icons.arrow_drop_up,
+                                          color: Colors.white))
+                                ])),
+                            children: lessons[index]
+                                .difficulties
+                                .map<Widget>((Difficulty difficulty) {
+                              return _buildDifficultyContainer(difficulty);
+                            }).toList());
+                      }
+                    }),
+                Padding(
+                  padding: EdgeInsets.all(MediaQuery.of(context).size.width *
+                      0.04), // 4% of screen width
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          color: Colors.white,
+                          width: MediaQuery.of(context).size.width *
+                              0.005), // 0.5% of screen width
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      clipBehavior: Clip.antiAlias,
+                      shape: const CircleBorder(),
+                      child: InkWell(
+                        onTap: () {
+                          // Add your onPressed logic here
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.all(
+                              MediaQuery.of(context).size.width *
+                                  0.05), // 5% of screen width
+                          child: Icon(
+                            Icons.add,
                             color: Colors.white,
-                            width: MediaQuery.of(context).size.width *
-                                0.005), // 0.5% of screen width
-                      ),
-                      child: Material(
-                        color: Colors.transparent,
-                        clipBehavior: Clip.antiAlias,
-                        shape: const CircleBorder(),
-                        child: InkWell(
-                          onTap: () {
-                            // Add your onPressed logic here
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.all(
-                                MediaQuery.of(context).size.width *
-                                    0.05), // 5% of screen width
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: MediaQuery.of(context).size.width *
-                                  0.075, // 7.5% of screen width
-                            ),
+                            size: MediaQuery.of(context).size.width *
+                                0.075, // 7.5% of screen width
                           ),
                         ),
                       ),
                     ),
-                  )
-                ],
-              ),
-            ]),
-          ),
-        ]),
-        bottomNavigationBar: CustomBottomNavigationBarMentor(
-          currentIndex: 0, // set the currently selected item
-          onTap: (index) {
-            // handle the tap event
-          },
-        ));
+                  ),
+                )
+              ],
+            ),
+          ]),
+        ),
+      ]),
+    );
   }
 
   Widget _buildDifficultyContainer(Difficulty difficulty) {

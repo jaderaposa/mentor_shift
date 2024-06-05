@@ -10,6 +10,18 @@ class UserProfile extends StatefulWidget {
   State<UserProfile> createState() => _UserProfileState();
 }
 
+class User {
+  final String name;
+  final String profileImage;
+
+  User({required this.name, required this.profileImage});
+}
+
+final User currentUser = User(
+  name: 'Jade Raposa',
+  profileImage: 'images/icons/user_sample.png',
+);
+
 class CustomIcon {
   final String path;
   final String label;
@@ -130,18 +142,17 @@ class _UserProfileState extends State<UserProfile> {
                             child: CircleAvatar(
                               radius: screenWidth * 0.15, // 10% of screen width
                               backgroundColor: const Color(0xFF035E5D),
-                              backgroundImage: const AssetImage(
-                                'images/icons/user_sample.png',
-                              ),
+                              backgroundImage:
+                                  AssetImage(currentUser.profileImage),
                             ),
                           ),
                         ),
                         SizedBox(
                           height: screenHeight * 0.01,
                         ), // 1% of screen height
-                        const Text(
-                          'Sample Text',
-                          style: TextStyle(
+                        Text(
+                          currentUser.name,
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
                             fontFamily: 'ProtestRiot',
@@ -306,12 +317,6 @@ class _UserProfileState extends State<UserProfile> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: 0, // set the currently selected item
-        onTap: (index) {
-          // handle the tap event
-        },
       ),
     );
   }

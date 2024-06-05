@@ -10,24 +10,24 @@ class MentorshipsPage extends StatefulWidget {
 
 class _MentorshipsPageState extends State<MentorshipsPage> {
   final List<Map<String, dynamic>> mentorships = [
-    // {
-    //   'subject': 'Subject 1',
-    //   'mentor': 'Mentor 1',
-    //   'rating': 5,
-    //   'picture': 'images/icons/user_sample.png', // replace with your image path
-    // },
-    // {
-    //   'subject': 'Subject 2',
-    //   'mentor': 'Mentor 2',
-    //   'rating': 4,
-    //   'picture': 'images/icons/user_sample.png', // replace with your image path
-    // },
-    // {
-    //   'subject': 'Subject 3',
-    //   'mentor': 'Mentor 3',
-    //   'rating': 3,
-    //   'picture': 'images/icons/user_sample.png', // replace with your image path
-    // },
+    {
+      'subject': 'Subject 1',
+      'mentor': 'Mentor 1',
+      'rating': 5,
+      'picture': 'images/icons/user_sample.png', // replace with your image path
+    },
+    {
+      'subject': 'Subject 2',
+      'mentor': 'Mentor 2',
+      'rating': 4,
+      'picture': 'images/icons/user_sample.png', // replace with your image path
+    },
+    {
+      'subject': 'Subject 3',
+      'mentor': 'Mentor 3',
+      'rating': 3,
+      'picture': 'images/icons/user_sample.png', // replace with your image path
+    },
     //add more mentorships as needed
   ];
 
@@ -47,7 +47,7 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
           },
         ),
         title: const Text(
-          'Mentee',
+          'Mentorship',
           style: TextStyle(
             color: Colors.white,
             fontSize: 30.0,
@@ -63,19 +63,22 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'Mentorships',
+                Text(
+                  'My Mentorship(s)',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 40.0,
+                    fontSize: MediaQuery.of(context).size.width *
+                        0.09, // 5% of screen width
                     fontFamily: 'ProtestRiot',
                   ),
                 ),
                 IconButton(
                   icon: Image.asset(
                     'images/icons/search.png',
-                    width: 35,
-                    height: 35,
+                    width: MediaQuery.of(context).size.width *
+                        0.1, // 10% of screen width
+                    height: MediaQuery.of(context).size.width *
+                        0.1, // 10% of screen width
                   ),
                   onPressed: () {
                     // handle the button press
@@ -93,7 +96,7 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                         const Center(
+                          const Center(
                             child: Text(
                               'You have not enrolled into any mentorships/s yet',
                               style: TextStyle(
@@ -136,100 +139,97 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
                 : ListView.builder(
                     itemCount: mentorships.length,
                     itemBuilder: (context, index) {
-                return Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    gradient: const LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [Color(0xff025d5c), Color(0xff00312e)],
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      return Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 20),
+                        padding: const EdgeInsets.all(20.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          gradient: const LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [Color(0xff025d5c), Color(0xff00312e)],
+                          ),
+                        ),
+                        child: Row(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 10.0),
-                              child: Text(
-                                mentorships[index]
-                                    ['subject'], // dynamic subject name
-                                style: const TextStyle(
-                                  fontFamily: 'ProtestRiot',
-                                  color: Colors.white,
-                                  fontSize: 35.0,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 60.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    mentorships[index]
-                                        ['mentor'], // dynamic mentor name
-                                    style: const TextStyle(
-                                      fontFamily: 'ProtestRiot',
-                                      color: Colors.white,
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.only(bottom: 10.0),
+                                    child: Text(
+                                      mentorships[index]
+                                          ['subject'], // dynamic subject name
+                                      style: const TextStyle(
+                                        fontFamily: 'ProtestRiot',
+                                        color: Colors.white,
+                                        fontSize: 35.0,
+                                      ),
                                     ),
                                   ),
-                                  Row(
-                                    children: List.generate(
-                                      mentorships[index]['rating'],
-                                      (index) => Image.asset(
-                                        'images/icons/star.png', // replace with the path to your custom star icon
-                                        height: 18, // adjust the size as needed
-                                        width: 18, // adjust the size as needed
-                                      ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          mentorships[index]
+                                              ['mentor'], // dynamic mentor name
+                                          style: const TextStyle(
+                                            fontFamily: 'ProtestRiot',
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Row(
+                                          children: List.generate(
+                                            mentorships[index]['rating'],
+                                            (index) => Image.asset(
+                                              'images/icons/star.png', // replace with the path to your custom star icon
+                                              height:
+                                                  18, // adjust the size as needed
+                                              width:
+                                                  18, // adjust the size as needed
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
                               ),
                             ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromARGB(255, 224, 224, 224),
+                              ),
+                              width: 100.0,
+                              height: 100.0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      mentorships[index]
+                                          ['picture'], // dynamic picture
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color.fromARGB(255, 224, 224, 224),
-                        ),
-                        width: 100.0,
-                        height: 100.0,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage(
-                                mentorships[index]
-                                    ['picture'], // dynamic picture
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
         ],
-      ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: 0, // set the currently selected item
-        onTap: (index) {
-          // handle the tap event
-        },
       ),
     );
   }

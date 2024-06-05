@@ -431,12 +431,6 @@ class _LandingMenteeState extends State<LandingMentee> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
-        currentIndex: 0, // set the currently selected item
-        onTap: (index) {
-          // handle the tap event
-        },
-      ),
     );
   }
 }

@@ -156,31 +156,42 @@ class _MentorshipsPageState extends State<MentorshipsPage> {
                           children: [
                             Expanded(
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    mentorships[index]
-                                        ['subject'], // dynamic subject name
-                                    style: const TextStyle(
-                                      fontFamily: 'ProtestRiot',
-                                      color: Colors.white,
-                                      fontSize: 35.0,
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20.0),
+                                    child: Text(
+                                      mentorships[index]
+                                          ['subject'], // dynamic subject name
+                                      style: TextStyle(
+                                        fontFamily: 'ProtestRiot',
+                                        color: Colors.white,
+                                        fontSize: (35.0 *
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width) /
+                                            420, // Adjust the denominator to get the desired responsiveness
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(height: 20,),
+                                  SizedBox(height: 20 * MediaQuery.of(context).size.height / 720),
                                   Padding(
                                     padding: const EdgeInsets.only(right: 20.0),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          mentorships[index]
-                                              ['mentor'], // dynamic mentor name
-                                          style: const TextStyle(
-                                            fontFamily: 'ProtestRiot',
-                                            color: Colors.white,
+                                        Expanded(
+                                          child: Text(
+                                            mentorships[index][
+                                                'mentor'], // dynamic mentor name
+                                            style: const TextStyle(
+                                              fontFamily: 'ProtestRiot',
+                                              color: Colors.white,
+                                              fontSize: 20.0,
+                                            ),
                                           ),
                                         ),
                                         Row(

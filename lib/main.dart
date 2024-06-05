@@ -19,6 +19,7 @@ import 'package:mentor_shift/pages/view_messaging.dart';
 import 'package:mentor_shift/mainscaffold.dart';
 
 void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false, // Add this line
       initialRoute: '/main', // Change this to '/main'
       routes: {
         '/main': (context) => const MainScaffold(), // Add this line

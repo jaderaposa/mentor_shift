@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mentor_shift/classes/achievement.dart';
-import 'package:mentor_shift/objects/bottomnav.dart';
-import 'dart:ui';
+// import 'package:mentor_shift/objects/bottomnav.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});

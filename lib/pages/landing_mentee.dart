@@ -1,6 +1,6 @@
 //import dart
 import 'package:flutter/material.dart';
-import 'package:mentor_shift/objects/bottomnav.dart';
+// import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 
 class LandingMentee extends StatefulWidget {

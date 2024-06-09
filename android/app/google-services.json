@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "404217509031",
+    "project_id": "mentor-shift",
+    "storage_bucket": "mentor-shift.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404217509031:android:08ac6867fe02ae70025782",
+        "android_client_info": {
+          "package_name": "com.example.mentor_shift"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmMj9pmoIg5AwvH_GBBO4g4kNNOJEMgnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

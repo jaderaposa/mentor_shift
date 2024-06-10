@@ -49,7 +49,7 @@ class _MessagingState extends State<Messaging> {
           },
         ),
         title: Text(
-          'Mentee',
+          'Chat',
           style: TextStyle(
             color: Colors.white,
             fontSize: screenHeight * 0.035,

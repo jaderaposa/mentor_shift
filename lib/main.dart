@@ -23,19 +23,26 @@ import 'package:mentor_shift/mainscaffold.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp();
 
   if (kIsWeb) {
     Firebase.initializeApp(
         options: const FirebaseOptions(
-            apiKey: "AIzaSyAUL3VJUldMs6zAW52WDo71KfwoPhrO3NI",
-            authDomain: "mentor-shift.firebaseapp.com",
-            projectId: "mentor-shift",
-            storageBucket: "mentor-shift.appspot.com",
-            messagingSenderId: "404217509031",
-            appId: "1:404217509031:web:7dc0ce82a33d351b025782",
-            measurementId: "G-M36LS7JGD4"));
+            apiKey: "AIzaSyCL8TqeUIoQscauixfzQjBg4scYeBk9QdM",
+            authDomain: "mentor-shift-project.firebaseapp.com",
+            projectId: "mentor-shift-project",
+            storageBucket: "mentor-shift-project.appspot.com",
+            messagingSenderId: "494407872849",
+            appId: "1:494407872849:web:077c22e752343fd2d22370"));
   } else {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+        options: const FirebaseOptions(
+      apiKey: 'AIzaSyD9L_QYZGLEZTC1D799P4Y-rbkcpEYehTs',
+      appId: '1:494407872849:android:ea0933d7d60c65c3d22370',
+      messagingSenderId: '494407872849',
+      projectId: 'mentor-shift-project',
+      storageBucket: 'mentor-shift-project.appspot.com',
+    ));
   }
 
   runApp(MaterialApp(

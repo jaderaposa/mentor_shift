@@ -28,12 +28,12 @@ void main() async {
   if (kIsWeb) {
     Firebase.initializeApp(
         options: const FirebaseOptions(
-            apiKey: "AIzaSyCL8TqeUIoQscauixfzQjBg4scYeBk9QdM",
-            authDomain: "mentor-shift-project.firebaseapp.com",
-            projectId: "mentor-shift-project",
-            storageBucket: "mentor-shift-project.appspot.com",
-            messagingSenderId: "494407872849",
-            appId: "1:494407872849:web:077c22e752343fd2d22370"));
+            apiKey: 'AIzaSyCL8TqeUIoQscauixfzQjBg4scYeBk9QdM',
+            authDomain: 'mentor-shift-project.firebaseapp.com',
+            projectId: 'mentor-shift-project',
+            storageBucket: 'mentor-shift-project.appspot.com',
+            messagingSenderId: '494407872849',
+            appId: '1:494407872849:web:077c22e752343fd2d22370'));
   } else {
     await Firebase.initializeApp(
         options: const FirebaseOptions(

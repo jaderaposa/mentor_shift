@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/classes/user.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 import 'package:mentor_shift/objects/style/paddedcontainer.dart';
 import 'package:mentor_shift/pages/register1.dart';
@@ -13,6 +14,9 @@ class Register extends StatefulWidget {
 
 class RegisterState extends State<Register> {
   Map data = {};
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   void initState() {
@@ -128,6 +132,7 @@ class RegisterState extends State<Register> {
                                       boxShadow: const [kBoxShadow],
                                     ),
                                     child: TextFormField(
+                                      controller: emailController,
                                       decoration: const InputDecoration(
                                         labelText: 'Email',
                                         labelStyle: TextStyle(
@@ -162,6 +167,7 @@ class RegisterState extends State<Register> {
                                       boxShadow: const [kBoxShadow],
                                     ),
                                     child: TextFormField(
+                                      controller: passwordController,
                                       decoration: const InputDecoration(
                                         labelText: 'Password',
                                         labelStyle: TextStyle(
@@ -196,6 +202,7 @@ class RegisterState extends State<Register> {
                                       boxShadow: const [kBoxShadow],
                                     ),
                                     child: TextFormField(
+                                      controller: confirmPasswordController,
                                       decoration: const InputDecoration(
                                         labelText: 'Confirm Password',
                                         labelStyle: TextStyle(
@@ -232,12 +239,26 @@ class RegisterState extends State<Register> {
           SizedBox(
             width: double.infinity,
             child: TextButton(
-              onPressed: () {
-                // Navigate to the next sequence of the registration
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Register1()),
-                );
+            onPressed: () {
+                // Check if the password and confirm password match
+                if (passwordController.text == confirmPasswordController.text) {
+                  // If they match, update RegistrationData and navigate
+                  RegistrationData().setData(
+                    email: emailController.text,
+                    password: passwordController.text,
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Register1()),
+                  ); // Added missing semicolon here
+                } else {
+                  // If they don't match, show an error message
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text(
+                            'Passwords do not match.')), // Added 'const' keyword here
+                  ); // Added missing parenthesis here
+                }
               },
               style: TextButton.styleFrom(
                 backgroundColor:

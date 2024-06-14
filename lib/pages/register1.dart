@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/classes/user.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 import 'package:mentor_shift/objects/backbutton.dart';
 import 'package:mentor_shift/objects/style/paddedcontainer.dart';
+import 'package:mentor_shift/pages/register2_mentee.dart';
 
 class Register1 extends StatefulWidget {
   const Register1({Key? key}) : super(key: key);
@@ -11,7 +13,11 @@ class Register1 extends StatefulWidget {
 }
 
 class Register1State extends State<Register1> {
-  DateTime selectedDate = DateTime.now();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+// For date of birth, you might use a DateTime variable instead of a TextEditingController
+  DateTime selectedDate = DateTime
+      .now(); // Assuming you have a method to update this based on user selection
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -117,6 +123,7 @@ class Register1State extends State<Register1> {
                                   boxShadow: const [kBoxShadow],
                                 ),
                                 child: TextFormField(
+                                  controller: firstNameController,
                                   decoration: const InputDecoration(
                                     labelText: 'First Name',
                                     labelStyle: TextStyle(
@@ -151,6 +158,7 @@ class Register1State extends State<Register1> {
                                   boxShadow: const [kBoxShadow],
                                 ),
                                 child: TextFormField(
+                                  controller: lastNameController,
                                   decoration: const InputDecoration(
                                     labelText: 'Last Name',
                                     labelStyle: TextStyle(
@@ -232,10 +240,19 @@ class Register1State extends State<Register1> {
             width: double.infinity,
             child: TextButton(
               onPressed: () {
-                // Navigate to the next sequence of the registration
+                // Update RegistrationData with the new information collected in this step
+                RegistrationData().setData(
+                  firstName: firstNameController.text,
+                  lastName: lastNameController.text,
+                  dateOfBirth:
+                      selectedDate, // Assuming selectedDate is updated elsewhere in your code based on user input
+                );
+                // Navigate to the next registration step
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Register1()),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const Register2()), // Assuming Register2 is the next step
                 );
               },
               style: TextButton.styleFrom(

@@ -188,66 +188,68 @@ class Register3State extends State<Register3> {
                               ),
                               // Third input box
                               PaddedContainer(
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 0.0, vertical: 5.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: const [kBoxShadow],
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15.0),
-                                        child: Text(
-                                          'Field/s of Expertise',
-                                          style: TextStyle(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 0.0, vertical: 5.0),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: const [kBoxShadow],
+                                      ),
+                                      child: TextFormField(
+                                        controller: fieldsOfExpertiseController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Field/s of Expertise',
+                                          labelStyle: TextStyle(
                                             fontFamily: 'ProtestRiot',
                                             color: Color(0xFF076A89),
                                           ),
+                                          fillColor: Colors.white,
+                                          filled: true,
+                                          border: InputBorder.none,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 5.0, horizontal: 15.0),
                                         ),
-                                      ),
-                                      TextField(
-                                        decoration: const InputDecoration(
-                                          hintText:
-                                              'Enter your fields of expertise',
-                                        ),
-                                        onSubmitted: (String str) {
+                                        onFieldSubmitted: (String str) {
                                           setState(() {
                                             selectedExpertises.add(str);
+                                            fieldsOfExpertiseController
+                                                .clear(); // Clear the text field
                                           });
                                         },
                                       ),
-                                      Wrap(
-                                        spacing:
-                                            8.0, // gap between adjacent chips
-                                        runSpacing: 4.0, // gap between lines
-                                        children: selectedExpertises
-                                            .map((String expertise) {
-                                          return ActionChip(
-                                            label: Text(
-                                              expertise,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: 'ProtestRiot',
-                                              ),
+                                    ),
+                                    const SizedBox(height: 10,),
+                                    Wrap(
+                                      alignment: WrapAlignment.start,
+                                      spacing:
+                                          4.0, // gap between adjacent chips
+                                      runSpacing: 4.0, // gap between lines
+                                      children: selectedExpertises
+                                          .map((String expertise) {
+                                        return ActionChip(
+                                          label: Text(
+                                            expertise,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: 'ProtestRiot',
+                                              fontSize: 16,
                                             ),
-                                            backgroundColor: Colors.blue,
-                                            onPressed: () {
-                                              setState(() {
-                                                selectedExpertises
-                                                    .remove(expertise);
-                                              });
-                                            },
-                                          );
-                                        }).toList(),
-                                      ),
-                                    ],
-                                  ),
+                                          ),
+                                          backgroundColor: Colors.blue,
+                                          onPressed: () {
+                                            setState(() {
+                                              selectedExpertises
+                                                  .remove(expertise);
+                                            });
+                                          },
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

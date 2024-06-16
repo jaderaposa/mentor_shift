@@ -47,7 +47,7 @@ void main() async {
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: '/register3',
+    initialRoute: '/login',
     routes: {
       '/main': (context) => const MainScaffold(),
       '/login': (context) => const Login(),

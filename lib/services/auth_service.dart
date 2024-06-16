@@ -35,9 +35,16 @@ class AuthService {
       // Handle errors here
       if (e.code == 'weak-password') {
         return 'The password provided is too weak.';
+      } else if (e.code == 'email-already-in-use') {
+        return 'The email address is already in use by another account.';
+      } else if (e.code == 'invalid-email') {
+        return 'The email address is not valid.';
+      } else {
+        return 'Failed to register. Please try again later.';
       }
-      // Add other error handling as needed
+    } catch (e) {
+      // Handle other exceptions
+      return 'Failed to register. Please try again later.';
     }
-    throw Exception('Registration failed');
   }
 }

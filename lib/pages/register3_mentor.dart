@@ -17,7 +17,7 @@ class Register3 extends StatefulWidget {
 }
 
 class Register3State extends State<Register3> {
-  List<String> selectedExpertises = ['Test1', 'Test2'];
+  List<String> selectedExpertises = [];
   TextEditingController fieldsOfExpertiseController = TextEditingController();
   TextEditingController mentorDisplayNameController = TextEditingController();
   TextEditingController educationalBackgroundController =
@@ -266,12 +266,10 @@ class Register3State extends State<Register3> {
             width: double.infinity,
             child: TextButton(
               onPressed: () async {
-                // Assuming email and password are collected in earlier steps and stored in RegistrationData
+                // Use the singleton instance to access the data
                 RegistrationData registrationData = RegistrationData();
-                registrationData.email =
-                    RegistrationData().email; // Set dynamically
-                registrationData.password =
-                    RegistrationData().password; // Set dynamically
+
+                // Set the new data
                 registrationData.mentorDisplayName =
                     mentorDisplayNameController.text;
                 registrationData.educationalBackground =
@@ -281,33 +279,20 @@ class Register3State extends State<Register3> {
                 String registrationStatus =
                     await AuthService().registerUser(registrationData);
 
-                if (registrationStatus == 'User registered successfully') {
-                  // Additional details for mentors
-                  await FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .set({
-                    'mentorDisplayName': mentorDisplayNameController.text,
-                    'educationalBackground':
-                        educationalBackgroundController.text,
-                    'fieldsOfExpertise': selectedExpertises,
-                    // Add other mentor-specific fields
-                  }).then((_) {
+                if (mounted) {
+                  // Check if the widget is still in the tree
+                  if (registrationStatus == 'User registered successfully') {
+                    // Navigate to Login page
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const Login()),
                     );
-                  }).catchError((error) {
+                  } else {
+                    // Show error message
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                          content:
-                              Text("Failed to store user details: $error")),
+                      SnackBar(content: Text(registrationStatus)),
                     );
-                  });
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(registrationStatus)),
-                  );
+                  }
                 }
               },
               style: TextButton.styleFrom(

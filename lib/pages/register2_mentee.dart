@@ -1,8 +1,10 @@
 //import dart
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/classes/user.dart';
 import 'package:mentor_shift/objects/backbutton.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 import 'package:mentor_shift/objects/style/paddedcontainer.dart';
+import 'package:mentor_shift/pages/register3_mentor.dart';
 
 class Register2 extends StatefulWidget {
   const Register2({super.key});
@@ -12,6 +14,11 @@ class Register2 extends StatefulWidget {
 }
 
 class Register2State extends State<Register2> {
+  TextEditingController menteeDisplayNameController = TextEditingController();
+  TextEditingController yearLevelController = TextEditingController();
+  TextEditingController courseController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,13 +65,13 @@ class Register2State extends State<Register2> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(48, 50, 48, 0),
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                         child: Column(
                           children: <Widget>[
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment:
-                                  CrossAxisAlignment.start, // Add this line
+                                  CrossAxisAlignment.center, // Add this line
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,6 +124,7 @@ class Register2State extends State<Register2> {
                                   boxShadow: const [kBoxShadow],
                                 ),
                                 child: TextFormField(
+                                  controller: menteeDisplayNameController,
                                   decoration: const InputDecoration(
                                     labelText: 'Display Name', // Changed label
                                     labelStyle: TextStyle(
@@ -147,8 +155,9 @@ class Register2State extends State<Register2> {
                                   boxShadow: const [kBoxShadow],
                                 ),
                                 child: TextFormField(
+                                  controller: yearLevelController,
                                   decoration: const InputDecoration(
-                                    labelText: 'Year Level', // Changed label
+                                    labelText: 'Year Level',
                                     labelStyle: TextStyle(
                                       fontFamily: 'ProtestRiot',
                                       color: Color(0xFF076A89),
@@ -159,7 +168,8 @@ class Register2State extends State<Register2> {
                                     contentPadding: EdgeInsets.symmetric(
                                         vertical: 5.0, horizontal: 15.0),
                                   ),
-                                  keyboardType: TextInputType.name,
+                                  keyboardType: TextInputType
+                                      .number, // Assuming year level is numeric
                                   style: const TextStyle(
                                     fontFamily: 'ProtestRiot',
                                   ),
@@ -180,8 +190,9 @@ class Register2State extends State<Register2> {
                                   children: <Widget>[
                                     Expanded(
                                       child: TextFormField(
+                                        controller: courseController,
                                         decoration: const InputDecoration(
-                                          labelText: 'Course', // Changed label
+                                          labelText: 'Course',
                                           labelStyle: TextStyle(
                                             fontFamily: 'ProtestRiot',
                                             color: Color(0xFF076A89),
@@ -192,7 +203,9 @@ class Register2State extends State<Register2> {
                                           contentPadding: EdgeInsets.symmetric(
                                               vertical: 5.0, horizontal: 15.0),
                                         ),
-                                        enabled: false,
+                                        style: const TextStyle(
+                                          fontFamily: 'ProtestRiot',
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -212,15 +225,24 @@ class Register2State extends State<Register2> {
             width: double.infinity,
             child: TextButton(
               onPressed: () {
-                // Navigate to the next sequence of the registration
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => const Register1()),
-                // );
+                // Update RegistrationData with the new information
+                RegistrationData().setData(
+                  menteeDisplayName: menteeDisplayNameController.text,
+                  yearLevel: yearLevelController.text,
+                  course: courseController.text,
+                  // Add other fields as necessary
+                );
+
+                // Navigate to the next step in the registration process
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const Register3()), // Replace NextStepPage with the actual next page in your registration process
+                );
               },
               style: TextButton.styleFrom(
-                backgroundColor:
-                    Colors.blue, // Change this to the color you want
+                backgroundColor: Colors.blue,
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero),

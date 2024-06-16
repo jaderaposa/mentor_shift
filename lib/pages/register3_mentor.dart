@@ -69,7 +69,7 @@ class Register3State extends State<Register3> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(48, 50, 48, 0),
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                         child: SingleChildScrollView(
                           child: Column(
                             children: <Widget>[
@@ -77,7 +77,7 @@ class Register3State extends State<Register3> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment:
-                                    CrossAxisAlignment.start, // Add this line
+                                    CrossAxisAlignment.center, // Add this line
                                 children: [
                                   Column(
                                     crossAxisAlignment:
@@ -87,7 +87,7 @@ class Register3State extends State<Register3> {
                                         'Setting Up Role Profiles',
                                         style: TextStyle(
                                           fontSize:
-                                              25, // Adjust the font size as needed
+                                              20, // Adjust the font size as needed
                                           color: Colors.white,
                                           fontFamily:
                                               'ProtestRiot', // Set the text color
@@ -97,7 +97,7 @@ class Register3State extends State<Register3> {
                                         'Mentor',
                                         style: TextStyle(
                                           fontSize:
-                                              40, // Adjust the font size as needed
+                                              30, // Adjust the font size as needed
                                           color: Colors.white,
                                           fontFamily:
                                               'ProtestRiot', // Set the text color

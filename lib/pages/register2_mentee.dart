@@ -65,13 +65,13 @@ class Register2State extends State<Register2> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(48, 50, 48, 0),
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                         child: Column(
                           children: <Widget>[
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment:
-                                  CrossAxisAlignment.start, // Add this line
+                                  CrossAxisAlignment.center, // Add this line
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

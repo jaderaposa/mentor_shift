@@ -49,29 +49,37 @@ class RegisterState extends State<Register> {
                     ),
                   ),
                   child: Center(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Image.asset(
-                            'images/icons/mentorshiftorig.png',
-                            width: double
-                                .infinity, // Make the image take the full width
-                            height:
-                                120, // Keep the height fixed or adjust as needed
-                            fit: BoxFit
-                                .contain, // Scale the image to fit within the bounds
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Positioned(
+                          top: 50, // Adjust as needed
+                          left: 50, // Adjust as needed
+                          child: Column(
+                            children: <Widget>[
+                              Image.asset(
+                                'images/icons/mentorshiftorig.png',
+                                width: double
+                                    .infinity, // Make the image take the full width
+                                height:
+                                    120, // Keep the height fixed or adjust as needed
+                                fit: BoxFit
+                                    .contain, // Scale the image to fit within the bounds
+                              ),
+                              const Text(
+                                'Mentor-Shift',
+                                style: TextStyle(
+                                  fontSize: 38,
+                                  fontFamily: 'ProtestRiot',
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
-                          const Text(
-                            'Mentor-Shift',
-                            style: TextStyle(
-                              fontSize: 38,
-                              fontFamily: 'ProtestRiot',
-                              color: Colors.white,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(48, 50, 48, 0),
+                        ),
+                        SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                             child: Column(
                               children: <Widget>[
                                 const Row(
@@ -88,7 +96,7 @@ class RegisterState extends State<Register> {
                                           'Welcome to Mentor-Shift!',
                                           style: TextStyle(
                                             fontSize:
-                                                25, // Adjust the font size as needed
+                                                20, // Adjust the font size as needed
                                             color: Colors.white,
                                             fontFamily:
                                                 'ProtestRiot', // Set the text color
@@ -98,7 +106,7 @@ class RegisterState extends State<Register> {
                                           'First, let\'s create an account',
                                           style: TextStyle(
                                             fontSize:
-                                                25, // Adjust the font size as needed
+                                                20, // Adjust the font size as needed
                                             color: Colors.white,
                                             fontFamily:
                                                 'ProtestRiot', // Set the text color
@@ -120,7 +128,7 @@ class RegisterState extends State<Register> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 10),
+                                const SizedBox(height: 20),
                                 // Email input
                                 PaddedContainer(
                                   child: Container(
@@ -228,8 +236,8 @@ class RegisterState extends State<Register> {
                               ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -79,13 +79,13 @@ class Register1State extends State<Register1> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(48, 50, 48, 0),
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                         child: Column(
                           children: <Widget>[
                             const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment:
-                                  CrossAxisAlignment.start, // Add this line
+                                  CrossAxisAlignment.center, // Add this line
                               children: [
                                 Text(
                                   'Let\'s get personal',
@@ -214,6 +214,11 @@ class Register1State extends State<Register1> {
                                             text: "${selectedDate.toLocal()}"
                                                 .split(' ')[0]),
                                         enabled: false,
+                                        style: const TextStyle(
+                                            color: Colors
+                                                .black,
+                                            fontFamily: 'ProtestRiot'
+                                        ),
                                       ),
                                     ),
                                     Padding(

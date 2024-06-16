@@ -8,7 +8,7 @@ class PaddedContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0), // adjust padding as needed
+      padding: const EdgeInsets.symmetric(vertical: 10.0), // adjust padding as needed
       child: child,
     );
   }

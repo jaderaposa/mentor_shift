@@ -240,7 +240,7 @@ class _LandingMenteeState extends State<LandingMentee> {
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               image: DecorationImage(
-                                                image: NetworkImage(mentors[
+                                                image: AssetImage(mentors[
                                                         index - 1]
                                                     .pictureUrl), // Subtract 1 from the index
                                                 fit: BoxFit.scaleDown,
@@ -378,7 +378,7 @@ class _LandingMenteeState extends State<LandingMentee> {
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle,
                                               image: DecorationImage(
-                                                image: NetworkImage(mentors[
+                                                image: AssetImage(mentors[
                                                         index - 1]
                                                     .pictureUrl), // Subtract 1 from the index
                                                 fit: BoxFit.scaleDown,

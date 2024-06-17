@@ -3,17 +3,56 @@ import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/custom_button.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 import 'package:mentor_shift/objects/style/paddedcontainer.dart';
+import 'package:mentor_shift/pages/landing_mentee.dart';
 import 'package:mentor_shift/pages/register.dart';
+import 'package:mentor_shift/services/auth_service.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  const Login({Key? key}) : super(key: key);
 
   @override
   LoginState createState() => LoginState();
 }
 
 class LoginState extends State<Login> {
-  Map data = {};
+  final AuthService _authService = AuthService();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // Handle the login button press
+  void _handleLoginButtonPress() async {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    // Basic validation
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all fields.')),
+      );
+      return; // Exit the method if validation fails
+    }
+
+    try {
+      // Attempt to log in and handle any exceptions with more descriptive messages
+      await _authService.loginUser(email, password);
+      // Navigate to another screen upon successful login
+      if (mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const LandingMentee()), // Adjust as needed
+        );
+      }
+    } catch (error) {
+      // Display error message based on the type of exception
+      String errorMessage = error.toString();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(errorMessage)),
+        );
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -93,6 +132,7 @@ class LoginState extends State<Login> {
                             boxShadow: const [kBoxShadow],
                           ),
                           child: TextFormField(
+                            controller: _emailController,
                             decoration: const InputDecoration(
                               labelText: 'Email',
                               labelStyle: TextStyle(
@@ -127,6 +167,7 @@ class LoginState extends State<Login> {
                             boxShadow: const [kBoxShadow],
                           ),
                           child: TextFormField(
+                            controller: _passwordController,
                             decoration: const InputDecoration(
                               labelText: 'Password',
                               labelStyle: TextStyle(
@@ -153,9 +194,7 @@ class LoginState extends State<Login> {
                       const SizedBox(height: 25),
                       CustomButton(
                         text: 'SIGN IN',
-                        onPressed: () {
-                          // Handle button press
-                        },
+                        onPressed: _handleLoginButtonPress,
                       ),
                       const SizedBox(height: 20),
                       GestureDetector(

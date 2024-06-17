@@ -47,4 +47,29 @@ class AuthService {
       return 'Failed to register. Please try again later.';
     }
   }
+
+  // Function to login a user
+  Future<void> loginUser(String email, String password) async {
+    try {
+      // Authenticate the user with email and password
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      // Translate FirebaseAuthException codes to user-friendly messages
+      if (e.code == 'wrong-password') {
+        throw ('Incorrect password. Please try again.');
+      } else if (e.code == 'user-not-found') {
+        throw ('No account found for that email.');
+      } else if (e.code == 'invalid-email') {
+        throw ('Please enter a valid email address.');
+      } else {
+        throw ('Failed to login. Please try again later.');
+      }
+    } catch (e) {
+      // Handle other exceptions
+      throw ('An unexpected error occurred. Please try again later.');
+    }
+  }
 }

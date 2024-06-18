@@ -53,7 +53,7 @@ void main() async {
       '/login': (context) => const Login(),
       '/register': (context) => const Register(),
       '/register1': (context) => const Register1(),
-      '/role': (context) => const Role(),
+      '/role': (context) => Role(),
       '/menteehome': (context) => const MenteeSearch(),
       '/mentorships': (context) => const MentorshipsPage(),
       '/message': (context) => const Messaging(),

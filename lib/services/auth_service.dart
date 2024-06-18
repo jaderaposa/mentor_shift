@@ -28,6 +28,7 @@ class AuthService {
         'educationalBackground': registrationData.educationalBackground,
         'fieldsOfExpertise': registrationData.fieldsOfExpertise,
         'email': registrationData.email,
+        'role': '', // Add this line
       });
 
       return 'User registered successfully';
@@ -72,4 +73,30 @@ class AuthService {
       throw ('An unexpected error occurred. Please try again later.');
     }
   }
+
+  //Role Selection
+  Future<void> updateUserRole(String role) async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .update({
+        'role': role,
+      });
+    }
+  }
+
+  // Get the user's role
+  Future<String> getUserRole() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      return doc.get('role');
+    }
+    return '';
+  }  
 }

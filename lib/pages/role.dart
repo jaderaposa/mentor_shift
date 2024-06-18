@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/services/auth_service.dart';
 
 class Role extends StatelessWidget {
-  const Role({super.key});
+  final AuthService _authService;
+
+  Role({Key? key})
+      : _authService = AuthService(),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +56,9 @@ class Role extends StatelessWidget {
                       Column(
                         children: <Widget>[
                           GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/login');
+                            onTap: () async {
+                              await _authService.updateUserRole('Mentor');
+                              Navigator.pushNamed(context, '/mcp');
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -88,8 +94,9 @@ class Role extends StatelessWidget {
                       Column(
                         children: <Widget>[
                           GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/login');
+                            onTap: () async {
+                              await _authService.updateUserRole('Mentee');
+                              Navigator.pushNamed(context, '/landingmentee');
                             },
                             child: Container(
                               decoration: BoxDecoration(

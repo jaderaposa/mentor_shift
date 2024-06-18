@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/custom_button.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 import 'package:mentor_shift/objects/style/paddedcontainer.dart';
-import 'package:mentor_shift/pages/landing_mentee.dart';
 import 'package:mentor_shift/pages/register.dart';
+import 'package:mentor_shift/pages/role.dart';
 import 'package:mentor_shift/services/auth_service.dart';
 
 class Login extends StatefulWidget {
@@ -40,7 +40,7 @@ class LoginState extends State<Login> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => const LandingMentee()), // Adjust as needed
+              builder: (context) => Role()), // Adjust as needed
         );
       }
     } catch (error) {

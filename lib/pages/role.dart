@@ -57,7 +57,7 @@ class Role extends StatelessWidget {
                         children: <Widget>[
                           GestureDetector(
                             onTap: () async {
-                              await _authService.updateUserRole('Mentor');
+                              await _authService.updateUserRole('mentor');
                               Navigator.pushNamed(context, '/mcp');
                             },
                             child: Container(
@@ -95,7 +95,7 @@ class Role extends StatelessWidget {
                         children: <Widget>[
                           GestureDetector(
                             onTap: () async {
-                              await _authService.updateUserRole('Mentee');
+                              await _authService.updateUserRole('mentee');
                               Navigator.pushNamed(context, '/landingmentee');
                             },
                             child: Container(

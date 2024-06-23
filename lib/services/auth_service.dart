@@ -99,4 +99,10 @@ class AuthService {
     }
     return '';
   }  
+
+  // Method to check if the user is logged in
+  Future<bool> isLoggedIn() async {
+    final User? user = _auth.currentUser;
+    return user != null;
+  }
 }

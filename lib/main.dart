@@ -1,25 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/mainscaffold.dart';
 import 'package:mentor_shift/pages/landing_mentee.dart';
 import 'package:mentor_shift/pages/login.dart';
 import 'package:mentor_shift/pages/mentee_requests.dart';
+import 'package:mentor_shift/pages/mentee_search.dart';
 import 'package:mentor_shift/pages/mentees_enrolled.dart';
 import 'package:mentor_shift/pages/mentor_content_page.dart';
 import 'package:mentor_shift/pages/mentor_learning_page.dart';
+import 'package:mentor_shift/pages/mentorships_screen.dart';
+import 'package:mentor_shift/pages/messaging.dart';
 import 'package:mentor_shift/pages/register.dart';
+import 'package:mentor_shift/pages/register1.dart';
 import 'package:mentor_shift/pages/register2_mentee.dart';
 import 'package:mentor_shift/pages/register3_mentor.dart';
 import 'package:mentor_shift/pages/role.dart';
-import 'package:mentor_shift/pages/register1.dart';
-import 'package:mentor_shift/pages/mentee_search.dart';
-import 'package:mentor_shift/pages/mentorships_screen.dart';
-import 'package:mentor_shift/pages/messaging.dart';
 import 'package:mentor_shift/pages/user_profile.dart';
 import 'package:mentor_shift/pages/view_mentor.dart';
 import 'package:mentor_shift/pages/view_messaging.dart';
-import 'package:mentor_shift/mainscaffold.dart';
+import 'package:mentor_shift/services/route_names.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,28 +47,36 @@ void main() async {
     ));
   }
 
+  auth.FirebaseAuth.instance.authStateChanges().listen((auth.User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
+
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: '/login',
+    initialRoute: RouteNames.main,
     routes: {
-      '/main': (context) => const MainScaffold(),
-      '/login': (context) => const Login(),
-      '/register': (context) => const Register(),
-      '/register1': (context) => const Register1(),
-      '/role': (context) => Role(),
-      '/menteehome': (context) => const MenteeSearch(),
-      '/mentorships': (context) => const MentorshipsPage(),
-      '/message': (context) => const Messaging(),
-      '/viewmessage': (context) => const ViewMessaging(),
-      '/viewmentor': (context) => const ViewMentor(),
-      '/register2': (context) => const Register2(),
-      '/register3': (context) => const Register3(),
-      '/landingmentee': (context) => const LandingMentee(),
-      '/mlp': (context) => const MentorLearningPage(),
-      '/userprofile': (context) => const UserProfile(),
-      '/mcp': (context) => const MentorContentPage(),
-      '/enrolled': (context) => const MenteesEnrolled(),
-      '/requests': (context) => const MenteeRequests(),
+      RouteNames.main: (context) => const MainScaffold(),
+      RouteNames.login: (context) => const Login(),
+      RouteNames.register: (context) => const Register(),
+      RouteNames.register1: (context) => const Register1(),
+      RouteNames.register2: (context) => const Register2(),
+      RouteNames.register3: (context) => const Register3(),
+      RouteNames.role: (context) => Role(),
+      RouteNames.landingmentee: (context) => const LandingMentee(),
+      RouteNames.mentorships: (context) => const MentorshipsPage(),
+      RouteNames.message: (context) => const Messaging(),
+      RouteNames.viewmessage: (context) => const ViewMessaging(),
+      RouteNames.viewmentor: (context) => const ViewMentor(),
+      RouteNames.menteesearch: (context) => const MenteeSearch(),
+      RouteNames.userprofile: (context) => const UserProfile(),
+      RouteNames.mcp: (context) => const MentorContentPage(),
+      RouteNames.mlp: (context) => const MentorLearningPage(),
+      RouteNames.enrolled: (context) => const MenteesEnrolled(),
+      RouteNames.requests: (context) => const MenteeRequests(),
     },
   ));
 }

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/objects/bottomnav.dart';
 // import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/cet.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
+import 'package:mentor_shift/pages/login.dart';
 import 'dart:math' as math;
+
+import 'package:mentor_shift/services/auth_service.dart';
 
 class MentorContentPage extends StatefulWidget {
   const MentorContentPage({super.key});
@@ -43,7 +47,11 @@ class Lesson {
 class _MentorContentPageState extends State<MentorContentPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  late AuthService authService = AuthService();
+  String? userRole;
   List<Lesson> lessons = [];
+  final AuthService _authService = AuthService();
+
 
   @override
   void initState() {
@@ -51,6 +59,14 @@ class _MentorContentPageState extends State<MentorContentPage>
     _tabController =
         TabController(length: 2, vsync: this); // Change length to 2
     fetchLessons();
+    _fetchUserRole();
+  }
+
+  Future<void> _fetchUserRole() async {
+    String fetchedRole = await authService.getUserRole();
+    setState(() {
+      userRole = fetchedRole;
+    });
   }
 
   Future<void> fetchLessons() async {
@@ -174,6 +190,18 @@ class _MentorContentPageState extends State<MentorContentPage>
             ),
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.exit_to_app, color: Colors.white),
+            onPressed: () async {
+              await _authService.signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Login()),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(children: [
         Padding(
@@ -421,6 +449,21 @@ class _MentorContentPageState extends State<MentorContentPage>
           ]),
         ),
       ]),
+      bottomNavigationBar: userRole == 'mentor'
+          ? CustomBottomNavigationBarMentor(
+              currentIndex:
+                  0, // Assuming you want to start with the first tab selected
+              onTap: (index) {
+                // Handle tab selection
+              },
+            )
+          : CustomBottomNavigationBar(
+              currentIndex:
+                  0, // Assuming you want to start with the first tab selected
+              onTap: (index) {
+                // Handle tab selection
+              },
+            ),
     );
   }
 

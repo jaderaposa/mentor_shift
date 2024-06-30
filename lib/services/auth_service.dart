@@ -105,4 +105,9 @@ class AuthService {
     final User? user = _auth.currentUser;
     return user != null;
   }
+
+  // Method to log out the user
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
 }

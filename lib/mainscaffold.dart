@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-// Removed unnecessary import of 'package:flutter/foundation.dart'
-import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/loadingwidget.dart';
 import 'package:mentor_shift/pages/landing_mentee.dart';
 import 'package:mentor_shift/pages/login.dart';
-import 'package:mentor_shift/pages/mentee_search.dart';
 import 'package:mentor_shift/pages/mentor_content_page.dart';
-import 'package:mentor_shift/pages/mentorships_screen.dart';
-import 'package:mentor_shift/pages/messaging.dart';
 import 'package:mentor_shift/pages/role.dart';
-import 'package:mentor_shift/pages/user_profile.dart';
 import 'package:mentor_shift/services/auth_service.dart';
 
 class MainScaffold extends StatefulWidget {

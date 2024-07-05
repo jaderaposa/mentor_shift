@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/loadingwidget.dart';
 import 'package:mentor_shift/pages/landing_mentee.dart';
 import 'package:mentor_shift/pages/login.dart';
+import 'package:mentor_shift/pages/mentee_search.dart';
+import 'package:mentor_shift/pages/mentees_enrolled.dart';
 import 'package:mentor_shift/pages/mentor_content_page.dart';
+import 'package:mentor_shift/pages/mentorships_screen.dart';
+import 'package:mentor_shift/pages/messaging.dart';
 import 'package:mentor_shift/pages/role.dart';
+import 'package:mentor_shift/pages/user_profile.dart';
 import 'package:mentor_shift/services/auth_service.dart';
 
 class MainScaffold extends StatefulWidget {
@@ -17,15 +23,7 @@ class MainScaffoldState extends State<MainScaffold> {
   final AuthService _authService = AuthService();
   String role = '';
   bool _isLoading = true;
-
-  // final _pages = [
-  //   const MentorshipsPage(),
-  //   const MenteeSearch(),
-  //   const Messaging(),
-  //   const UserProfile(),
-  //   const LandingMentee()
-  //   // Add more pages as needed
-  // ];
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -77,34 +75,60 @@ class MainScaffoldState extends State<MainScaffold> {
               MaterialPageRoute(builder: (context) => Role()),
             );
           }
-        } else {
-          if (mounted) {
-            setState(() {
-              _isLoading = false;
-            });
-            if (userRole == 'mentor') {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const MentorContentPage()),
-              );
-            } else if (userRole == 'mentee') {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LandingMentee()),
-              );
-            } else {
-              // Handle any other roles or unexpected situations
-              // For example, you can navigate to a default page or display an error message
-              // ...
-            }
-          }
-        }
+        } 
+        // else {
+        //   if (mounted) {
+        //     setState(() {
+        //       _isLoading = false;
+        //     });
+        //     if (userRole == 'mentor') {
+        //       Navigator.pushReplacement(
+        //         context,
+        //         MaterialPageRoute(
+        //             builder: (context) => const MentorContentPage()),
+        //       );
+        //     } else if (userRole == 'mentee') {
+        //       Navigator.pushReplacement(
+        //         context,
+        //         MaterialPageRoute(builder: (context) => const LandingMentee()),
+        //       );
+        //     } else {
+        //       // Handle any other roles or unexpected situations
+        //       // For example, you can navigate to a default page or display an error message
+        //       // ...
+        //     }
+        //   }
+        // }
       }
     } catch (e) {
       debugPrint("Error during redirection: $e");
     }
   }
+
+  // Define pages for mentor and mentee roles
+  final List<Widget> _mentorPages = [
+    const MentorContentPage(),
+    const MenteesEnrolled(),
+    const Messaging(),
+    const UserProfile(),
+  ];
+
+  final List<Widget> _menteePages = [
+    const LandingMentee(),
+    const MenteeSearch(),
+    const Messaging(),
+    const UserProfile(),
+    // Add other mentee pages here
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  // Add a flag to track if the temporary page should be shown
+  bool _showTemporaryPage = true;
 
   @override
   Widget build(BuildContext context) {
@@ -133,22 +157,35 @@ class MainScaffoldState extends State<MainScaffold> {
       }
     } else {
       // Determine the page to display based on the user's role
-      Widget pageToDisplay;
+      List<Widget> pagesToDisplay;
+      Widget? bottomNavBar;
       switch (role) {
         case 'mentor':
-          pageToDisplay = const MentorContentPage();
+          pagesToDisplay = _mentorPages;
+          bottomNavBar = CustomBottomNavigationBarMentor(
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+          );
           break;
         case 'mentee':
-          pageToDisplay = const LandingMentee();
+          pagesToDisplay = _menteePages;
+          bottomNavBar = CustomBottomNavigationBar(
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+          );
           break;
         default:
-          pageToDisplay =
-              const Center(child: Text('Unknown role or no role assigned'));
+          // Display an empty page for unknown or unassigned role
+          pagesToDisplay = [
+            const SizedBox.shrink()
+          ]; // This creates an empty space, effectively showing nothing
+          bottomNavBar = null; // Optionally hide the bottom navigation bar
           break;
       }
-
-      return Scaffold(body: pageToDisplay);
+      return Scaffold(
+        body: pagesToDisplay.elementAt(_selectedIndex),
+        bottomNavigationBar: bottomNavBar,
+      );
     }
   }
 }
-

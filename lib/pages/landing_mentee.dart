@@ -1,7 +1,10 @@
 //import dart
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/objects/bottomnav.dart';
 // import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
+import 'package:mentor_shift/pages/login.dart';
+import 'package:mentor_shift/services/auth_service.dart';
 
 class LandingMentee extends StatefulWidget {
   const LandingMentee({super.key});
@@ -25,6 +28,9 @@ class Mentor {
 }
 
 class _LandingMenteeState extends State<LandingMentee> {
+  String? userRole;
+  final AuthService _authService = AuthService(); // Keep this single instance
+
   List<Mentor> mentors = [
     Mentor(
       pictureUrl: 'images/icons/user_sample.png',
@@ -88,66 +94,23 @@ class _LandingMenteeState extends State<LandingMentee> {
           ),
         ),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.exit_to_app, color: Colors.white),
+            onPressed: () async {
+              await _authService.signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Login()),
+              );
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
-            child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 5.0, vertical: 0.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: const [
-                  BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0, 2),
-                      blurRadius: 6.0)
-                ],
-              ),
-              child: Row(
-                // crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 3.0),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0, vertical: 5.0),
-                    ),
-                  ),
-                  Expanded(
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: 'Search for Mentors',
-                        hintStyle: TextStyle(
-                          color: Colors.black
-                              .withOpacity(0.5), // Adjust the opacity as needed
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 5.0, horizontal: 0.0),
-                      ),
-                      style: const TextStyle(
-                        fontFamily: 'ProtestRiot',
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.search, color: Colors.black),
-                    onPressed: () {
-                      // handle the button press
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
             child: Row(
               children: [
                 Text(
@@ -202,7 +165,7 @@ class _LandingMenteeState extends State<LandingMentee> {
                       } else {
                         mentors.sort((a, b) => b.stars.compareTo(a.stars));
                         return SizedBox(
-                          width: 180.0,
+                          width: 170.0,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
@@ -220,72 +183,70 @@ class _LandingMenteeState extends State<LandingMentee> {
                               ),
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 20.0),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Container(
-                                        width: 90.0,
-                                        height: 90.0,
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFF936030),
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(3.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                image: AssetImage(mentors[
-                                                        index - 1]
-                                                    .pictureUrl), // Subtract 1 from the index
-                                                fit: BoxFit.scaleDown,
-                                              ),
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      width: 90.0,
+                                      height: 90.0,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFF936030),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              image: AssetImage(mentors[
+                                                      index - 1]
+                                                  .pictureUrl), // Subtract 1 from the index
+                                              fit: BoxFit.scaleDown,
                                             ),
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: 10.0),
-                                      Text(
+                                    ),
+                                    // const SizedBox(height: 5.0),
+                                    Text(
+                                      mentors[index - 1]
+                                          .name, // Subtract 1 from the index
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18.0,
+                                        fontFamily: 'ProtestRiot',
+                                      ),
+                                    ),
+                                    const Text(
+                                      'Expertise',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        color: Color(0xFFFF9061),
+                                        fontFamily: 'ProtestRiot',
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: List.generate(
                                         mentors[index - 1]
-                                            .name, // Subtract 1 from the index
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                          fontFamily: 'ProtestRiot',
-                                        ),
-                                      ),
-                                      const Text(
-                                        'Expertise',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                          color: Color(0xFFFF9061),
-                                          fontFamily: 'ProtestRiot',
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: List.generate(
-                                          mentors[index - 1]
-                                              .stars, // Subtract 1 from the index
-                                          (index) => Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 2.0, vertical: 2),
-                                            child: Image.asset(
-                                              'images/icons/star.png',
-                                              width: 16,
-                                              height: 16,
-                                            ),
+                                            .stars, // Subtract 1 from the index
+                                        (index) => Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 2.0, vertical: 2),
+                                          child: Image.asset(
+                                            'images/icons/star.png',
+                                            width: 16,
+                                            height: 16,
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -340,7 +301,7 @@ class _LandingMenteeState extends State<LandingMentee> {
                         );
                       } else {
                         return SizedBox(
-                          width: 180.0,
+                          width: 170.0,
                           child: Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
@@ -358,65 +319,63 @@ class _LandingMenteeState extends State<LandingMentee> {
                               ),
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 20.0),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Container(
-                                        width: 90.0,
-                                        height: 90.0,
-                                        decoration: const BoxDecoration(
-                                          color: Color(0xFF936030),
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(3.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                image: AssetImage(mentors[
-                                                        index - 1]
-                                                    .pictureUrl), // Subtract 1 from the index
-                                                fit: BoxFit.scaleDown,
-                                              ),
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Container(
+                                      width: 90.0,
+                                      height: 90.0,
+                                      decoration: const BoxDecoration(
+                                        color: Color(0xFF936030),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(3.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              image: AssetImage(mentors[
+                                                      index - 1]
+                                                  .pictureUrl), // Subtract 1 from the index
+                                              fit: BoxFit.scaleDown,
                                             ),
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: 10.0),
-                                      Text(
-                                        mentors[index - 1]
-                                            .name, // Subtract 1 from the index
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18.0,
-                                          fontFamily: 'ProtestRiot',
-                                        ),
+                                    ),
+                                    // const SizedBox(height: 10.0),
+                                    Text(
+                                      mentors[index - 1]
+                                          .name, // Subtract 1 from the index
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18.0,
+                                        fontFamily: 'ProtestRiot',
                                       ),
-                                      const Text(
-                                        'Total Mentees',
-                                        style: TextStyle(
-                                          fontSize: 16.0,
-                                          color: Color(0xFFFF9061),
-                                          fontFamily: 'ProtestRiot',
-                                        ),
+                                    ),
+                                    const Text(
+                                      'Total Mentees',
+                                      style: TextStyle(
+                                        fontSize: 16.0,
+                                        color: Color(0xFFFF9061),
+                                        fontFamily: 'ProtestRiot',
                                       ),
-                                      Text(
-                                        mentors[index - 1]
-                                            .totalMentees
-                                            .toString(), // Subtract 1 from the index
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16.0,
-                                          fontFamily: 'ProtestRiot',
-                                        ),
+                                    ),
+                                    Text(
+                                      mentors[index - 1]
+                                          .totalMentees
+                                          .toString(), // Subtract 1 from the index
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16.0,
+                                        fontFamily: 'ProtestRiot',
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -431,6 +390,7 @@ class _LandingMenteeState extends State<LandingMentee> {
           ),
         ],
       ),
+
     );
   }
 }

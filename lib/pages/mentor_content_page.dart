@@ -47,23 +47,21 @@ class Lesson {
 class _MentorContentPageState extends State<MentorContentPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late AuthService authService = AuthService();
+  final AuthService _authService = AuthService(); // Keep this single instance
   String? userRole;
   List<Lesson> lessons = [];
-  final AuthService _authService = AuthService();
-
 
   @override
   void initState() {
     super.initState();
-    _tabController =
-        TabController(length: 2, vsync: this); // Change length to 2
+    _tabController = TabController(length: 2, vsync: this);
     fetchLessons();
     _fetchUserRole();
   }
 
   Future<void> _fetchUserRole() async {
-    String fetchedRole = await authService.getUserRole();
+    String fetchedRole =
+        await _authService.getUserRole(); // Use the single instance here
     setState(() {
       userRole = fetchedRole;
     });
@@ -449,21 +447,21 @@ class _MentorContentPageState extends State<MentorContentPage>
           ]),
         ),
       ]),
-      bottomNavigationBar: userRole == 'mentor'
-          ? CustomBottomNavigationBarMentor(
-              currentIndex:
-                  0, // Assuming you want to start with the first tab selected
-              onTap: (index) {
-                // Handle tab selection
-              },
-            )
-          : CustomBottomNavigationBar(
-              currentIndex:
-                  0, // Assuming you want to start with the first tab selected
-              onTap: (index) {
-                // Handle tab selection
-              },
-            ),
+      // bottomNavigationBar: userRole == 'mentor'
+      //     ? CustomBottomNavigationBarMentor(
+      //         currentIndex:
+      //             0, // Assuming you want to start with the first tab selected
+      //         onTap: (index) {
+      //           // Handle tab selection
+      //         },
+      //       )
+      //     : CustomBottomNavigationBar(
+      //         currentIndex:
+      //             0, // Assuming you want to start with the first tab selected
+      //         onTap: (index) {
+      //           // Handle tab selection
+      //         },
+      //       ),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/mainscaffold.dart';
 import 'package:mentor_shift/services/auth_service.dart';
 
 class Role extends StatelessWidget {
@@ -58,7 +59,14 @@ class Role extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               await _authService.updateUserRole('mentor');
-                              Navigator.pushNamed(context, '/mcp');
+                              Future.delayed(const Duration(
+                                  seconds:
+                                      1)); // Example delay, adjust based on actual needs
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MainScaffold()),
+                              );
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -96,7 +104,14 @@ class Role extends StatelessWidget {
                           GestureDetector(
                             onTap: () async {
                               await _authService.updateUserRole('mentee');
-                              Navigator.pushNamed(context, '/landingmentee');
+                              Future.delayed(const Duration(
+                                  seconds:
+                                      1)); // Example delay, adjust based on actual needs
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MainScaffold()),
+                              );
                             },
                             child: Container(
                               decoration: BoxDecoration(

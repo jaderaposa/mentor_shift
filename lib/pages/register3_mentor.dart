@@ -53,12 +53,9 @@ class Register3State extends State<Register3> {
                     children: <Widget>[
                       Image.asset(
                         'images/icons/mentorshiftorig.png',
-                        width: double
-                            .infinity, // Make the image take the full width
-                        height:
-                            120, // Keep the height fixed or adjust as needed
-                        fit: BoxFit
-                            .contain, // Scale the image to fit within the bounds
+                        width: double.infinity,
+                        height: 120,
+                        fit: BoxFit.contain,
                       ),
                       const Text(
                         'Mentor-Shift',
@@ -76,8 +73,7 @@ class Register3State extends State<Register3> {
                               const Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.center, // Add this line
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
                                     crossAxisAlignment:
@@ -86,21 +82,17 @@ class Register3State extends State<Register3> {
                                       Text(
                                         'Setting Up Role Profiles',
                                         style: TextStyle(
-                                          fontSize:
-                                              20, // Adjust the font size as needed
+                                          fontSize: 20,
                                           color: Colors.white,
-                                          fontFamily:
-                                              'ProtestRiot', // Set the text color
+                                          fontFamily: 'ProtestRiot',
                                         ),
                                       ),
                                       Text(
                                         'Mentor',
                                         style: TextStyle(
-                                          fontSize:
-                                              30, // Adjust the font size as needed
+                                          fontSize: 30,
                                           color: Colors.white,
-                                          fontFamily:
-                                              'ProtestRiot', // Set the text color
+                                          fontFamily: 'ProtestRiot',
                                         ),
                                       ),
                                     ],
@@ -108,19 +100,15 @@ class Register3State extends State<Register3> {
                                   Text(
                                     '4/4',
                                     style: TextStyle(
-                                      fontSize:
-                                          40, // Adjust the font size as needed
-                                      fontWeight:
-                                          FontWeight.bold, // Make the text bold
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.white,
-                                      fontFamily:
-                                          'ProtestRiot', // Set the text color
+                                      fontFamily: 'ProtestRiot',
                                     ),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 10),
-                              // First input box
                               PaddedContainer(
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
@@ -133,8 +121,7 @@ class Register3State extends State<Register3> {
                                   child: TextFormField(
                                     controller: mentorDisplayNameController,
                                     decoration: const InputDecoration(
-                                      labelText:
-                                          'Display Name', // Changed label
+                                      labelText: 'Display Name',
                                       labelStyle: TextStyle(
                                         fontFamily: 'ProtestRiot',
                                         color: Color(0xFF076A89),
@@ -152,7 +139,6 @@ class Register3State extends State<Register3> {
                                   ),
                                 ),
                               ),
-                              // Second input box
                               PaddedContainer(
                                 child: Container(
                                   padding: const EdgeInsets.symmetric(
@@ -165,10 +151,9 @@ class Register3State extends State<Register3> {
                                   child: TextFormField(
                                     controller: educationalBackgroundController,
                                     decoration: const InputDecoration(
-                                      labelText:
-                                          'Educational Background', // Shortened label
+                                      labelText: 'Educational Background',
                                       hintText:
-                                          'Degree, Institution, Year Graduated', // Added hint text
+                                          'Degree, Institution, Year Graduated',
                                       labelStyle: TextStyle(
                                         fontFamily: 'ProtestRiot',
                                         color: Color(0xFF076A89),
@@ -186,7 +171,6 @@ class Register3State extends State<Register3> {
                                   ),
                                 ),
                               ),
-                              // Third input box
                               PaddedContainer(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,18 +200,16 @@ class Register3State extends State<Register3> {
                                         onFieldSubmitted: (String str) {
                                           setState(() {
                                             selectedExpertises.add(str);
-                                            fieldsOfExpertiseController
-                                                .clear(); // Clear the text field
+                                            fieldsOfExpertiseController.clear();
                                           });
                                         },
                                       ),
                                     ),
-                                    const SizedBox(height: 10,),
+                                    const SizedBox(height: 10),
                                     Wrap(
                                       alignment: WrapAlignment.start,
-                                      spacing:
-                                          4.0, // gap between adjacent chips
-                                      runSpacing: 4.0, // gap between lines
+                                      spacing: 4.0,
+                                      runSpacing: 4.0,
                                       children: selectedExpertises
                                           .map((String expertise) {
                                         return ActionChip(
@@ -262,57 +244,51 @@ class Register3State extends State<Register3> {
               ),
             ),
           ),
-          SizedBox(
-            width: double.infinity,
-            child: TextButton(
-              onPressed: () async {
-                // Use the singleton instance to access the data
-                RegistrationData registrationData = RegistrationData();
+        ],
+      ),
+      bottomNavigationBar: SizedBox(
+        width: double.infinity,
+        child: TextButton(
+          onPressed: () async {
+            RegistrationData registrationData = RegistrationData();
 
-                // Set the new data
-                registrationData.mentorDisplayName =
-                    mentorDisplayNameController.text;
-                registrationData.educationalBackground =
-                    educationalBackgroundController.text;
-                registrationData.fieldsOfExpertise = selectedExpertises;
+            registrationData.mentorDisplayName =
+                mentorDisplayNameController.text;
+            registrationData.educationalBackground =
+                educationalBackgroundController.text;
+            registrationData.fieldsOfExpertise = selectedExpertises;
 
-                String registrationStatus =
-                    await AuthService().registerUser(registrationData);
+            String registrationStatus =
+                await AuthService().registerUser(registrationData);
 
-                if (mounted) {
-                  // Check if the widget is still in the tree
-                  if (registrationStatus == 'User registered successfully') {
-                    // Navigate to Login page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Login()),
-                    );
-                  } else {
-                    // Show error message
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(registrationStatus)),
-                    );
-                  }
-                }
-              },
-              style: TextButton.styleFrom(
-                backgroundColor:
-                    Colors.blue, // Change this to the color you want
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.zero),
-              ),
-              child: const Text(
-                'FINISH',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'ProtestRiot',
-                  fontSize: 20.0,
-                ),
-              ),
+            if (mounted) {
+              if (registrationStatus == 'User registered successfully') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Login()),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(registrationStatus)),
+                );
+              }
+            }
+          },
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.blue,
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            shape:
+                const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+          ),
+          child: const Text(
+            'FINISH',
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'ProtestRiot',
+              fontSize: 20.0,
             ),
           ),
-        ],
+        ),
       ),
     );
   }

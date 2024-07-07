@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 // import 'package:mentor_shift/objects/style/paddedcontainer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MenteeSearch extends StatefulWidget {
   const MenteeSearch({super.key});
@@ -12,6 +13,46 @@ class MenteeSearch extends StatefulWidget {
 
 class MenteeSearchState extends State<MenteeSearch> {
   String dropdownValue = 'NAME';
+  final TextEditingController _searchController = TextEditingController();
+  List<Mentor> searchResults = []; // Assuming you have a Mentor class
+  List<Mentor> allMentors = []; // This should contain all available mentors
+  late Future<void> _mentorsFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _mentorsFuture = fetchMentors(); // Initialize the future here
+  }
+
+  // Make sure fetchMentors returns a Future
+  Future<void> fetchMentors() async {
+    final mentors = <Mentor>[];
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .where('role', isEqualTo: 'mentor')
+          .get();
+
+      for (var doc in querySnapshot.docs) {
+        final data = doc.data();
+        final mentor = Mentor(
+          name: "${data['firstName']} ${data['lastName']}",
+          expertise: (data['fieldsOfExpertise'] as List).join(', '),
+          imageUrl: data['imageUrl'] ??
+              'https://www.pikpng.com/pngl/m/80-805523_default-avatar-svg-png-icon-free-download-264157.png',
+        );
+        mentors.add(mentor);
+      }
+
+      setState(() {
+        allMentors = mentors;
+        searchResults = List.from(allMentors);
+      });
+    } catch (e) {
+      // Handle errors or no data cases
+      print("Error fetching mentors: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +60,15 @@ class MenteeSearchState extends State<MenteeSearch> {
       backgroundColor: const Color(0xFF4C9A91),
       appBar: AppBar(
         backgroundColor: const Color(0xFF4C9A91),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ), // replace with your custom back button
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(
+        //     Icons.arrow_back,
+        //     color: Colors.white,
+        //   ), // replace with your custom back button
+        //   onPressed: () {
+        //     Navigator.of(context).pop();
+        //   },
+        // ),
         title: const Text(
           'Search',
           style: TextStyle(
@@ -66,6 +107,11 @@ class MenteeSearchState extends State<MenteeSearch> {
                           horizontal: 10.0, vertical: 5.0),
                       decoration: BoxDecoration(
                         color: Colors.grey[300], // set the background color
+                        border: Border.all(
+                          color: const Color.fromARGB(
+                              255, 181, 181, 181), // Border color
+                          width: 1.0, // Border width
+                        ),
                         borderRadius: BorderRadius.circular(5),
                         boxShadow: const [kBoxShadow],
                       ),
@@ -111,6 +157,7 @@ class MenteeSearchState extends State<MenteeSearch> {
                   ),
                   Expanded(
                     child: TextFormField(
+                      controller: _searchController,
                       decoration: const InputDecoration(
                         hintText: 'Search Mentors',
                         fillColor: Colors.white,
@@ -127,16 +174,136 @@ class MenteeSearchState extends State<MenteeSearch> {
                   IconButton(
                     icon: const Icon(Icons.search, color: Colors.black),
                     onPressed: () {
-                      // handle the button press
+                      searchMentor(_searchController.text);
                     },
                   ),
                 ],
               ),
             ),
           ),
-          // Add more widgets to the column here
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              child: FutureBuilder(
+                future: _mentorsFuture, // Use the future variable here
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                        child:
+                            CircularProgressIndicator(color: Color(0xFF0B6E6D),)); // Show loading indicator while waiting
+                  } else if (snapshot.hasError) {
+                    return Center(
+                        child: Text(
+                            'Error: ${snapshot.error}')); // Show error if any
+                  } else {
+                    return GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Number of columns
+                        crossAxisSpacing: 5, // Space between cards horizontally
+                        mainAxisSpacing: 10, // Space between cards vertically
+                        childAspectRatio:
+                            0.9, // Adjust card size (width / height)
+                      ),
+                      itemCount: searchResults.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Card(
+                          clipBehavior: Clip
+                              .antiAlias, // Ensures the decoration is clipped to the card's shape
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [Color(0xff00312e), Color(0xff025d5c)],
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  ClipOval(
+                                    child: Image.network(
+                                      searchResults[index]
+                                          .imageUrl, // Use the imageUrl for the Image.network widget
+                                      width: 100, // Set your desired width
+                                      height: 100, // Set your desired height
+                                      fit: BoxFit
+                                          .cover, // Cover the area without changing the aspect ratio
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                      height:
+                                          8), // Add space between the image and the first text
+                                  Text(
+                                    searchResults[index]
+                                        .name, // Display the mentor's name
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontFamily: 'ProtestRiot',
+                                    ),
+                                  ),
+                                  Text(
+                                    searchResults[index]
+                                        .expertise, // Display the mentor's expertise
+                                    textAlign:
+                                        TextAlign.center, // Center align the text
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                      fontFamily: 'ProtestRiot',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
+
+  void searchMentor(String query) {
+    if (query.isEmpty) {
+      // If there is no search query, display all mentors
+      setState(() {
+        searchResults = List.from(allMentors);
+      });
+    } else {
+      List<Mentor> filteredMentors = [];
+      if (dropdownValue == 'NAME') {
+        // Filter the list of all mentors based on the name
+        filteredMentors = allMentors.where((mentor) {
+          return mentor.name.toLowerCase().contains(query.toLowerCase());
+        }).toList();
+      } else if (dropdownValue == 'EXPERTISE') {
+        // Filter the list of all mentors based on the expertise
+        filteredMentors = allMentors.where((mentor) {
+          return mentor.expertise.toLowerCase().contains(query.toLowerCase());
+        }).toList();
+      }
+      // Update the state to display the filtered mentors
+      setState(() {
+        searchResults = filteredMentors;
+      });
+    }
+  }
+}
+
+class Mentor {
+  final String name;
+  final String expertise;
+  final String imageUrl; // Add imageUrl property
+
+  Mentor({required this.name, required this.expertise, required this.imageUrl});
 }

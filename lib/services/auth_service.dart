@@ -2,6 +2,48 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentor_shift/classes/user.dart';
 
+class UserDetails {
+  final String firstName;
+  final String lastName;
+  final String menteeDisplayName;
+  final String mentorDisplayName;
+  final DateTime? dateOfBirth;
+  final String? yearLevel;
+  final String? course;
+  final String? educationalBackground;
+  final List<String> fieldsOfExpertise;
+  final String? profileImage; // Add this line
+
+  UserDetails({
+    required this.firstName,
+    required this.lastName,
+    this.menteeDisplayName = '',
+    this.mentorDisplayName = '',
+    this.dateOfBirth,
+    this.yearLevel,
+    this.course,
+    this.educationalBackground,
+    this.fieldsOfExpertise = const [],
+    this.profileImage = '', // Add this line
+  });
+
+  factory UserDetails.fromDocument(DocumentSnapshot doc) {
+    return UserDetails(
+      firstName: doc['firstName'],
+      lastName: doc['lastName'],
+      menteeDisplayName: doc['menteeDisplayName'],
+      mentorDisplayName: doc['mentorDisplayName'],
+      dateOfBirth: doc['dateOfBirth']?.toDate(),
+      yearLevel: doc['yearLevel'],
+      course: doc['course'],
+      educationalBackground: doc['educationalBackground'],
+      fieldsOfExpertise: List<String>.from(doc['fieldsOfExpertise']),
+      profileImage: doc['profileImage'] ?? '',
+    );
+  }
+}
+
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -29,6 +71,7 @@ class AuthService {
         'fieldsOfExpertise': registrationData.fieldsOfExpertise,
         'email': registrationData.email,
         'role': '', // Add this line
+        'profileImage': registrationData.profileImage, // Add this line
       });
 
       return 'User registered successfully';
@@ -98,7 +141,7 @@ class AuthService {
       return doc.get('role');
     }
     return '';
-  }  
+  }
 
   // Method to check if the user is logged in
   Future<bool> isLoggedIn() async {
@@ -109,5 +152,17 @@ class AuthService {
   // Method to log out the user
   Future<void> signOut() async {
     await _auth.signOut();
+  }
+
+  Future<UserDetails?> getUserDetails() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+      return UserDetails.fromDocument(doc);
+    }
+    return null;
   }
 }

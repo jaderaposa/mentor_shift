@@ -16,6 +16,7 @@ class RegistrationData {
   String? course; // Course for mentee
   String? educationalBackground; // Educational background for mentor
   List<String> fieldsOfExpertise = []; // Fields of expertise
+  String profileImage = ''; // Add this line
 
   void setData({
     String? email,
@@ -29,6 +30,7 @@ class RegistrationData {
     String? educationalBackground,
     DateTime? dateOfBirth,
     List<String>? fieldsOfExpertise,
+    String? profileImage, // Add this line
   }) {
     this.email = email ?? this.email;
     this.password = password ?? this.password;
@@ -42,6 +44,7 @@ class RegistrationData {
         educationalBackground ?? this.educationalBackground;
     this.dateOfBirth = dateOfBirth ?? this.dateOfBirth;
     this.fieldsOfExpertise = fieldsOfExpertise ?? this.fieldsOfExpertise;
+    this.profileImage = profileImage ?? this.profileImage; // Add this line
   }
 
   // Optionally, implement a clearData method to reset all fields

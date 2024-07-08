@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tags/flutter_tags.dart';
 import 'package:mentor_shift/classes/user.dart';
+import 'package:mentor_shift/mainscaffold.dart';
 import 'package:mentor_shift/objects/backbutton.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 import 'package:mentor_shift/objects/style/paddedcontainer.dart';
@@ -265,7 +266,7 @@ class Register3State extends State<Register3> {
               if (registrationStatus == 'User registered successfully') {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Login()),
+                  MaterialPageRoute(builder: (context) => const MainScaffold()),
                 );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(

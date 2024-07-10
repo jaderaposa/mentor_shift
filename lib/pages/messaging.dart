@@ -61,7 +61,7 @@ class _MessagingState extends State<Messaging> {
             String userRole = snapshot.data!;
             Color backgroundColor = userRole == 'mentor'
                 ?  const Color(0xFF0B6E6D)
-                : Colors.green; // Example colors
+                : const Color(0xFF4C9A91); // Example colors
 
             return Scaffold(
               backgroundColor:

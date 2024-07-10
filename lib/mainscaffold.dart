@@ -3,7 +3,7 @@ import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/loadingwidget.dart';
 import 'package:mentor_shift/pages/landing_mentee.dart';
 import 'package:mentor_shift/pages/login.dart';
-import 'package:mentor_shift/pages/mentee_search.dart';
+import 'package:mentor_shift/pages/mentor_search.dart';
 import 'package:mentor_shift/pages/mentees_enrolled.dart';
 import 'package:mentor_shift/pages/mentor_content_page.dart';
 import 'package:mentor_shift/pages/mentorships_screen.dart';

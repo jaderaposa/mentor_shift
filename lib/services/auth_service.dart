@@ -165,4 +165,21 @@ class AuthService {
     }
     return null;
   }
+
+  // Method to get a specific user's details by user ID
+  Future<UserDetails?> getUserDetailsById(String userId) async {
+    try {
+      DocumentSnapshot doc =
+          await _firestore.collection('users').doc(userId).get();
+      if (doc.exists) {
+        return UserDetails.fromDocument(doc);
+      } else {
+        return null; // User not found
+      }
+    } catch (e) {
+      // Handle exceptions
+      print('Error getting user details: $e');
+      return null;
+    }
+  }
 }

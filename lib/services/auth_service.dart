@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mentor_shift/classes/user.dart';
+import 'package:mentor_shift/classes/user_registration.dart';
 
 class UserDetails {
   final String firstName;

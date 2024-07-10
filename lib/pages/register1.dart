@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mentor_shift/classes/user.dart';
+import 'package:mentor_shift/classes/user_registration.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 import 'package:mentor_shift/objects/backbutton.dart';
 import 'package:mentor_shift/objects/style/paddedcontainer.dart';

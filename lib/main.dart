@@ -21,6 +21,7 @@ import 'package:mentor_shift/pages/role.dart';
 import 'package:mentor_shift/pages/user_profile.dart';
 import 'package:mentor_shift/pages/view_mentor.dart';
 import 'package:mentor_shift/pages/view_messaging.dart';
+import 'package:mentor_shift/services/auth_service.dart';
 import 'package:mentor_shift/services/route_names.dart';
 
 void main() async {
@@ -70,13 +71,29 @@ void main() async {
       RouteNames.mentorships: (context) => const MentorshipsPage(),
       RouteNames.message: (context) => const Messaging(),
       RouteNames.viewmessage: (context) => const ViewMessaging(),
-      RouteNames.viewmentor: (context) => const ViewMentor(),
+      // Removed ViewMentor from here
       RouteNames.menteesearch: (context) => const MentorSearch(),
       RouteNames.userprofile: (context) => const UserProfile(),
       RouteNames.mcp: (context) => const MentorContentPage(),
       RouteNames.mlp: (context) => const MentorLearningPage(),
       RouteNames.enrolled: (context) => const MenteesEnrolled(),
       RouteNames.requests: (context) => const MenteeRequests(),
+    },
+    onGenerateRoute: (RouteSettings settings) {
+      if (settings.name == RouteNames.viewmentor) {
+        final args = settings.arguments;
+        // Ensure that args is the correct type, e.g., MentorDetails
+        if (args is UserDetails) {
+          return MaterialPageRoute(
+            builder: (context) {
+              return ViewMentor(mentor: args);
+            },
+          );
+        }
+        // Handle error or return null if args is not the expected type
+      }
+      // Implement other dynamic routes if necessary
+      return null; // Return null if there is no match
     },
   ));
 }

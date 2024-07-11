@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 // import 'package:mentor_shift/objects/style/paddedcontainer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mentor_shift/pages/view_mentor.dart';
 import 'package:mentor_shift/services/auth_service.dart';
 
 class MentorSearch extends StatefulWidget {
@@ -199,61 +200,72 @@ class MentorSearchState extends State<MentorSearch> {
                       ),
                       itemCount: searchResults.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          clipBehavior: Clip
-                              .antiAlias, // Ensures the decoration is clipped to the card's shape
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [Color(0xff00312e), Color(0xff025d5c)],
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ViewMentor(mentor: searchResults[index]),
                               ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  ClipOval(
-                                    child: Image.network(
-                                      searchResults[index].profileImage ??
-                                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Provide a default image URL in case profileImage is null
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) =>
-                                              Image.network(
-                                        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Fallback image URL
+                            );
+                          },
+                          child: Card(
+                            clipBehavior: Clip
+                                .antiAlias, // Ensures the decoration is clipped to the card's shape
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [Color(0xff00312e), Color(0xff025d5c)],
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    ClipOval(
+                                      child: Image.network(
+                                        searchResults[index].profileImage ??
+                                            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Provide a default image URL in case profileImage is null
                                         width: 100,
                                         height: 100,
                                         fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                Image.network(
+                                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Fallback image URL
+                                          width: 100,
+                                          height: 100,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                      height:
-                                          8), // Add space between the image and the first text
-                                  Text(
-                                    searchResults[index].mentorDisplayName, // Display the mentor's full name
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontFamily: 'ProtestRiot',
+                                    const SizedBox(
+                                        height:
+                                            8), // Add space between the image and the first text
+                                    Text(
+                                      searchResults[index].mentorDisplayName, // Display the mentor's full name
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontFamily: 'ProtestRiot',
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    searchResults[index].fieldsOfExpertise.join(
-                                        ', '), // Display the mentor's expertise as a comma-separated list
-                                    textAlign: TextAlign.center, // Center align the text
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                      fontFamily: 'ProtestRiot',
+                                    Text(
+                                      searchResults[index].fieldsOfExpertise.join(
+                                          ', '), // Display the mentor's expertise as a comma-separated list
+                                      textAlign: TextAlign.center, // Center align the text
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.white,
+                                        fontFamily: 'ProtestRiot',
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -289,10 +301,10 @@ class MentorSearchState extends State<MentorSearch> {
   }
 }
 
-class Mentor {
-  final String name;
-  final String expertise;
-  final String imageUrl; // Add imageUrl property
+// class Mentor {
+//   final String name;
+//   final String expertise;
+//   final String imageUrl; // Add imageUrl property
 
-  Mentor({required this.name, required this.expertise, required this.imageUrl});
-}
+//   Mentor({required this.name, required this.expertise, required this.imageUrl});
+// }

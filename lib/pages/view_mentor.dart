@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 // import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
+import 'package:mentor_shift/services/auth_service.dart';
 
 class ViewMentor extends StatefulWidget {
-  const ViewMentor({super.key});
+  final UserDetails mentor;
+
+  const ViewMentor({Key? key, required this.mentor}) : super(key: key);
 
   @override
   State<ViewMentor> createState() => _ViewMentorState();
@@ -83,11 +86,15 @@ class _ViewMentorState extends State<ViewMentor> {
                           padding: const EdgeInsets.all(
                               10.0), // adjust the padding as needed
                           child: Container(
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: AssetImage(
-                                    'images/icons/user_sample.png'), // replace with your image URL
+                                image: NetworkImage(
+                                  widget.mentor.profileImage != null &&
+                                          widget.mentor.profileImage!.isNotEmpty
+                                      ? widget.mentor.profileImage!
+                                      : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Default image path
+                                ),
                                 fit: BoxFit.scaleDown,
                               ),
                             ),
@@ -97,9 +104,9 @@ class _ViewMentorState extends State<ViewMentor> {
                       SizedBox(
                           height: screenHeight * 0.01), // 1% of screen height
                       // added SizedBox to separate the widgets
-                      const Text(
-                        'Mentor Name', // replace with your mentor's name
-                        style: TextStyle(
+                      Text(
+                        widget.mentor.mentorDisplayName, // Display the mentor's name
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,

@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 // import 'package:mentor_shift/objects/style/paddedcontainer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mentor_shift/services/auth_service.dart';
 
-class MenteeSearch extends StatefulWidget {
-  const MenteeSearch({super.key});
+class MentorSearch extends StatefulWidget {
+  const MentorSearch({super.key});
 
   @override
-  State<MenteeSearch> createState() => MenteeSearchState();
+  State<MentorSearch> createState() => MentorSearchState();
 }
 
-class MenteeSearchState extends State<MenteeSearch> {
+class MentorSearchState extends State<MentorSearch> {
   String dropdownValue = 'NAME';
   final TextEditingController _searchController = TextEditingController();
-  List<Mentor> searchResults = []; // Assuming you have a Mentor class
-  List<Mentor> allMentors = []; // This should contain all available mentors
+  List<UserDetails> searchResults = []; // Use UserDetails directly
+  List<UserDetails> allMentors =
+      []; // This should contain all available mentors
   late Future<void> _mentorsFuture;
 
   @override
@@ -26,30 +28,20 @@ class MenteeSearchState extends State<MenteeSearch> {
 
   // Make sure fetchMentors returns a Future
   Future<void> fetchMentors() async {
-    final mentors = <Mentor>[];
+    final mentors = <UserDetails>[];
     try {
       final querySnapshot = await FirebaseFirestore.instance
           .collection('users')
           .where('role', isEqualTo: 'mentor')
           .get();
-
       for (var doc in querySnapshot.docs) {
-        final data = doc.data();
-        final mentor = Mentor(
-          name: "${data['firstName']} ${data['lastName']}",
-          expertise: (data['fieldsOfExpertise'] as List).join(', '),
-          imageUrl: data['imageUrl'] ??
-              'https://www.pikpng.com/pngl/m/80-805523_default-avatar-svg-png-icon-free-download-264157.png',
-        );
-        mentors.add(mentor);
+        mentors.add(UserDetails.fromDocument(doc));
       }
-
       setState(() {
         allMentors = mentors;
         searchResults = List.from(allMentors);
       });
     } catch (e) {
-      // Handle errors or no data cases
       print("Error fetching mentors: $e");
     }
   }
@@ -225,20 +217,26 @@ class MenteeSearchState extends State<MenteeSearch> {
                                 children: <Widget>[
                                   ClipOval(
                                     child: Image.network(
-                                      searchResults[index]
-                                          .imageUrl, // Use the imageUrl for the Image.network widget
-                                      width: 100, // Set your desired width
-                                      height: 100, // Set your desired height
-                                      fit: BoxFit
-                                          .cover, // Cover the area without changing the aspect ratio
+                                      searchResults[index].profileImage ??
+                                          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Provide a default image URL in case profileImage is null
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Image.network(
+                                        'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Fallback image URL
+                                        width: 100,
+                                        height: 100,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(
                                       height:
                                           8), // Add space between the image and the first text
                                   Text(
-                                    searchResults[index]
-                                        .name, // Display the mentor's name
+                                    searchResults[index].mentorDisplayName, // Display the mentor's full name
                                     style: const TextStyle(
                                       fontSize: 20,
                                       color: Colors.white,
@@ -246,10 +244,9 @@ class MenteeSearchState extends State<MenteeSearch> {
                                     ),
                                   ),
                                   Text(
-                                    searchResults[index]
-                                        .expertise, // Display the mentor's expertise
-                                    textAlign:
-                                        TextAlign.center, // Center align the text
+                                    searchResults[index].fieldsOfExpertise.join(
+                                        ', '), // Display the mentor's expertise as a comma-separated list
+                                    textAlign: TextAlign.center, // Center align the text
                                     style: const TextStyle(
                                       fontSize: 14,
                                       color: Colors.white,
@@ -274,29 +271,21 @@ class MenteeSearchState extends State<MenteeSearch> {
   }
 
   void searchMentor(String query) {
-    if (query.isEmpty) {
-      // If there is no search query, display all mentors
-      setState(() {
-        searchResults = List.from(allMentors);
-      });
-    } else {
-      List<Mentor> filteredMentors = [];
-      if (dropdownValue == 'NAME') {
-        // Filter the list of all mentors based on the name
-        filteredMentors = allMentors.where((mentor) {
-          return mentor.name.toLowerCase().contains(query.toLowerCase());
-        }).toList();
-      } else if (dropdownValue == 'EXPERTISE') {
-        // Filter the list of all mentors based on the expertise
-        filteredMentors = allMentors.where((mentor) {
-          return mentor.expertise.toLowerCase().contains(query.toLowerCase());
-        }).toList();
-      }
-      // Update the state to display the filtered mentors
-      setState(() {
-        searchResults = filteredMentors;
-      });
+    List<UserDetails> filteredMentors = [];
+    if (dropdownValue == 'NAME') {
+      filteredMentors = allMentors.where((mentor) {
+        return mentor.firstName.toLowerCase().contains(query.toLowerCase()) ||
+            mentor.lastName.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    } else if (dropdownValue == 'EXPERTISE') {
+      filteredMentors = allMentors.where((mentor) {
+        return mentor.fieldsOfExpertise.any((expertise) =>
+            expertise.toLowerCase().contains(query.toLowerCase()));
+      }).toList();
     }
+    setState(() {
+      searchResults = filteredMentors;
+    });
   }
 }
 

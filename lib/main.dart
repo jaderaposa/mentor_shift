@@ -71,7 +71,7 @@ void main() async {
       RouteNames.message: (context) => const Messaging(),
       RouteNames.viewmessage: (context) => const ViewMessaging(),
       RouteNames.viewmentor: (context) => const ViewMentor(),
-      RouteNames.menteesearch: (context) => const MenteeSearch(),
+      RouteNames.menteesearch: (context) => const MentorSearch(),
       RouteNames.userprofile: (context) => const UserProfile(),
       RouteNames.mcp: (context) => const MentorContentPage(),
       RouteNames.mlp: (context) => const MentorLearningPage(),

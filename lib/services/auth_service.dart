@@ -174,10 +174,10 @@ class AuthService {
       if (doc.exists) {
         return UserDetails.fromDocument(doc);
       } else {
-        return null; // User not found
+        print('User not found');
+        return null;
       }
     } catch (e) {
-      // Handle exceptions
       print('Error getting user details: $e');
       return null;
     }

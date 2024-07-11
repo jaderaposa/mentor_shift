@@ -115,7 +115,7 @@ class MainScaffoldState extends State<MainScaffold> {
 
   final List<Widget> _menteePages = [
     const LandingMentee(),
-    const MenteeSearch(),
+    const MentorSearch(),
     const Messaging(),
     const UserProfile(),
     // Add other mentee pages here

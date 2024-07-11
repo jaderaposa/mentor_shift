@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
 import 'package:mentor_shift/services/auth_service.dart';
+import 'package:outlined_text/outlined_text.dart';
 
 class ViewMentor extends StatefulWidget {
   final UserDetails mentor;
@@ -78,13 +79,16 @@ class _ViewMentorState extends State<ViewMentor> {
                       Container(
                         width: screenWidth * 0.4, // 30% of screen width
                         height: screenHeight * 0.2, // 15% of screen height
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF936030),
+                        decoration: BoxDecoration(
+                          // color: const Color(0xFF936030),
                           shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white, // Border color
+                            width: 2, // Border width
+                          ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(
-                              10.0), // adjust the padding as needed
+                          padding: const EdgeInsets.all(5.0),
                           child: Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
@@ -232,147 +236,72 @@ class _ViewMentorState extends State<ViewMentor> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Stack(
-                      children: [
-                        // Stroked text
-                        Text(
-                          'Bio',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'ProtestRiot',
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
-                              ..color = Colors.black,
-                          ),
+                    OutlinedText(
+                      text: const Text(
+                        'Bio',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontFamily: 'ProtestRiot',
+                          color: Colors.white,
                         ),
-                        // Solid text
-                        const Text(
-                          'Bio',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'ProtestRiot',
-                            color: Colors.white,
-                          ),
-                        ),
+                      ),
+                      strokes: [
+                        OutlinedTextStroke(color: Colors.black, width: 3),
                       ],
                     ),
                     const SizedBox(height: 10.0),
-                    Stack(
-                      children: [
-                        // Stroked text
-                        Text(
-                          bio,
-                          style: TextStyle(
-                            // fontSize: 16.0,
-                            fontFamily: 'ProtestRiot',
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 2
-                              ..color = Colors.black,
-                          ),
+                    OutlinedText(
+                      text: Text(
+                        widget.mentor.bio?.isNotEmpty ?? false
+                          ? widget.mentor.bio!
+                          : 'No bio available',
+                        style: const TextStyle(
+                          // fontSize: 20.0,
+                          fontFamily: 'ProtestRiot',
+                          color: Colors.white,
                         ),
-                        // Solid text
-                        Text(
-                          bio,
-                          style: const TextStyle(
-                            // fontSize: 16.0,
-                            fontFamily: 'ProtestRiot',
-                            color: Colors.white,
-                          ),
-                        ),
+                      ),
+                      strokes: [
+                        OutlinedTextStroke(color: Colors.black, width: 2),
                       ],
                     ),
-                    const SizedBox(height: 10.0),
-                    Stack(
-                      children: [
-                        Text(
-                          'Field of Expertise',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'ProtestRiot',
-                            foreground: Paint()
-                              ..style = PaintingStyle.stroke
-                              ..strokeWidth = 3
-                              ..color = Colors.black,
-                          ),
+                    const SizedBox(height: 20.0),
+                    OutlinedText(
+                      text: const Text(
+                        'Field of Expertise',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontFamily: 'ProtestRiot',
+                          color: Colors.white,
                         ),
-                        const Text(
-                          'Field of Expertise',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontFamily: 'ProtestRiot',
-                            color: Colors.white,
-                          ),
-                        ),
+                      ),
+                      strokes: [
+                        OutlinedTextStroke(color: Colors.black, width: 3),
                       ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (var item in expertise)
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 10.0, top: 10.0),
-                            child: Row(
-                              children: [
-                                Stack(
-                                  children: [
-                                    // Stroked bullet
-                                    Text(
-                                      '•',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontFamily: 'ProtestRiot',
-                                        foreground: Paint()
-                                          ..style = PaintingStyle.stroke
-                                          ..strokeWidth = 2
-                                          ..color = Colors.black,
-                                      ),
+                      children: widget.mentor.fieldsOfExpertise
+                          .map((item) => Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10.0, top: 10.0),
+                                child: OutlinedText(
+                                  text: Text(
+                                    "• $item", // Prepend a bullet before the item
+                                    style: const TextStyle(
+                                      fontFamily: 'ProtestRiot',
+                                      color: Colors.white,
                                     ),
-                                    // Solid bullet
-                                    const Text(
-                                      '•',
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontFamily: 'ProtestRiot',
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                  ),
+                                  strokes: [
+                                    OutlinedTextStroke(
+                                        color: Colors.black, width: 2),
                                   ],
                                 ),
-                                const SizedBox(width: 10.0),
-                                Stack(
-                                  children: [
-                                    // Stroked text
-                                    Text(
-                                      item,
-                                      style: TextStyle(
-                                        fontSize: 16.0,
-                                        fontFamily: 'ProtestRiot',
-                                        foreground: Paint()
-                                          ..style = PaintingStyle.stroke
-                                          ..strokeWidth = 2
-                                          ..color = Colors.black,
-                                      ),
-                                    ),
-                                    // Solid text
-                                    Text(
-                                      item,
-                                      style: const TextStyle(
-                                        fontSize: 16.0,
-                                        fontFamily: 'ProtestRiot',
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                      ],
+                              ))
+                          .toList(),
                     ),
-                    const SizedBox(height: 10.0),
+                    const SizedBox(height: 20.0),
                     Row(
                       children: [
                         Stack(

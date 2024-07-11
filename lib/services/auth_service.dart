@@ -12,7 +12,8 @@ class UserDetails {
   final String? course;
   final String? educationalBackground;
   final List<String> fieldsOfExpertise;
-  final String? profileImage; // Add this line
+  final String? profileImage;
+  final String? bio; 
 
   UserDetails({
     required this.firstName,
@@ -24,7 +25,8 @@ class UserDetails {
     this.course,
     this.educationalBackground,
     this.fieldsOfExpertise = const [],
-    this.profileImage = '', // Add this line
+    this.profileImage = '', 
+    this.bio,
   });
 
   factory UserDetails.fromDocument(DocumentSnapshot doc) {
@@ -39,6 +41,7 @@ class UserDetails {
       educationalBackground: doc['educationalBackground'],
       fieldsOfExpertise: List<String>.from(doc['fieldsOfExpertise']),
       profileImage: doc['profileImage'] ?? '',
+      bio: doc['bio'],
     );
   }
 }
@@ -71,7 +74,8 @@ class AuthService {
         'fieldsOfExpertise': registrationData.fieldsOfExpertise,
         'email': registrationData.email,
         'role': '', // Add this line
-        'profileImage': registrationData.profileImage, // Add this line
+        'profileImage': registrationData.profileImage, 
+        'bio': registrationData.bio, 
       });
 
       return 'User registered successfully';

@@ -1,5 +1,6 @@
 //dart basic structure import
 import 'package:flutter/material.dart';
+import 'package:mentor_shift/pages/view_messaging.dart';
 // import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/services/auth_service.dart';
 
@@ -133,56 +134,70 @@ class _MessagingState extends State<Messaging> {
                     child: ListView.builder(
                       itemCount: messages.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          leading: Container(
-                            width: 60.0, // adjust the size as needed
-                            height: 60.0, // adjust the size as needed
-                            decoration: const BoxDecoration(
-                              color: Colors.grey,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: ClipOval(
-                                child: Image.asset(
-                                  'images/icons/user_sample.png', // replace with your image URL
-                                  fit: BoxFit.contain,
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ViewMessaging(
+                                  conversationId: 'your_conversation_id',
+                                  receiverId:
+                                      'your_receiver_id', // Add the required parameter here
+                                ),
+                              ),
+                            );
+                          },
+                          child: ListTile(
+                            leading: Container(
+                              width: 60.0, // adjust the size as needed
+                              height: 60.0, // adjust the size as needed
+                              decoration: const BoxDecoration(
+                                color: Colors.grey,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: ClipOval(
+                                  child: Image.asset(
+                                    'images/icons/user_sample.png', // replace with your image URL
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    messages[index]['name'],
-                                    style: const TextStyle(
-                                      fontFamily: 'ProtestRiot',
-                                      color: Colors.white,
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      messages[index]['name'],
+                                      style: const TextStyle(
+                                        fontFamily: 'ProtestRiot',
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    messages[index]['time'],
-                                    style: const TextStyle(
-                                      fontFamily: 'ProtestRiot',
-                                      color: Colors.white,
+                                    Text(
+                                      messages[index]['time'],
+                                      style: const TextStyle(
+                                        fontFamily: 'ProtestRiot',
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                messages[index]['message'],
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontFamily: 'ProtestRiot',
-                                  color: Color.fromARGB(255, 226, 226, 226),
+                                  ],
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  messages[index]['message'],
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    fontFamily: 'ProtestRiot',
+                                    color: Color.fromARGB(255, 226, 226, 226),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },

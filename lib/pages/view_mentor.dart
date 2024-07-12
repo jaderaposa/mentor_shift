@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 // import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:mentor_shift/objects/style/boxshadow.dart';
+import 'package:mentor_shift/pages/view_messaging.dart';
 import 'package:mentor_shift/services/auth_service.dart';
+import 'package:mentor_shift/services/messaging_service.dart';
 import 'package:outlined_text/outlined_text.dart';
 
 class ViewMentor extends StatefulWidget {
@@ -14,15 +16,37 @@ class ViewMentor extends StatefulWidget {
 }
 
 class _ViewMentorState extends State<ViewMentor> {
+  final AuthService _authService = AuthService();
+  final MessagingService _messagingService = MessagingService();
+
+
   String bio =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'; // replace with your data
-
   int numberOfMentees = 24; // replace with your data
   List<String> expertise = [
     'Database',
     'Web Development',
     'Angular'
   ]; // replace with your data
+
+  Future<void> _navigateAndSendMessage(BuildContext context) async {
+    String conversationId = await _getOrCreateConversationId();
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => ViewMessaging(conversationId: conversationId, receiverId: widget.mentor.userId,)));
+  }
+
+  Future<String> _getOrCreateConversationId() async {
+    // Assuming you have access to the current user's ID and the mentor's ID
+    UserDetails? currentUserDetails = await _authService.getUserDetails();
+    String currentUserId =
+        currentUserDetails?.userId ?? ""; // Fallback to an empty string if null
+    String mentorId = widget.mentor
+        .userId; // Replace with actual mentor's userId from your widget or state
+    print("Mentor ID: $mentorId"); // Print statement to verify mentorId
+    // Use the MessagingService to generate a consistent conversation ID
+    return _messagingService.generateConversationId(currentUserId, mentorId);
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +223,7 @@ class _ViewMentorState extends State<ViewMentor> {
                     ),
                     child: OutlinedButton(
                       onPressed: () {
-                        // handle the button press
+                        _navigateAndSendMessage(context);
                       },
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(

@@ -159,12 +159,12 @@ class _UserProfileState extends State<UserProfile> {
                         Center(
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                                vertical: screenHeight * 0.03),
+                                vertical: screenHeight * 0.02),
                             child: Column(
                               children: [
                                 Container(
                                   padding: EdgeInsets.all(
-                                      screenWidth * 0.02), // 2% of screen width
+                                      screenWidth * 0.03), // 2% of screen width
                                   decoration: BoxDecoration(
                                     color: profileCircle,
                                     shape: BoxShape.circle,
@@ -175,7 +175,7 @@ class _UserProfileState extends State<UserProfile> {
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         width: screenWidth *
                                             0.005, // 0.5% of screen width
                                       ),
@@ -183,7 +183,7 @@ class _UserProfileState extends State<UserProfile> {
                                     // Inside the UserProfile widget's build method, where the CircleAvatar is defined
                                     child: CircleAvatar(
                                       radius: screenWidth *
-                                          0.15, // 10% of screen width
+                                          0.13, // 10% of screen width
                                       backgroundColor: Colors.transparent,
                                       backgroundImage: userDetails
                                                       ?.profileImage !=
@@ -223,38 +223,68 @@ class _UserProfileState extends State<UserProfile> {
                             child: Column(
                               children: [
                                 TabBar(
+                                  // isScrollable: true,
                                   indicator: const BoxDecoration(
-                                    color: Color(0xFF00312E),
+                                    color: Color.fromARGB(0, 255, 255, 255),
                                     borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20),
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15),
                                     ),
+                                    // border: Border.all(
+                                    //   color: Colors
+                                    //       .black, // Transparent border to create the illusion of padding
+                                    //   width:
+                                    //       4, // Adjust the width to control the 'padding' size
+                                    // ),
                                   ),
+                                  indicatorPadding: const EdgeInsets.symmetric(vertical: 10),
                                   dividerColor: Colors.transparent,
                                   tabs: [
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0),
-                                      child: const Tab(
-                                        child: Text(
-                                          'About',
-                                          style: TextStyle(
-                                              // fontSize: 18,
-                                              color: Colors.white,
-                                              fontFamily: 'ProtestRiot'),
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15),
+                                      ),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12.0),
+                                        color: const Color(0xFF00312E),
+                                        child: const Tab(
+                                          child: SizedBox(
+                                            width: 110,
+                                            child: Text(
+                                              'About',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.white,
+                                                  fontFamily: 'ProtestRiot'),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0),
-                                      child: const Tab(
-                                        child: Text(
-                                          'Achievements',
-                                          style: TextStyle(
-                                              // fontSize: 18,
-                                              color: Colors.white,
-                                              fontFamily: 'ProtestRiot'),
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15),
+                                      ),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12.0),
+                                        color: const Color(0xFF00312E),
+                                        child: const Tab(
+                                          child: SizedBox(
+                                            width: 110,
+                                            child: Text(
+                                              'Achievements',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.white,
+                                                  fontFamily: 'ProtestRiot'),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -301,13 +331,21 @@ class _UserProfileState extends State<UserProfile> {
                                                           'ProtestRiot'),
                                                 ),
                                                 Text(
-                                                  '${userDetails?.firstName ?? ""} ${userDetails?.lastName ?? ""}',
-                                                  style: const TextStyle(
+                                                    '${userDetails?.firstName ?? ""} ${userDetails?.lastName ?? ""}',
+                                                    style: const TextStyle(
                                                       fontSize: 18,
                                                       color: Colors.white,
-                                                      fontFamily:
-                                                          'ProtestRiot'),
-                                                ),
+                                                      fontFamily: 'ProtestRiot',
+                                                      shadows: [
+                                                        Shadow(
+                                                          offset:
+                                                              Offset(1.0, 1.0),
+                                                          blurRadius: 3.0,
+                                                          color: Color.fromARGB(
+                                                              255, 0, 0, 0),
+                                                        ),
+                                                      ],
+                                                    )),
                                                 const Text(
                                                   'Mentor Display Name:',
                                                   style: TextStyle(
@@ -321,10 +359,19 @@ class _UserProfileState extends State<UserProfile> {
                                                           ?.mentorDisplayName ??
                                                       '',
                                                   style: const TextStyle(
-                                                      fontSize: 18,
-                                                      color: Colors.white,
-                                                      fontFamily:
-                                                          'ProtestRiot'),
+                                                    fontSize: 18,
+                                                    color: Colors.white,
+                                                    fontFamily: 'ProtestRiot',
+                                                    shadows: [
+                                                      Shadow(
+                                                        offset:
+                                                            Offset(1.0, 1.0),
+                                                        blurRadius: 3.0,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 0, 0),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 const Text(
                                                   'Date of Birth:',
@@ -346,7 +393,17 @@ class _UserProfileState extends State<UserProfile> {
                                                       fontSize: 18,
                                                       color: Colors.white,
                                                       fontFamily:
-                                                          'ProtestRiot'),
+                                                          'ProtestRiot',
+                                                          shadows: [
+                                                      Shadow(
+                                                        offset:
+                                                            Offset(1.0, 1.0),
+                                                        blurRadius: 3.0,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 0, 0),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 const Text(
                                                   'Educational Background:',
@@ -364,7 +421,17 @@ class _UserProfileState extends State<UserProfile> {
                                                       fontSize: 18,
                                                       color: Colors.white,
                                                       fontFamily:
-                                                          'ProtestRiot'),
+                                                          'ProtestRiot',
+                                                    shadows: [
+                                                      Shadow(
+                                                        offset:
+                                                            Offset(1.0, 1.0),
+                                                        blurRadius: 3.0,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 0, 0),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                                 const Text(
                                                   'Fields of Expertise:',
@@ -383,7 +450,17 @@ class _UserProfileState extends State<UserProfile> {
                                                       fontSize: 16,
                                                       color: Colors.white,
                                                       fontFamily:
-                                                          'ProtestRiot'),
+                                                          'ProtestRiot',
+                                                          shadows: [
+                                                      Shadow(
+                                                        offset:
+                                                            Offset(1.0, 1.0),
+                                                        blurRadius: 3.0,
+                                                        color: Color.fromARGB(
+                                                            255, 0, 0, 0),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),

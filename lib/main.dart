@@ -74,7 +74,9 @@ void main() async {
       RouteNames.viewmessage: (context) {
         final args =
             ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-        return ViewMessaging(conversationId: args['conversationId']);
+        return ViewMessaging(
+            conversationId: args['conversationId'],
+            receiverId: args['receiverId']);
       },
       RouteNames.userprofile: (context) => const UserProfile(),
       RouteNames.mcp: (context) => const MentorContentPage(),

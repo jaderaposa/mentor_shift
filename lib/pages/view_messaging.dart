@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 // import 'package:mentor_shift/objects/bottomnav.dart';
 import 'package:intl/intl.dart';
+import 'package:mentor_shift/classes/message_model.dart';
+import 'package:mentor_shift/services/auth_service.dart';
 
 class ViewMessaging extends StatefulWidget {
-  const ViewMessaging({Key? key}) : super(key: key);
+  final String conversationId;
+  final String receiverId;
+
+  const ViewMessaging(
+      {Key? key,
+      required this.conversationId,
+      required this.receiverId})
+      : super(key: key);
 
   @override
   ViewMessagingState createState() => ViewMessagingState();
 }
 
 class ViewMessagingState extends State<ViewMessaging> {
+  final TextEditingController _messageController = TextEditingController();
+  final AuthService _authService = AuthService();
+  late String _conversationId;
+  late Stream<List<Message>> _messagesStream;
+
   final List<Map<String, dynamic>> messages = [
     {
       'sender': 'Me',
@@ -43,6 +57,8 @@ class ViewMessagingState extends State<ViewMessaging> {
   @override
   void initState() {
     super.initState();
+    _conversationId = widget.conversationId;
+    _messagesStream = _authService.getMessages(_conversationId);
     messages.sort((a, b) {
       DateFormat format = DateFormat.jm(); // for AM/PM format
       DateTime timeA = format.parse(a['time']);
@@ -60,28 +76,21 @@ class ViewMessagingState extends State<ViewMessaging> {
       backgroundColor: const Color(0xFF4C9A91),
       appBar: AppBar(
         backgroundColor: const Color(0xFF0B6E6D),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
         title: Row(
           children: [
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ), // replace with your custom back button
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            const Spacer(), // This will take up all available space
+            const Spacer(),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 CircleAvatar(
-                  radius: screenHeight *
-                      0.02, // replace 0.05 with the desired fraction of the screen height
+                  radius: screenHeight * 0.025,
                   backgroundImage:
                       const AssetImage('images/icons/user_sample.png'),
                 ),
-                const SizedBox(width: 10),
+                const SizedBox(width: 15),
                 Text(
                   'Glaiza Mea Millete',
                   style: TextStyle(
@@ -92,26 +101,25 @@ class ViewMessagingState extends State<ViewMessaging> {
                 ),
               ],
             ),
-            const Spacer(
-                flex:
-                    2), // This will take up twice the space of the other Spacer
+            const Spacer(flex: 2),
           ],
         ),
       ),
       body: Column(
         children: [
           Expanded(
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                    child:
-                        Container()), // This will take up all available space
-                ListView.builder(
-                  shrinkWrap:
-                      true, // This makes the ListView.builder wrap its content
+            child: StreamBuilder<List<Message>>(
+              stream: _messagesStream,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                List<Message> messages = snapshot.data ?? [];
+                return ListView.builder(
                   itemCount: messages.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    bool isMe = messages[index]['sender'] == 'Me';
+                  itemBuilder: (context, index) {
+                    bool isMe = messages[index].senderId ==
+                        _authService.currentUser?.uid;
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
@@ -121,8 +129,7 @@ class ViewMessagingState extends State<ViewMessaging> {
                         children: [
                           ConstrainedBox(
                             constraints: BoxConstraints(
-                              maxWidth: MediaQuery.of(context).size.width *
-                                  0.7, // 70% of screen width
+                              maxWidth: MediaQuery.of(context).size.width * 0.7,
                             ),
                             child: Container(
                               padding: const EdgeInsets.all(10.0),
@@ -134,7 +141,7 @@ class ViewMessagingState extends State<ViewMessaging> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    messages[index]['message'],
+                                    messages[index].text,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: screenHeight * 0.02,
@@ -150,7 +157,8 @@ class ViewMessagingState extends State<ViewMessaging> {
                                 ? Alignment.centerRight
                                 : Alignment.centerLeft,
                             child: Text(
-                              messages[index]['time'],
+                              DateFormat('hh:mm a')
+                                  .format(messages[index].timestamp),
                               style: TextStyle(
                                 color: const Color.fromARGB(205, 88, 88, 88),
                                 fontSize: screenHeight * 0.015,
@@ -162,13 +170,14 @@ class ViewMessagingState extends State<ViewMessaging> {
                       ),
                     );
                   },
-                ),
-              ],
+                );
+              },
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
             child: TextField(
+              controller: _messageController,
               decoration: InputDecoration(
                 hintText: 'Type A Message',
                 fillColor: Colors.white,
@@ -179,14 +188,24 @@ class ViewMessagingState extends State<ViewMessaging> {
                 ),
                 suffixIcon: IconButton(
                   icon: const Image(
-                    image: AssetImage(
-                        'images/icons/send.png'), // replace 'assets/images/send.png' with the path to your custom icon
-                    width: 39, // adjust the width as needed
-                    height: 39, // adjust the height as needed
+                    image: AssetImage('images/icons/send.png'),
+                    width: 39,
+                    height: 39,
                   ),
-                  onPressed: () {
-                    // Temporary sample code
-                    print('Send button pressed');
+                  onPressed: () async {
+                    if (_messageController.text.isNotEmpty) {
+                      Message message = Message(
+                        senderId:
+                            _authService.currentUser!.uid,
+                        receiverId:
+                            widget.receiverId, // Assuming mentorId is available here
+                        text: _messageController.text,
+                        timestamp: DateTime.now(),
+                      );
+                      await _authService.sendMessage(
+                          widget.conversationId, message);
+                      _messageController.clear();
+                    }
                   },
                 ),
               ),
@@ -194,7 +213,7 @@ class ViewMessagingState extends State<ViewMessaging> {
                 fontFamily: 'ProtestRiot',
               ),
             ),
-          )
+          ),
         ],
       ),
     );

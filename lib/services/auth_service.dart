@@ -4,6 +4,7 @@ import 'package:mentor_shift/classes/user_registration.dart';
 import 'package:mentor_shift/classes/message_model.dart';
 
 class UserDetails {
+  final String userId; // Added userId field
   final String firstName;
   final String lastName;
   final String menteeDisplayName;
@@ -17,6 +18,7 @@ class UserDetails {
   final String? bio;
 
   UserDetails({
+    required this.userId, // Include userId in the constructor
     required this.firstName,
     required this.lastName,
     this.menteeDisplayName = '',
@@ -32,6 +34,7 @@ class UserDetails {
 
   factory UserDetails.fromDocument(DocumentSnapshot doc) {
     return UserDetails(
+      userId: doc.reference.id, // Automatically include the userId
       firstName: doc['firstName'],
       lastName: doc['lastName'],
       menteeDisplayName: doc['menteeDisplayName'],

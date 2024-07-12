@@ -70,9 +70,12 @@ void main() async {
       RouteNames.landingmentee: (context) => const LandingMentee(),
       RouteNames.mentorships: (context) => const MentorshipsPage(),
       RouteNames.message: (context) => const Messaging(),
-      RouteNames.viewmessage: (context) => const ViewMessaging(),
-      // Removed ViewMentor from here
       RouteNames.menteesearch: (context) => const MentorSearch(),
+      RouteNames.viewmessage: (context) {
+        final args =
+            ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+        return ViewMessaging(conversationId: args['conversationId']);
+      },
       RouteNames.userprofile: (context) => const UserProfile(),
       RouteNames.mcp: (context) => const MentorContentPage(),
       RouteNames.mlp: (context) => const MentorLearningPage(),

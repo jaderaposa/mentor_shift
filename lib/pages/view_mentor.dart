@@ -77,14 +77,14 @@ class _ViewMentorState extends State<ViewMentor> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Container(
-                        width: screenWidth * 0.4, // 30% of screen width
+                        width: screenWidth * 0.35, // 30% of screen width
                         height: screenHeight * 0.2, // 15% of screen height
                         decoration: BoxDecoration(
                           // color: const Color(0xFF936030),
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: Colors.white, // Border color
-                            width: 2, // Border width
+                            color: const Color(0xFF936030), // Border color
+                            width: 3, // Border width
                           ),
                         ),
                         child: Padding(
@@ -95,7 +95,12 @@ class _ViewMentorState extends State<ViewMentor> {
                               image: DecorationImage(
                                 image: NetworkImage(
                                   widget.mentor.profileImage != null &&
-                                          widget.mentor.profileImage!.isNotEmpty
+                                          widget.mentor.profileImage!
+                                              .isNotEmpty &&
+                                          Uri.tryParse(widget
+                                                      .mentor.profileImage!)
+                                                  ?.hasAbsolutePath ==
+                                              true
                                       ? widget.mentor.profileImage!
                                       : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Default image path
                                 ),
@@ -304,22 +309,8 @@ class _ViewMentorState extends State<ViewMentor> {
                     const SizedBox(height: 20.0),
                     Row(
                       children: [
-                        Stack(
-                          children: [
-                            // Stroked text
-                            Text(
-                              'Mentees: ',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontFamily: 'ProtestRiot',
-                                foreground: Paint()
-                                  ..style = PaintingStyle.stroke
-                                  ..strokeWidth = 3
-                                  ..color = Colors.black,
-                              ),
-                            ),
-                            // Solid text
-                            const Text(
+                        OutlinedText(
+                            text: const Text(
                               'Mentees: ',
                               style: TextStyle(
                                 fontSize: 20.0,
@@ -327,6 +318,8 @@ class _ViewMentorState extends State<ViewMentor> {
                                 color: Colors.white,
                               ),
                             ),
+                            strokes: [
+                            OutlinedTextStroke(color: Colors.black, width: 3),
                           ],
                         ),
                         const SizedBox(width: 5),

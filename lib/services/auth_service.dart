@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mentor_shift/classes/user_registration.dart';
+import 'package:mentor_shift/classes/message_model.dart';
 
 class UserDetails {
   final String firstName;
@@ -13,7 +14,7 @@ class UserDetails {
   final String? educationalBackground;
   final List<String> fieldsOfExpertise;
   final String? profileImage;
-  final String? bio; 
+  final String? bio;
 
   UserDetails({
     required this.firstName,
@@ -25,7 +26,7 @@ class UserDetails {
     this.course,
     this.educationalBackground,
     this.fieldsOfExpertise = const [],
-    this.profileImage = '', 
+    this.profileImage = '',
     this.bio,
   });
 
@@ -46,10 +47,11 @@ class UserDetails {
   }
 }
 
-
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  User? get currentUser => _auth.currentUser;
 
   // Function to register a user
   Future<String> registerUser(RegistrationData registrationData) async {
@@ -74,8 +76,8 @@ class AuthService {
         'fieldsOfExpertise': registrationData.fieldsOfExpertise,
         'email': registrationData.email,
         'role': '', // Add this line
-        'profileImage': registrationData.profileImage, 
-        'bio': registrationData.bio, 
+        'profileImage': registrationData.profileImage,
+        'bio': registrationData.bio,
       });
 
       return 'User registered successfully';
@@ -185,5 +187,26 @@ class AuthService {
       print('Error getting user details: $e');
       return null;
     }
+  }
+
+  // Method to send a message
+  Future<void> sendMessage(String conversationId, Message message) async {
+    await _firestore
+        .collection('conversations')
+        .doc(conversationId)
+        .collection('messages')
+        .add(message.toJson());
+  }
+
+// Method to get messages stream
+  Stream<List<Message>> getMessages(String conversationId) {
+    return _firestore
+        .collection('conversations')
+        .doc(conversationId)
+        .collection('messages')
+        .orderBy('timestamp') // Example ordering by timestamp
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => Message.fromJson(doc.data())).toList());
   }
 }

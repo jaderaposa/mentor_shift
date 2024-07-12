@@ -228,8 +228,18 @@ class MentorSearchState extends State<MentorSearch> {
                                   children: <Widget>[
                                     ClipOval(
                                       child: Image.network(
-                                        searchResults[index].profileImage ??
-                                            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Provide a default image URL in case profileImage is null
+                                        searchResults[index].profileImage !=
+                                                    null &&
+                                                searchResults[index]
+                                                    .profileImage!
+                                                    .isNotEmpty &&
+                                                Uri.tryParse(
+                                                            searchResults[index]
+                                                                .profileImage!)
+                                                        ?.hasAbsolutePath ==
+                                                    true
+                                            ? searchResults[index].profileImage!
+                                            : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Default image URL
                                         width: 100,
                                         height: 100,
                                         fit: BoxFit.cover,

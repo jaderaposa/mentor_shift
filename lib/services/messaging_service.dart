@@ -1,5 +1,3 @@
-import 'package:uuid/uuid.dart'; // Import uuid package for generating unique IDs
-
 class MessagingService {
   String generateConversationId(String userId1, String userId2) {
     List<String> participants = [userId1, userId2];

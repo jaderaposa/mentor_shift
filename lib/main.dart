@@ -23,6 +23,8 @@ import 'package:mentor_shift/pages/view_mentor.dart';
 import 'package:mentor_shift/pages/view_messaging.dart';
 import 'package:mentor_shift/services/auth_service.dart';
 import 'package:mentor_shift/services/route_names.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,6 +49,11 @@ void main() async {
       storageBucket: 'mentor-shift-project.appspot.com',
     ));
   }
+
+  tz.initializeTimeZones(); // Initialize timezone data
+  tz.setLocalLocation(tz.getLocation(
+      'Asia/Manila')); // Set the default timezone to Philippine Standard Time
+
 
   auth.FirebaseAuth.instance.authStateChanges().listen((auth.User? user) {
     if (user == null) {

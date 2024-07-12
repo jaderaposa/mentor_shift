@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mentor_shift/classes/message_model.dart';
 import 'package:mentor_shift/services/auth_service.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class ViewMessaging extends StatefulWidget {
   final String conversationId;
@@ -22,6 +23,7 @@ class ViewMessagingState extends State<ViewMessaging> {
   final TextEditingController _messageController = TextEditingController();
   final AuthService _authService = AuthService();
   late String _conversationId;
+  UserDetails? _receiverDetails;
   late Stream<List<Message>> _messagesStream;
 
   final List<Map<String, dynamic>> messages = [
@@ -59,12 +61,25 @@ class ViewMessagingState extends State<ViewMessaging> {
     super.initState();
     _conversationId = widget.conversationId;
     _messagesStream = _authService.getMessages(_conversationId);
+    _fetchReceiverDetails();
     messages.sort((a, b) {
       DateFormat format = DateFormat.jm(); // for AM/PM format
-      DateTime timeA = format.parse(a['time']);
-      DateTime timeB = format.parse(b['time']);
+      DateTime timeA = tz.TZDateTime.from(
+          format.parse(a['time']), tz.getLocation('Asia/Manila'));
+      DateTime timeB = tz.TZDateTime.from(
+          format.parse(b['time']), tz.getLocation('Asia/Manila'));
       return timeA.compareTo(timeB);
     });
+  }
+
+  Future<void> _fetchReceiverDetails() async {
+    UserDetails? details =
+        await _authService.getUserDetailsById(widget.receiverId);
+    if (details != null) {
+      setState(() {
+        _receiverDetails = details;
+      });
+    }
   }
 
   @override
@@ -87,12 +102,19 @@ class ViewMessagingState extends State<ViewMessaging> {
               children: [
                 CircleAvatar(
                   radius: screenHeight * 0.025,
-                  backgroundImage:
-                      const AssetImage('images/icons/user_sample.png'),
+                  backgroundImage: NetworkImage(
+                    _receiverDetails?.profileImage != null &&
+                            _receiverDetails!.profileImage!.isNotEmpty &&
+                            Uri.tryParse(_receiverDetails!.profileImage!)
+                                    ?.hasAbsolutePath ==
+                                true
+                        ? _receiverDetails!.profileImage!
+                        : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png', // Default image path
+                  ) as ImageProvider,
                 ),
                 const SizedBox(width: 15),
                 Text(
-                  'Glaiza Mea Millete',
+                  _receiverDetails?.mentorDisplayName ?? '',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: screenHeight * 0.028,

@@ -19,7 +19,6 @@ class _ViewMentorState extends State<ViewMentor> {
   final AuthService _authService = AuthService();
   final MessagingService _messagingService = MessagingService();
 
-
   String bio =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'; // replace with your data
   int numberOfMentees = 24; // replace with your data
@@ -32,7 +31,10 @@ class _ViewMentorState extends State<ViewMentor> {
   Future<void> _navigateAndSendMessage(BuildContext context) async {
     String conversationId = await _getOrCreateConversationId();
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => ViewMessaging(conversationId: conversationId, receiverId: widget.mentor.userId,)));
+        builder: (context) => ViewMessaging(
+              conversationId: conversationId,
+              receiverId: widget.mentor.userId,
+            )));
   }
 
   Future<String> _getOrCreateConversationId() async {
@@ -46,7 +48,6 @@ class _ViewMentorState extends State<ViewMentor> {
     // Use the MessagingService to generate a consistent conversation ID
     return _messagingService.generateConversationId(currentUserId, mentorId);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +139,8 @@ class _ViewMentorState extends State<ViewMentor> {
                           height: screenHeight * 0.01), // 1% of screen height
                       // added SizedBox to separate the widgets
                       Text(
-                        widget.mentor.mentorDisplayName, // Display the mentor's name
+                        widget.mentor
+                            .mentorDisplayName, // Display the mentor's name
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18.0,
@@ -282,8 +284,8 @@ class _ViewMentorState extends State<ViewMentor> {
                     OutlinedText(
                       text: Text(
                         widget.mentor.bio?.isNotEmpty ?? false
-                          ? widget.mentor.bio!
-                          : 'No bio available',
+                            ? widget.mentor.bio!
+                            : 'No bio available',
                         style: const TextStyle(
                           // fontSize: 20.0,
                           fontFamily: 'ProtestRiot',
@@ -334,15 +336,15 @@ class _ViewMentorState extends State<ViewMentor> {
                     Row(
                       children: [
                         OutlinedText(
-                            text: const Text(
-                              'Mentees: ',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontFamily: 'ProtestRiot',
-                                color: Colors.white,
-                              ),
+                          text: const Text(
+                            'Mentees: ',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontFamily: 'ProtestRiot',
+                              color: Colors.white,
                             ),
-                            strokes: [
+                          ),
+                          strokes: [
                             OutlinedTextStroke(color: Colors.black, width: 3),
                           ],
                         ),
